@@ -56,8 +56,8 @@ while ~isempty(TFlMode) %true when TflMode is not empty
         if FlPlot
             figure(1)
             hold on;
-            plot(log10(data.dose),SimFluoValues,'-');
-            errorbar(log10(data.dose),DataMeans,DataStd,'o');
+            plot(log10(table2array(data.dose)),SimFluoValues,'-');
+            errorbar(log10(table2array(data.dose)),DataMeans,DataStd,'o');
             xlabel('log IPTG (nM)')
             ylabel('mean Fluorescence')
             title('P4Lacn.2_cit + PAct1_LacI')
