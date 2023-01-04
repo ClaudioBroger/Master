@@ -1,0 +1,85 @@
+********** MODEL NAME
+Model TetR NF
+
+********** NOTES
+% 
+
+********** MODEL STATES
+d/dt(TetR) = R1 - D1
+d/dt(Citimmature) = R2 - D2
+d/dt(Citrine) = R3 - D3
+
+
+% total species concentrations in nM
+TetR(0)         = 0          
+Citimmature(0)  = 0          
+Citrine(0)      = 0          
+       
+
+********** MODEL PARAMETERS
+% k_        production rate (_gene_promoter)    nM/min
+k7tetTetR        = 50
+k7tetCit         = 50
+
+ 
+% d_        degradation rate                    min-1
+dTetR          = 0.5
+dCit           = 0.5
+
+% kL_       leakage term of promoter            nM/min
+kL7tet          = 1e-02
+
+% theta_    repression coefficient              nM
+thetaTetR      = 1
+
+% Kd_       dissociation constant               nM
+KdTetR         = 0.5
+
+
+% n_        Hill coefficient
+nTetR          = 2.5
+
+
+% induction parameters
+atcAdded        = 0             % nM total aTc conc. 
+indTime         = 2000         % induction time (time for reaching steady state)
+
+% data selection, switching parameters
+mu           = 0.0077        % set to zero when calculating growth
+
+% nM to Unit parameters
+nMperUnit       = 1
+ 
+% Maturation time Citrine (from Claudes)
+kmaturation = 0.0173  % 40min maturation time Citrine
+             
+********** MODEL VARIABLES
+% 0 until induction and then inducer concentration
+atc             = piecewiseIQM(atcAdded/nMperUnit,ge(time,indTime),0);
+
+% converting to Unit
+KdTetR_InUnit  = KdTetR/nMperUnit;
+
+
+% solutions to the equilibrium condition
+TetRfree       = piecewiseIQM(TetR/2 - KdTetR_InUnit/2 - atc/2 + (KdTetR_InUnit^2 + 2*KdTetR_InUnit*TetR + 2*KdTetR_InUnit*atc + TetR^2 - 2*TetR*atc + atc^2)^(1/2)/2,ge(TetR,1e-4),0)
+
+
+********** MODEL REACTIONS
+R1 = k7tetTetR*(kL7tet+(1-kL7tet)/(1+(TetRfree/thetaTetR)^nTetR))
+R2 = k7tetCit*(kL7tet+(1-kL7tet)/(1+(TetRfree/thetaTetR)^nTetR))
+R3 = kmaturation* Citimmature
+
+                                           
+D1 = (dTetR+mu)*TetR
+D2 = (dCit +mu)*Citimmature
+D3 = (dCit +mu)*Citrine 
+
+             
+********** MODEL FUNCTIONS
+
+ 
+********** MODEL EVENTS
+
+
+********** MODEL MATLAB FUNCTIONS
