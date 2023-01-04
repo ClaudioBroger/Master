@@ -7,7 +7,7 @@ Settings.model.modelproj = 'model.mw_sbmod1';
 [ParaNames] = (get(model.mw_sbmod1.parameters, {'Name'}));
 [ParaValues] = cell2mat(get(model.mw_sbmod1.parameters, {'Value'}));
 ParametersTable = readtable('/LacI/code/model/parameters_0.xlsx');
-Settings.model.dataPath = ('/Users/claudiobroger/Documents/ETH/Master_Thesis/LacI/DataForEstimation/');
+Settings.model.dataPath = ('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/DataForEstimation/');
 
 % Specific
 [~,Locb] = ismember(ParaNames, ParametersTable.names); %tells you how paramspecs should be changed
@@ -19,17 +19,17 @@ Settings.model.objF = 'objf_LacI_experiments_0';
 
 % Meigo Estimation Settings
 
-Settings.meigo.maxeval = 5000;
+Settings.meigo.maxeval = 2000;
 Settings.meigo.npoints = 1;
-Settings.meigo.outputfile = ['/Users/claudiobroger/Documents/ETH/Master_Thesis/LacI/Code/results' filesep, '20122022_fitModel'];
+Settings.meigo.outputfile = ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Code/results' filesep, '20122022_fitModel'];
 %FlPlot = false;
 
 % Hyperspace Settings
 
-Settings.hyperspace.nsamples = 2000;
-Settings.hyperspace.outputfile = ['/Users/claudiobroger/Documents/ETH/Master_Thesis/LacI/Code/results' filesep '20122022_fitModel_hyperspace'];
+Settings.hyperspace.nsamples = 1000;
+Settings.hyperspace.outputfile = ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Code/results' filesep '20122022_fitModel_hyperspace'];
 
 % Posterior
-Settings.hyperspace.outputfile2 = ['/Users/claudiobroger/Documents/ETH/Master_Thesis/LacI/Code/results' filesep '20122022_paramDist']
+Settings.hyperspace.outputfile2 = ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Code/results' filesep '20122022_paramDist']
 
 
