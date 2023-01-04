@@ -1,0 +1,19 @@
+clear all; clc;
+% sbioreset
+%%  Sections to run
+%%%%%%%%%%%%%%%%%%
+estimate_parameters         = 1;
+select_optimal_param        = 1;
+plot_meigo                  = 1;
+runHyperspace               = 1;
+plot_param_post             = 1;
+
+%initPaths; do add dependencies (to do)
+
+%% Load Model
+
+% Step 1: Create model in a seperate model file, run the model & save the
+% model using sbiosaveproject
+
+
+
