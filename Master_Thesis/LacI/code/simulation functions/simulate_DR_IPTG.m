@@ -1,4 +1,4 @@
-function SimFluoValues = simulate_DR_aTc(para, data, ParaNames,model)
+function SimFluoValues = simulate_DR_IPTG(para, data, ParaNames,model)
 % simulates the fluorescent values with parameters para using the
 % timepoints from the data
 
@@ -32,7 +32,7 @@ data = load(dataPos);
 
     SimFluoValues = zeros(height(dose),1);
     for kdose = 1:height(dose)
-        d1.Amount = table2array(data.dose(kdose,1)); % IPTG To Do: remove nMperUnit, place it inside the model  
+        d1.Amount = data.dose(kdose,1); % IPTG To Do: remove nMperUnit, place it inside the model  
         try      
             [t,sd,species] = sbiosimulate(model.mw_sbmod1, d1);
             index = ismember(species, 'Citrine');

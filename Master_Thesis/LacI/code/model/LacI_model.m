@@ -25,6 +25,7 @@ p8 = addparameter(LacImodel, 'nLacI', 'Value', 1.001, 'ValueUnits', 'dimensionle
 p9 = addparameter(LacImodel, 'mu', 'Value', 0.0077, 'Valueunits', '1/minute');
 p10 = addparameter(LacImodel, 'kmaturation', 'Value', 0.0173, 'ValueUnits', '1/minute');
 p11 = addparameter(LacImodel, 'nMperUnit', 'Value', 1.6552, 'ValueUnits', 'dimensionless');
+p12 = addparameter(LacImodel, 'LacI_rep_Cit_W220F', 'Value', 3.607, 'ValueUnits', 'molarity');
 
 %Add scaling factor to KdLacI and IPTG
 scaling1 = addrule(LacImodel, 'KdLacI_InUnit = KdLacI/nMperUnit', 'RuleType', 'repeatedAssignment');
@@ -32,7 +33,7 @@ scaling2 = addrule(LacImodel, 'IPTG_InUnit = IPTG/nMperUnit', 'RuleType', 'repea
 
 %Add rate rules
 raterule1 = addrule(LacImodel, 'LacI = PAct1_LacI-(dLacI+mu)*LacI', 'RuleType', 'rate');
-raterule2 = addrule(LacImodel, 'Citimmature = P4Lacn_cit*(PAct1_LacI_L+(1-PAct1_LacI_L)/(1+(LacIfree/LacI_rep_Cit)^nLacI)) - (dCit+mu)*Citimmature', 'RuleType', 'rate');
+raterule2 = addrule(LacImodel, 'Citimmature = P4Lacn_cit*(PAct1_LacI_L+(1-PAct1_LacI_L)/(1+(LacIfree/(LacI_rep_Cit+LacI_rep_Cit_W220F))^nLacI)) - (dCit+mu)*Citimmature', 'RuleType', 'rate');
 raterule3 = addrule(LacImodel, 'Citrine = kmaturation*Citimmature - (dCit+mu)*Citrine', 'RuleType', 'rate');
 
 %Add repeated assignment rule

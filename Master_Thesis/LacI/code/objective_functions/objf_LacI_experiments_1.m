@@ -63,6 +63,40 @@ while ~isempty(TFlMode) %true when TflMode is not empty
             title('P4Lacn.2_cit + PAct1_LacI')
             legend({'simulation' 'data'})
         end
+        case{2}
+        %% module 2: PAct1_LacI(W220F)_tCyc1
+            para = paraValues;
+            dataPos = strcat(dataPath, "data_W220F.mat");
+            data_W220F = load(dataPos);
+
+            NamestoZero = setdiff(ParaNames,{'PAct1_LacI','P4Lacn_cit', 'PAct1_LacI_L', 'dLacI', 'dCit', 'LacI_rep_Cit_W220F', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+            IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
+            para(IdxToZero) = 0;
+
+            SimFluoValues = simulate_DR_IPTG(para,data_W220F.data_W220F,ParaNames,model);
+            DataMeans = data_W220F.data_W220F.means;
+            DataStd = data_W220F.data_W220F.std;
+            
+            if noise           
+            res = (SimFluoValues + normrnd(0,DataStd) - DataMeans)./DataStd;
+            else
+            res = (SimFluoValues - DataMeans)./DataStd;
+            end
+ 
+            objf(end+1) = sum(res.^2);
+            objfn{end+1} = data_W220F.modulenames_W220F{1};
+            ndata = ndata + numel(res);
+        %plot
+        if FlPlot
+            figure(1)
+            hold on;
+            plot(log10(data_W220F.dose_W220F),SimFluoValues,'-');
+            errorbar(log10(data_W220F.dose_W220F),DataMeans,DataStd,'o');
+            xlabel('log IPTG (µM)')
+            ylabel('mean Fluorescence')
+            title('PAct1_LacI(W220F)_tCyc1')
+            legend({'simulation_W220F' 'data_W220F'})
+        end
     end 
     
     TFlMode = setdiff(TFlMode,TFl); %removes the mode that has just been dealt with
