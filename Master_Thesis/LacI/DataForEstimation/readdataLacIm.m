@@ -19,7 +19,6 @@ timepoint = table2array(data_raw(1:12,13));
 
 save('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/DataForEstimation/data.mat', 'data', 'modulenames', 'dose', 'timepoint')
 
-
 data_W220F.time = 20;
 
 data_W220F.tdh3 = table2array(data_raw(86,"Mean"));

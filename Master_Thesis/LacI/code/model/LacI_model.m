@@ -18,7 +18,7 @@ p1 = addparameter(LacImodel, 'PAct1_LacI', 'Value', 1.0803, 'ValueUnits', '(mola
 p2 = addparameter(LacImodel, 'P4Lacn_cit', 'Value', 1.3389, 'ValueUnits', '(molarity)/minute');
 p3 = addparameter(LacImodel, 'dLacI', 'Value', 0.0014, 'ValueUnits', '1/minute');
 p4 = addparameter(LacImodel, 'dCit', 'Value', 0.0077, 'ValueUnits', '1/minute');
-p5 = addparameter(LacImodel, 'PAct1_LacI_L','Value', 0.0077, 'ValueUnits', 'dimensionless');
+%p5 = addparameter(LacImodel, 'PAct1_LacI_L','Value', 0.0077, 'ValueUnits', 'dimensionless');
 p6 = addparameter(LacImodel, 'LacI_rep_Cit', 'Value', 0.3607, 'ValueUnits', 'molarity');
 p7 = addparameter(LacImodel, 'KdLacI', 'Value', 0.4532, 'ValueUnits', 'mole/liter');
 p8 = addparameter(LacImodel, 'nLacI', 'Value', 1.001, 'ValueUnits', 'dimensionless');
@@ -36,7 +36,7 @@ scaling2 = addrule(LacImodel, 'IPTG_InUnit = IPTG/nMperUnit', 'RuleType', 'repea
 
 %Add rate rules
 raterule1 = addrule(LacImodel, 'LacI = PAct1_LacI + P_4Lacn_LacI*(P_4Lacn_LacI_L + (1- P_4Lacn_LacI_L)/(1 + (LacIfree/LacI_rep)^nLacI))-(dLacI+mu)*LacI', 'RuleType', 'rate');
-raterule2 = addrule(LacImodel, 'Citimmature = P4Lacn_cit*(PAct1_LacI_L+P_4Lacn_LacI_L+(1-PAct1_LacI_L+P_4Lacn_LacI_L)/(1+(LacIfree/(LacI_rep_Cit+LacI_rep_Cit_W220F+LacI_rep))^nLacI)) - (dCit+mu)*Citimmature', 'RuleType', 'rate');
+raterule2 = addrule(LacImodel, 'Citimmature = P4Lacn_cit*(P_4Lacn_LacI_L+(1-P_4Lacn_LacI_L)/(1+(LacIfree/(LacI_rep_Cit+LacI_rep_Cit_W220F+LacI_rep))^nLacI)) - (dCit+mu)*Citimmature', 'RuleType', 'rate');
 raterule3 = addrule(LacImodel, 'Citrine = kmaturation*Citimmature - (dCit+mu)*Citrine', 'RuleType', 'rate');
 
 %Add repeated assignment rule
