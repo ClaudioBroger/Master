@@ -34,6 +34,20 @@ timepoint_W220F = table2array(data_raw(13:24,13));
 
 save('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/DataForEstimation/data_W220F.mat', 'data_W220F', 'modulenames_W220F', 'dose_W220F', 'timepoint_W220F')
 
+data_W220F_Q60G_T167A.time = 20;
+
+data_W220F_Q60G_T167A.tdh3 = table2array(data_raw(86,"Mean"));
+data_W220F_Q60G_T167A.empty = table2array(data_raw(end, "Mean"));
+data_W220F_Q60G_T167A.means = table2array(data_raw(25:36,3));
+data_W220F_Q60G_T167A.std = table2array(data_raw(25:36,6));
+
+modulenames_W220F_Q60G_T167A{1} = 'P4Lacn.2_LacI(W220F,Q60G, T167A)_tCyc1'
+
+dose_W220F_Q60G_T167A = table2array(data_raw(25:36,9))*1000;
+timepoint_W220F_Q60G_T167A = table2array(data_raw(25:36,13));
+
+save('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/DataForEstimation/data_W220F_Q60G_T167A.mat', 'data_W220F_Q60G_T167A', 'modulenames_W220F_Q60G_T167A', 'dose_W220F_Q60G_T167A', 'timepoint_W220F_Q60G_T167A')
+
 end
 
 
