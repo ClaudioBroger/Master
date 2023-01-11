@@ -36,7 +36,7 @@ scaling2 = addrule(LacImodel, 'IPTG_InUnit = IPTG/nMperUnit', 'RuleType', 'repea
 
 %Add rate rules
 raterule1 = addrule(LacImodel, 'LacI = PAct1_LacI + P_4Lacn_LacI*(P_4Lacn_LacI_L + (1- P_4Lacn_LacI_L)/(1 + (LacIfree/LacI_rep)^nLacI))-(dLacI+mu)*LacI', 'RuleType', 'rate');
-raterule2 = addrule(LacImodel, 'Citimmature = P4Lacn_cit*(P_4Lacn_LacI_L+(1-P_4Lacn_LacI_L)/(1+(LacIfree/(LacI_rep_Cit+LacI_rep_Cit_W220F+LacI_rep))^nLacI)) - (dCit+mu)*Citimmature', 'RuleType', 'rate');
+raterule2 = addrule(LacImodel, 'Citimmature = P4Lacn_cit*(P_4Lacn_LacI_L+(1- P_4Lacn_LacI_L)/(1+(LacIfree/(LacI_rep_Cit+LacI_rep_Cit_W220F+LacI_rep))^nLacI)) - (dCit+mu)*Citimmature', 'RuleType', 'rate');
 raterule3 = addrule(LacImodel, 'Citrine = kmaturation*Citimmature - (dCit+mu)*Citrine', 'RuleType', 'rate');
 
 %Add repeated assignment rule
