@@ -1,4 +1,4 @@
-clear all; clc;
+clear all; clc;:
 %sbioreset
 %%  Sections to run
 %%%%%%%%%%%%%%%%%%
@@ -23,7 +23,7 @@ model = sbioloadproject('LacImodel');
 sbioaccelerate(model.mw_sbmod1)
 
 %Step 4: Load Settings
-ModelSettings_2; % note: you have to fill in the correct model, objF and parameterfiles in this settings file
+ModelSettings_3; % note: you have to fill in the correct model, objF and parameterfiles in this settings file
 
 % Step 5: Set fixed parameters in model (according the parameter excel
 % file).
@@ -36,7 +36,7 @@ end
 if estimate_parameters
     %p0 = paramSpecs.p0(Settings.model.PIdx);
     p0 = ParaValues(Settings.model.PIdx);
-    [~, ndata, ~, ~] = objf_LacI_experiments_2(p0, model, Settings.model.dataPath, false, Settings.model.FlMode, Settings.model.PIdx, false);
+    [~, ndata, ~, ~] = objf_LacI_experiments_3(p0, model, Settings.model.dataPath, false, Settings.model.FlMode, Settings.model.PIdx, false);
     threshold = 0.5*chi2inv(0.95,ndata - length(Settings.model.PIdx));
     [paraoptlist, costlist] = find_initial_points(Settings.model.objF, model, Settings.model.dataPath, false, Settings.model.FlMode, paramSpecs,Settings.model.PIdx, Settings.meigo.npoints, Settings.meigo.maxeval, threshold, false);
     savetofile(Settings.meigo.outputfile, paraoptlist, costlist, Settings);  
@@ -51,12 +51,12 @@ end
 
 %% plot optimal parameter set
 if plot_meigo
-    [objfc, ndata, objf, objfn] = objf_LacI_experiments_2(paraopt, model, Settings.model.dataPath, true, Settings.model.FlMode, Settings.model.PIdx, false);
+    [objfc, ndata, objf, objfn] = objf_LacI_experiments_3(paraopt, model, Settings.model.dataPath, true, Settings.model.FlMode, Settings.model.PIdx, false);
 end
 %% uncertainty of parameters with hyperspace
 if runHyperspace
     p0 = paramSpecs.p0(Settings.model.PIdx);
-    [~, ndata, ~, ~] = objf_LacI_experiments_2(p0, model, Settings.model.dataPath, false, Settings.model.FlMode, Settings.model.PIdx, false);
+    [~, ndata, ~, ~] = objf_LacI_experiments_3(p0, model, Settings.model.dataPath, false, Settings.model.FlMode, Settings.model.PIdx, false);
     threshold = chi2inv(0.95,ndata - length(Settings.model.PIdx));
     %threshold = 3;
     OutV = sample_posterior(paraoptlist, Settings.model.objF, paramSpecs, Settings.model.PIdx, Settings.hyperspace.nsamples, threshold, model,  Settings.model.dataPath, false, Settings.model.FlMode, false);

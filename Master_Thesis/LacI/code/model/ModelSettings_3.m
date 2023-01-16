@@ -14,8 +14,8 @@ Settings.model.dataPath = ('/Users/claudiobroger/Documents/ETH/Master/Master_The
 paramSpecs = ParametersTable(Locb, :);
 Settings.model.PIdx = find(strcmp(paramSpecs.estimate, 'yes'));
 Settings.model.PIdxfixed = find(strcmp(paramSpecs.estimate, 'no'));
-Settings.model.FlMode = [1 2 3];
-Settings.model.objF = 'objf_LacI_experiments_2';
+Settings.model.FlMode = [1 2 3 4];
+Settings.model.objF = 'objf_LacI_experiments_3';
 
 % Meigo Estimation Settings
 
