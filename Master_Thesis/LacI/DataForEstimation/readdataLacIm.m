@@ -47,6 +47,20 @@ timepoint_W220F_Q60G_T167A = table2array(data_raw(25:36,13));
 
 save('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/DataForEstimation/data_W220F_Q60G_T167A.mat', 'data_W220F_Q60G_T167A', 'modulenames_W220F_Q60G_T167A', 'dose_W220F_Q60G_T167A', 'timepoint_W220F_Q60G_T167A')
 
+data_pt7.time = 20;
+
+data_pt7.tdh3 = table2array(data_raw(86,"Mean"));
+data_pt7.empty = table2array(data_raw(end, "Mean"));
+data_pt7.means = table2array(data_raw(37:48,3));
+data_pt7.std = table2array(data_raw(37:48,6));
+
+modulenames_pt7{1} = 'PAct1_citrine-pt7-LacI(W220F, Q60G, T167A)'
+
+dose_pt7 = table2array(data_raw(37:48,9))*1000;
+timepoint_pt7 = table2array(data_raw(37:48,13));
+
+save('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/DataForEstimation/data_pt7.mat', 'data_pt7', 'modulenames_pt7', 'dose_pt7', 'timepoint_pt7')
+
 end
 
 
