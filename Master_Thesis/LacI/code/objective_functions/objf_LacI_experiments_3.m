@@ -140,11 +140,11 @@ while ~isempty(TFlMode) %true when TflMode is not empty
             dataPos = strcat(dataPath, "data_pt7.mat");
             data_pt7 = load(dataPos);
 
-            NamestoZero = setdiff(ParaNames,{'P3_Lacn_5_cit','pt7_LacI', 'P3_Lacn_5_cit_L','LacI_rep','Silence_LacI_rep', 'dLacI', 'dCit', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+            NamestoZero = setdiff(ParaNames,{'P3_Lacn_5_cit','pt7_LacI', 'P3_Lacn_5_cit_L','LacI_rep','Silence_LacI_rep', 'pt7_LacI_d', 'dCit', 'nLacI_P3', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
             IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
             para(IdxToZero) = 0;
 
-            SimFluoValues = simulate_DR_IPTG(para,data_pt7.data_pt7,ParaNames,model);
+            SimFluoValues = simulate_DR_IPTG_3(para,data_pt7.data_pt7,ParaNames,model);
             DataMeans = data_pt7.data_pt7.means;
             DataStd = data_pt7.data_pt7.std;
             
