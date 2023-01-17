@@ -1,4 +1,4 @@
-clear all; clc;:
+clear all; clc;
 %sbioreset
 %%  Sections to run
 %%%%%%%%%%%%%%%%%%
