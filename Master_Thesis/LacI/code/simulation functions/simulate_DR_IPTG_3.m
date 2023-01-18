@@ -36,11 +36,13 @@ data = load(dataPos);
         try      
             [t,sd,species] = sbiosimulate(model.mw_sbmod1, d1);
             index = ismember(species, 'Citrine');
+            index_lacI = ismember(species, 'LacI');
             SimCitrineValues = sd(end,index);
-            SimFluoValues(kdose) = x_scal*SimCitrineValues + data.data.empty;
+            SimLacICitrineValues = sd(end,index_lacI);
+            SimFluoValues(kdose) = x_scal*(SimCitrineValues+SimLacICitrineValues) + data.data.empty;
         catch ME
             disp(ME)
         end
         
     end     
-end  
+end   
