@@ -1,4 +1,4 @@
-function [objfc, ndata, objf, objfn] = objf_LacI_experiments_0(paraest, model, dataPath, FlPlot, FlMode, PIdx, noise)
+function [objfc, ndata, objf, objfn] = objf_LacI_experiments_1(paraest, model, dataPath, FlPlot, FlMode, PIdx, noise)
 % objf_TetR_experiments: simulates experiments and compares simulation to
 % data.
 % 

@@ -1,4 +1,4 @@
-function SimFluoValues = simulate_DR_IPTG(para, data, ParaNames,model)
+function SimFluoValues = simulate_DR_IPTG_3(para, data, ParaNames,model)
 % simulates the fluorescent values with parameters para using the
 % timepoints from the data
 
