@@ -21,7 +21,7 @@ Settings.model.objF = 'objf_LacI_experiments_2';
 
 Settings.meigo.maxeval = 2000;
 Settings.meigo.npoints = 3;
-Settings.meigo.outputfile = ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Code/results' filesep, '20122022_fitModel'];
+Settings.meigo.outputfile = ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Code/results' filesep, '20012023_fitModel_3circuits'];
 %FlPlot = false;
 
 % Hyperspace Settings
