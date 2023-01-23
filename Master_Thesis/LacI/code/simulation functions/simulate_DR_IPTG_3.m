@@ -2,7 +2,7 @@ function SimFluoValues = simulate_DR_IPTG_3(para, data, ParaNames,model)
 % simulates the fluorescent values with parameters para using the
 % timepoints from the data
 
-dataPos = strcat('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/DataForEstimation/', "data.mat");
+dataPos = strcat('LacI/DataForEstimation/', "data.mat");
 data = load(dataPos);
 % Set simulation Time
     tmax = data.data.time;
