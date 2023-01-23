@@ -35,7 +35,7 @@ while ~isempty(TFlMode) %true when TflMode is not empty
             dataPos = strcat(dataPath, "data.mat");
             data = load(dataPos);
 
-            NamestoZero = setdiff(ParaNames,{'PAct1_LacI','P4Lacn_cit', 'PAct1_LacI_L', 'dLacI', 'dCit', 'LacI_rep_Cit', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+            NamestoZero = setdiff(ParaNames,{'PAct1_LacI','P4Lacn_cit', 'PAct1_LacI_L', 'dLacI', 'dCit', 'LacI_rep_WT', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
             IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
             para(IdxToZero) = 0;
 

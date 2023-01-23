@@ -17,7 +17,7 @@ modulenames{1} = 'PA_LacI-P4Lacn_cit';
 dose = table2array(data_raw(1:12,9))*1000;
 timepoint = table2array(data_raw(1:12,13));
 
-save('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/DataForEstimation/data.mat', 'data', 'modulenames', 'dose', 'timepoint')
+save('LacI/DataForEstimation/data.mat', 'data', 'modulenames', 'dose', 'timepoint')
 
 data_W220F.time = 20;
 
@@ -31,7 +31,7 @@ modulenames_W220F{1} = 'PAct1_LacI(W220F)_tCyc1';
 dose_W220F = table2array(data_raw(13:24,9))*1000;
 timepoint_W220F = table2array(data_raw(13:24,13));
 
-save('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/DataForEstimation/data_W220F.mat', 'data_W220F', 'modulenames_W220F', 'dose_W220F', 'timepoint_W220F')
+save('LacI/DataForEstimation/data_W220F.mat', 'data_W220F', 'modulenames_W220F', 'dose_W220F', 'timepoint_W220F')
 
 data_W220F_Q60G_T167A.time = 20;
 
@@ -45,7 +45,7 @@ modulenames_W220F_Q60G_T167A{1} = 'P4Lacn.2_LacI(W220F,Q60G, T167A)_tCyc1'
 dose_W220F_Q60G_T167A = table2array(data_raw(25:36,9))*1000;
 timepoint_W220F_Q60G_T167A = table2array(data_raw(25:36,13));
 
-save('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/DataForEstimation/data_W220F_Q60G_T167A.mat', 'data_W220F_Q60G_T167A', 'modulenames_W220F_Q60G_T167A', 'dose_W220F_Q60G_T167A', 'timepoint_W220F_Q60G_T167A')
+save('LacI/DataForEstimation/data_W220F_Q60G_T167A.mat', 'data_W220F_Q60G_T167A', 'modulenames_W220F_Q60G_T167A', 'dose_W220F_Q60G_T167A', 'timepoint_W220F_Q60G_T167A')
 
 data_pt7.time = 20;
 
@@ -59,7 +59,7 @@ modulenames_pt7{1} = 'PAct1_citrine-pt7-LacI(W220F, Q60G, T167A)'
 dose_pt7 = table2array(data_raw(37:48,9))*1000;
 timepoint_pt7 = table2array(data_raw(37:48,13));
 
-save('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/DataForEstimation/data_pt7.mat', 'data_pt7', 'modulenames_pt7', 'dose_pt7', 'timepoint_pt7')
+save('LacI/DataForEstimation/data_pt7.mat', 'data_pt7', 'modulenames_pt7', 'dose_pt7', 'timepoint_pt7')
 
 end
 

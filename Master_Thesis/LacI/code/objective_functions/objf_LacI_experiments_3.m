@@ -35,7 +35,7 @@ while ~isempty(TFlMode) %true when TflMode is not empty
             dataPos = strcat(dataPath, "data.mat");
             data = load(dataPos);
 
-            NamestoZero = setdiff(ParaNames,{'PAct1_LacI','P4Lacn_cit', 'P_4Lacn_LacI_L', 'dLacI', 'dCit', 'LacI_rep_Cit','LacI_rep', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+            NamestoZero = setdiff(ParaNames,{'PAct1_LacI','P4Lacn_cit', 'P_4Lacn_LacI_L', 'dLacI', 'dCit', 'LacI_rep_WT','LacI_rep_3mut', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
             IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
             para(IdxToZero) = 0;
 
@@ -70,7 +70,7 @@ while ~isempty(TFlMode) %true when TflMode is not empty
             dataPos = strcat(dataPath, "data_W220F.mat");
             data_W220F = load(dataPos);
 
-            NamestoZero = setdiff(ParaNames,{'PAct1_LacI','P4Lacn_cit', 'P_4Lacn_LacI_L', 'dLacI', 'dCit', 'LacI_rep_Cit_W220F','LacI_rep', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+            NamestoZero = setdiff(ParaNames,{'PAct1_LacI','P4Lacn_cit', 'P_4Lacn_LacI_L', 'dLacI', 'dCit', 'LacI_rep_W220F','LacI_rep_3mut', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
             IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
             para(IdxToZero) = 0;
 
@@ -105,7 +105,7 @@ while ~isempty(TFlMode) %true when TflMode is not empty
             dataPos = strcat(dataPath, "data_W220F_Q60G_T167A.mat");
             data_W220F_Q60G_T167A = load(dataPos);
 
-            NamestoZero = setdiff(ParaNames,{'P_4Lacn_LacI','P4Lacn_cit', 'P_4Lacn_LacI_L', 'dLacI', 'dCit', 'Silence_LacI_rep','LacI_rep', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+            NamestoZero = setdiff(ParaNames,{'P_4Lacn_LacI','P4Lacn_cit', 'P_4Lacn_LacI_L', 'dLacI', 'dCit', 'Silence_LacI_rep','LacI_rep_3mut', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
             IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
             para(IdxToZero) = 0;
 
@@ -140,7 +140,7 @@ while ~isempty(TFlMode) %true when TflMode is not empty
             dataPos = strcat(dataPath, "data_pt7.mat");
             data_pt7 = load(dataPos);
 
-            NamestoZero = setdiff(ParaNames,{'P3_Lacn_5_cit','pt7_LacI', 'P3_Lacn_5_cit_L','LacI_rep','Silence_LacI_rep', 'pt7_LacI_d', 'dCit', 'nLacI_P3', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+            NamestoZero = setdiff(ParaNames,{'P3_Lacn_5_cit','pt7_LacI', 'P3_Lacn_5_cit_L','LacI_rep_3mut','Silence_LacI_rep', 'dLacI_pt7', 'dCit', 'nLacI_P3', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
             IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
             para(IdxToZero) = 0;
 
