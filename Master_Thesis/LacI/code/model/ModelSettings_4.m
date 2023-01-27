@@ -14,22 +14,22 @@ Settings.model.dataPath = ('/Users/claudiobroger/Documents/ETH/Master/Master_The
 paramSpecs = ParametersTable(Locb, :);
 Settings.model.PIdx = find(strcmp(paramSpecs.estimate, 'yes'));
 Settings.model.PIdxfixed = find(strcmp(paramSpecs.estimate, 'no'));
-Settings.model.FlMode = [1 2 3 4];
-Settings.model.objF = 'objf_LacI_experiments_3';
+Settings.model.FlMode = [1 2 3 4 5];
+Settings.model.objF = 'objf_LacI_experiments_4';
 
 % Meigo Estimation Settings
 
 Settings.meigo.maxeval = 3000;
 Settings.meigo.npoints = 3;
-Settings.meigo.outputfile = ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Code/results' filesep, '24012023_fitModel_late'];
+Settings.meigo.outputfile = ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Code/results' filesep, '26012023_fitModel'];
 %FlPlot = false;
 
 % Hyperspace Settings
 
 Settings.hyperspace.nsamples = 2000;
-Settings.hyperspace.outputfile = ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Code/results' filesep '24012023_fitModel_hyperspace_late'];
+Settings.hyperspace.outputfile = ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Code/results' filesep '26012023_fitModel_hyperspace'];
 
 % Posterior
-Settings.hyperspace.outputfile2 = ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Code/results' filesep '24012023_paramDist_late'];
+Settings.hyperspace.outputfile2 = ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Code/results' filesep '26012023_paramDist'];
 
 
