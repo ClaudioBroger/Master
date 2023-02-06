@@ -35,7 +35,7 @@ while ~isempty(TFlMode) %true when TflMode is not empty
             dataPos = strcat(dataPath, "data.mat");
             data = load(dataPos);
 
-            NamestoZero = setdiff(ParaNames,{'PAct1_LacI','P4Lacn_cit', 'P_4Lacn_LacI_L', 'dLacI', 'dCit', 'LacI_rep_WT','LacI_rep_3mut', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+            NamestoZero = setdiff(ParaNames,{'PAct1_LacI','P4Lacn_cit', 'P_4Lacn_LacI_L', 'dLacI', 'dCit', 'LacI_rep_WT','LacI_rep_3mut','LacI_rep_3mut_P3', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
             IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
             para(IdxToZero) = 0;
 
@@ -57,12 +57,12 @@ while ~isempty(TFlMode) %true when TflMode is not empty
             figure(1)
             subplot(2,3,1);
             hold on;
-            plot(log10(data.dose),SimFluoValues,'-');
+            plot(log10(data.dose),SimFluoValues,'-', 'LineWidth', 2);
             errorbar(log10(data.dose),DataMeans,DataStd,'o');
-            xlabel('log IPTG (nM)')
-            ylabel('mean Fluorescence')
-            title('P4Lacn.2_cit + PAct1_LacI')
-            legend({'simulation' 'data'})
+            xlabel('log IPTG (nM)', 'FontSize', 18)
+            ylabel('mean Fluorescence','FontSize', 18)
+            title('P4Lacn.2-cit + PAct1-LacI', 'FontSize',20)
+            legend({'simulation' 'data'}, 'FontSize', 15)
         end
         case{2}
         %% module 2: PAct1_LacI(W220F)_tCyc1
@@ -70,7 +70,7 @@ while ~isempty(TFlMode) %true when TflMode is not empty
             dataPos = strcat(dataPath, "data_W220F.mat");
             data_W220F = load(dataPos);
 
-            NamestoZero = setdiff(ParaNames,{'PAct1_LacI','P4Lacn_cit', 'P_4Lacn_LacI_L', 'dLacI', 'dCit', 'LacI_rep_W220F','LacI_rep_3mut', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+            NamestoZero = setdiff(ParaNames,{'PAct1_LacI','P4Lacn_cit', 'P_4Lacn_LacI_L', 'dLacI', 'dCit', 'LacI_rep_W220F','LacI_rep_3mut','LacI_rep_3mut_P3', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
             IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
             para(IdxToZero) = 0;
 
@@ -92,12 +92,12 @@ while ~isempty(TFlMode) %true when TflMode is not empty
             figure(1)
             subplot(2,3,2);
             hold on;
-            plot(log10(data_W220F.dose_W220F),SimFluoValues,'-');
+            plot(log10(data_W220F.dose_W220F),SimFluoValues,'-', 'LineWidth', 2);
             errorbar(log10(data_W220F.dose_W220F),DataMeans,DataStd,'o');
-            xlabel('log IPTG (nM)')
-            ylabel('mean Fluorescence')
-            title('PAct1_LacI(W220F)_tCyc1')
-            legend({'simulation_W220F' 'data_W220F'})
+            xlabel('log IPTG (nM)', 'FontSize', 18)
+            ylabel('mean Fluorescence', 'FontSize', 18)
+            title('PAct1-LacI(W220F)-tCyc1', 'FontSize', 20)
+            legend({'simulation-W220F' 'data_W220F'}, 'FontSize', 15)
         end
         case{3}
         %% module 3: P4Lacn.2_LacI(W220F,Q60G,T167A)_tCyc1
@@ -105,7 +105,7 @@ while ~isempty(TFlMode) %true when TflMode is not empty
             dataPos = strcat(dataPath, "data_W220F_Q60G_T167A.mat");
             data_W220F_Q60G_T167A = load(dataPos);
 
-            NamestoZero = setdiff(ParaNames,{'P_4Lacn_LacI','P4Lacn_cit', 'P_4Lacn_LacI_L', 'dLacI', 'dCit', 'Silence_LacI_rep','LacI_rep_3mut', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+            NamestoZero = setdiff(ParaNames,{'P_4Lacn_LacI','P4Lacn_cit', 'P_4Lacn_LacI_L', 'dLacI', 'dCit', 'Silence_LacI_rep','LacI_rep_3mut','LacI_rep_3mut_P3', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
             IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
             para(IdxToZero) = 0;
 
@@ -127,12 +127,12 @@ while ~isempty(TFlMode) %true when TflMode is not empty
             figure(1)
             subplot(2,3,3);
             hold on;
-            plot(log10(data_W220F_Q60G_T167A.dose_W220F_Q60G_T167A),SimFluoValues,'-');
+            plot(log10(data_W220F_Q60G_T167A.dose_W220F_Q60G_T167A),SimFluoValues,'-', 'LineWidth', 2);
             errorbar(log10(data_W220F_Q60G_T167A.dose_W220F_Q60G_T167A),DataMeans,DataStd,'o');
-            xlabel('log IPTG (nM)')
-            ylabel('mean Fluorescence')
-            title('P4Lacn.2_LacI(W220F,Q60G, T167A)_tCyc1')
-            legend({'simulation_W220F_Q60G_T167A' 'data_W220F_Q60G_T167A'})
+            xlabel('log IPTG (nM)', 'FontSize', 18)
+            ylabel('mean Fluorescence', 'FontSize', 18)
+            title('P4Lacn.2-LacI(W220F,Q60G, T167A)-tCyc1', 'FontSize', 20)
+            legend({'simulation-W220F-Q60G-T167A' 'data-W220F-Q60G-T167A'}, 'FontSize', 15)
         end
         case{4}
         %% module 4: P3Lacn.5_LacI(W220F,Q60G,T167A)
@@ -140,7 +140,7 @@ while ~isempty(TFlMode) %true when TflMode is not empty
             dataPos = strcat(dataPath, "data_pt7.mat");
             data_pt7 = load(dataPos);
 
-            NamestoZero = setdiff(ParaNames,{'P3_Lacn_5_cit','pt7_LacI', 'P3_Lacn_5_cit_L','LacI_rep_3mut','Silence_LacI_rep', 'dLacI_pt7', 'dCit', 'nLacI_P3', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+            NamestoZero = setdiff(ParaNames,{'P3_Lacn_5_cit','pt7_LacI', 'P3_Lacn_5_cit_L','LacI_rep_3mut_P3','LacI_rep_3mut','Silence_LacI_rep', 'dLacI_pt7', 'dCit', 'nLacI_P3', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
             IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
             para(IdxToZero) = 0;
 
@@ -162,12 +162,12 @@ while ~isempty(TFlMode) %true when TflMode is not empty
             figure(1)
             subplot(2,3,4);
             hold on;
-            plot(log10(data_pt7.dose_pt7),SimFluoValues,'-');
+            plot(log10(data_pt7.dose_pt7),SimFluoValues,'-', 'LineWidth', 2);
             errorbar(log10(data_pt7.dose_pt7),DataMeans,DataStd,'o');
-            xlabel('log IPTG (nM)')
-            ylabel('mean Fluorescence')
-            title('P3Lacn.5_LacI(W220F,Q60G,T167A)')
-            legend({'simulation_pt7' 'data_pt7'})
+            xlabel('log IPTG (nM)', 'FontSize', 18)
+            ylabel('mean Fluorescence', 'FontSize', 18)
+            title('P3Lacn.5-LacI(W220F,Q60G,T167A)', 'FontSize', 20)
+            legend({'simulation-pt7' 'data-pt7'}, 'FontSize', 15)
         end
         case{5}
         %% module 5: P4Lacn.2_citrine_LacI(W220F,Q60G,T167A)
@@ -175,7 +175,7 @@ while ~isempty(TFlMode) %true when TflMode is not empty
             dataPos = strcat(dataPath, "data_pt7_5circuit.mat");
             data_pt7_5circuit = load(dataPos);
 
-            NamestoZero = setdiff(ParaNames,{'P4Lacn_cit','pt7_LacI', 'P_4Lacn_LacI_L','LacI_rep_3mut','Silence_LacI_rep', 'dLacI_pt7', 'dCit', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+            NamestoZero = setdiff(ParaNames,{'P4Lacn_cit','pt7_LacI', 'P_4Lacn_LacI_L','LacI_rep_3mut','LacI_rep_3mut_P3','Silence_LacI_rep', 'dLacI_pt7', 'dCit', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
             IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
             para(IdxToZero) = 0;
 
@@ -197,12 +197,12 @@ while ~isempty(TFlMode) %true when TflMode is not empty
             figure(1)
             subplot(2,3,5);
             hold on;
-            plot(log10(data_pt7_5circuit.dose_pt7_5circuit),SimFluoValues,'-');
+            plot(log10(data_pt7_5circuit.dose_pt7_5circuit),SimFluoValues,'-', 'LineWidth', 2);
             errorbar(log10(data_pt7_5circuit.dose_pt7_5circuit),DataMeans,DataStd,'o');
-            xlabel('log IPTG (nM)')
-            ylabel('mean Fluorescence')
-            title('P4Lacn.2_citrine_LacI(W220F,Q60G,T167A)')
-            legend({'simulation_pt7_5circuit' 'data_pt7_5circuit'})
+            xlabel('log IPTG (nM)', 'FontSize', 18)
+            ylabel('mean Fluorescence', 'FontSize', 18)
+            title('P4Lacn.2-citrine-LacI(W220F,Q60G,T167A)', 'FontSize', 20)
+            legend({'simulation-pt7-5circuit' 'data-pt7-5circuit'}, 'FontSize', 15)
         end
     end 
     

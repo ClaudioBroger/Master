@@ -19,7 +19,7 @@ function [paraoptlist, costlist] = find_initial_points(funobjstr,model, ExpDataP
         end
     end
     
-    for ipoint = 1:npoints %parfor on cluster  
+    parfor ipoint = 1:npoints %parfor on cluster  
         [cost, alphaopt] = optimize_funobj(paramSpecs,paraestinit(ipoint,:),funobjstr, model, ExpDataPath, FlPlot, FlMode, PIdx, maxeval, threshold, noise);
         costlist(ipoint) = cost;
         paraoptlist(ipoint,:) = alphaopt;    
