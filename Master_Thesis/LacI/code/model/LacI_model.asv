@@ -23,19 +23,19 @@ p5 = addparameter(LacImodel, 'LacI_rep_WT', 'Value', 0.3607);
 p6 = addparameter(LacImodel, 'KdLacI', 'Value', 0.4532);
 p7 = addparameter(LacImodel, 'nLacI', 'Value', 1.001);
 p8 = addparameter(LacImodel, 'mu', 'Value', 0.0077);
-p9 = addparameter(LacImodel, 'kmaturation', 'Value', 0.0173);
-p10 = addparameter(LacImodel, 'nMperUnit', 'Value', 1.6552);
-p11 = addparameter(LacImodel, 'LacI_rep_W220F', 'Value', 3.607);
-p12 = addparameter(LacImodel, 'P_4Lacn_LacI', 'Value', 1.0803);
-p13 = addparameter(LacImodel, 'P_4Lacn_LacI_L', 'Value', 0.0077);
-p14 = addparameter(LacImodel, 'LacI_rep_3mut', 'Value', 0.3607);
-p15 = addparameter(LacImodel, 'Silence_LacI_rep', 'Value', 1);
-p16 = addparameter(LacImodel, 'pt7_LacI', 'Value', 1.0803);
-p17 = addparameter(LacImodel, 'P3_Lacn_5_cit', 1.3389);
-p18 = addparameter(LacImodel, 'P3_Lacn_5_cit_L', 'Value', 0.0077);
-p19 = addparameter(LacImodel, 'dLacI_pt7', 'Value', 0.0014);
-p20 = addparameter(LacImodel, 'nLacI_P3', 'Value', 1.001);
-p21 = addparameter(LacImodel, 'LacI_rep_3mut_P3', 'Value', 0.3607);
+p9 = addparameter(LacImodel, 'kmaturation', 'Value');
+p10 = addparameter(LacImodel, 'nMperUnit', 'Value', 1.6552, 'ValueUnits', 'dimensionless');
+p11 = addparameter(LacImodel, 'LacI_rep_W220F', 'Value', 3.607, 'ValueUnits', 'nanomole');
+p12 = addparameter(LacImodel, 'P_4Lacn_LacI', 'Value', 1.0803, 'ValueUnits', 'nanomole/minute');
+p13 = addparameter(LacImodel, 'P_4Lacn_LacI_L', 'Value', 0.0077, 'ValueUnits', 'dimensionless');
+p14 = addparameter(LacImodel, 'LacI_rep_3mut', 'Value', 0.3607, 'ValueUnits', 'nanomole');
+p15 = addparameter(LacImodel, 'Silence_LacI_rep', 'Value', 1, 'ValueUnits', 'dimensionless');
+p16 = addparameter(LacImodel, 'pt7_LacI', 'Value', 1.0803, 'ValueUnits', 'nanomole/minute');
+p17 = addparameter(LacImodel, 'P3_Lacn_5_cit', 1.3389, 'ValueUnits', 'nanomole/minute');
+p18 = addparameter(LacImodel, 'P3_Lacn_5_cit_L', 'Value', 0.0077, 'ValueUnits', 'dimensionless');
+p19 = addparameter(LacImodel, 'dLacI_pt7', 'Value', 0.0014, 'ValueUnits', '1/minute');
+p20 = addparameter(LacImodel, 'nLacI_P3', 'Value', 1.001, 'ValueUnits', 'dimensionless');
+p21 = addparameter(LacImodel, 'LacI_rep_3mut_P3', 'Value', 0.3607, 'ValueUnits', 'nanomole');
 
 %Add scaling factor to KdLacI and IPTG
 scaling1 = addrule(LacImodel, 'KdLacI_InUnit = KdLacI/nMperUnit', 'RuleType', 'repeatedAssignment');
@@ -50,5 +50,4 @@ raterule4 = addrule(LacImodel, 'Citrine = kmaturation*(Citimmature+Citimmature_1
 
 %Add repeated assignment rule
 repassrule = addrule(LacImodel, 'LacIfree = max(0, LacI/2 - KdLacI_InUnit/2 - IPTG_InUnit/2 + sqrt(KdLacI_InUnit^2 + 2*KdLacI_InUnit*LacI + 2*KdLacI_InUnit*IPTG_InUnit + LacI^2 - 2*LacI*IPTG_InUnit + IPTG_InUnit^2)/2)', 'RuleType', 'repeatedAssignment');
-
 

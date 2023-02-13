@@ -3,77 +3,76 @@ function data_LacI = readdataLacI
 % used to generate the one .mat file per experiment (strains measured on
 % the same day) from the excel or facs data
 
-data.time = 20; % timepoint(s) of measurement
+data.time = 1200; % timepoint(s) of measurement
 
 data_raw = readtable('/DataForEstimation/Citrine_size_corrected.csv');
 
 data.tdh3 = table2array(data_raw(86,"Mean"));
 data.empty = table2array(data_raw(end, "Mean"));
-data.means = table2array(data_raw(1:12,3));
-data.std = table2array(data_raw(1:12,6));
+data.means = data_raw.Mean(strcmp(data_raw.Strain, 'P4Lacn.2_cit + PAct1_LacI'));
+data.std = data_raw.Stdev(strcmp(data_raw.Strain, 'P4Lacn.2_cit + PAct1_LacI'));
 
 modulenames{1} = 'PA_LacI-P4Lacn_cit';
 
-dose = table2array(data_raw(1:12,9))*1000;
-timepoint = table2array(data_raw(1:12,13));
+dose = data_raw.Dose(strcmp(data_raw.Strain, 'P4Lacn.2_cit + PAct1_LacI'));
+timepoint = data_raw.Time(strcmp(data_raw.Strain, 'P4Lacn.2_cit + PAct1_LacI'));
 
-save('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/DataForEstimation/data.mat', 'data', 'modulenames', 'dose', 'timepoint')
+save('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/DataForEstimation/data.mat','data', 'modulenames', 'dose', 'timepoint')
 
-data_W220F.time = 20;
+%data_W220F.tdh3 = data.tdh3;
+%data_W220F.empty = data.tdh3;
+data.means = data_raw.Mean(strcmp(data_raw.Strain, 'P4Lacn.2_cit + PAct1_LacI(W220F)'));
+data.std = data_raw.Stdev(strcmp(data_raw.Strain, 'P4Lacn.2_cit + PAct1_LacI(W220F)'));
 
-data_W220F.tdh3 = table2array(data_raw(86,"Mean"));
-data_W220F.empty = table2array(data_raw(end, "Mean"));
-data_W220F.means = table2array(data_raw(13:24,3));
-data_W220F.std = table2array(data_raw(13:24,6));
+modulenames{1} = 'PAct1_LacI(W220F)_tCyc1';
 
-modulenames_W220F{1} = 'PAct1_LacI(W220F)_tCyc1';
+dose = data_raw.Dose(strcmp(data_raw.Strain, 'P4Lacn.2_cit + PAct1_LacI(W220F)'));
+timepoint = data_raw.Time(strcmp(data_raw.Strain, 'P4Lacn.2_cit + PAct1_LacI(W220F)'));
 
-dose_W220F = table2array(data_raw(13:24,9))*1000;
-timepoint_W220F = table2array(data_raw(13:24,13));
+save('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/DataForEstimation/data_W220F.mat','data', 'modulenames', 'dose', 'timepoint')
 
-save('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/DataForEstimation/data_W220F.mat', 'data_W220F', 'modulenames_W220F', 'dose_W220F', 'timepoint_W220F')
 
-data_W220F_Q60G_T167A.time = 20;
+%data_W220F_Q60G_T167A.time = data.time;
 
-data_W220F_Q60G_T167A.tdh3 = table2array(data_raw(86,"Mean"));
-data_W220F_Q60G_T167A.empty = table2array(data_raw(end, "Mean"));
-data_W220F_Q60G_T167A.means = table2array(data_raw(25:36,3));
-data_W220F_Q60G_T167A.std = table2array(data_raw(25:36,6));
+%data_W220F_Q60G_T167A.tdh3 = data.tdh3;
+%data_W220F_Q60G_T167A.empty = data.empty;
+data.means = data_raw.Mean(strcmp(data_raw.Strain, 'P4Lacn.2_cit + P4Lacn.2_LacI(W220F,Q60G, T167A)'));
+data.std = data_raw.Stdev(strcmp(data_raw.Strain, 'P4Lacn.2_cit + P4Lacn.2_LacI(W220F,Q60G, T167A)'));
 
-modulenames_W220F_Q60G_T167A{1} = 'P4Lacn.2_LacI(W220F,Q60G, T167A)_tCyc1'
+modulenames{1} = 'P4Lacn.2_LacI(W220F,Q60G, T167A)_tCyc1';
 
-dose_W220F_Q60G_T167A = table2array(data_raw(25:36,9))*1000;
-timepoint_W220F_Q60G_T167A = table2array(data_raw(25:36,13));
+dose = data_raw.Dose(strcmp(data_raw.Strain, 'P4Lacn.2_cit + P4Lacn.2_LacI(W220F,Q60G, T167A)'));
+timepoint = data_raw.Time(strcmp(data_raw.Strain, 'P4Lacn.2_cit + P4Lacn.2_LacI(W220F,Q60G, T167A)'));
 
-save('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/DataForEstimation/data_W220F_Q60G_T167A.mat', 'data_W220F_Q60G_T167A', 'modulenames_W220F_Q60G_T167A', 'dose_W220F_Q60G_T167A', 'timepoint_W220F_Q60G_T167A')
+save('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/DataForEstimation/data_W220F_Q60G_T167A.mat','data', 'modulenames', 'dose', 'timepoint')
 
-data_pt7.time = 20;
+%data_pt7.time = data.time;
 
-data_pt7.tdh3 = table2array(data_raw(86,"Mean"));
-data_pt7.empty = table2array(data_raw(end, "Mean"));
-data_pt7.means = table2array(data_raw(37:48,3));
-data_pt7.std = table2array(data_raw(37:48,6));
+%data_pt7.tdh3 = data.tdh3;
+%data_pt7.empty = data.empty;
+data.means = data_raw.Mean(strcmp(data_raw.Strain, 'P3Lacn.5_cit + PAct1_citrine-pt7-LacI(W220F, Q60G, T167A)'));
+data.std = data_raw.Stdev(strcmp(data_raw.Strain, 'P3Lacn.5_cit + PAct1_citrine-pt7-LacI(W220F, Q60G, T167A)'));
 
-modulenames_pt7{1} = 'PAct1_citrine-pt7-LacI(W220F, Q60G, T167A)'
+modulenames{1} = 'PAct1_citrine-pt7-LacI(W220F, Q60G, T167A)';
 
-dose_pt7 = table2array(data_raw(37:48,9))*1000;
-timepoint_pt7 = table2array(data_raw(37:48,13));
+dose = data_raw.Dose(strcmp(data_raw.Strain, 'P3Lacn.5_cit + PAct1_citrine-pt7-LacI(W220F, Q60G, T167A)'));
+timepoint = data_raw.Time(strcmp(data_raw.Strain, 'P3Lacn.5_cit + PAct1_citrine-pt7-LacI(W220F, Q60G, T167A)'));
 
-save('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/DataForEstimation/data_pt7.mat', 'data_pt7', 'modulenames_pt7', 'dose_pt7', 'timepoint_pt7')
+save('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/DataForEstimation/data_pt7.mat','data', 'modulenames', 'dose', 'timepoint')
 
-data_pt7_5circuit.time = 20;
+%data_pt7_5circuit.time = data.time;
 
-data_pt7_5circuit.tdh3 = table2array(data_raw(86,"Mean"));
-data_pt7_5circuit.empty = table2array(data_raw(end, "Mean"));
-data_pt7_5circuit.means = table2array(data_raw(49:60,3));
-data_pt7_5circuit.std = table2array(data_raw(49:60,6));
+%data_pt7_5circuit.tdh3 = data.tdh3;
+%data_pt7_5circuit.empty = data.empty;
+data.means = data_raw.Mean(strcmp(data_raw.Strain, 'P4Lacn.2_cit + PAct1_citrine-pt7-LacI(W220F, Q60G, T167A)'));
+data.std = data_raw.Stdev(strcmp(data_raw.Strain, 'P4Lacn.2_cit + PAct1_citrine-pt7-LacI(W220F, Q60G, T167A)'));
 
-modulenames_pt7_5circuit{1} = 'P4Lacn.2_citrine-pt7-LacI(W220F, Q60G, T167A)'
+modulenames{1} = 'P4Lacn.2_citrine-pt7-LacI(W220F, Q60G, T167A)';
 
-dose_pt7_5circuit = table2array(data_raw(49:60,9))*1000;
-timepoint_pt7_5circuit = table2array(data_raw(49:60,13));
+dose = data_raw.Dose(strcmp(data_raw.Strain, 'P4Lacn.2_cit + PAct1_citrine-pt7-LacI(W220F, Q60G, T167A)'));
+timepoint = data_raw.Time(strcmp(data_raw.Strain, 'P4Lacn.2_cit + PAct1_citrine-pt7-LacI(W220F, Q60G, T167A)'));
 
-save('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/DataForEstimation/data_pt7_5circuit.mat', 'data_pt7_5circuit', 'modulenames_pt7_5circuit', 'dose_pt7_5circuit', 'timepoint_pt7_5circuit')
+save('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/DataForEstimation/data_pt7_5circuit.mat','data', 'modulenames', 'dose', 'timepoint')
 
 end
 
