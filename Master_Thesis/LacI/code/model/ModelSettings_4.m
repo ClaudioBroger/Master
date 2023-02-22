@@ -20,16 +20,16 @@ Settings.model.objF = 'objf_LacI_experiments_4';
 % Meigo Estimation Settings
 
 Settings.meigo.maxeval = 3000;
-Settings.meigo.npoints = 5;
-Settings.meigo.outputfile = ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Code/results' filesep, '14022023_fitModel'];
+Settings.meigo.npoints = 3;
+Settings.meigo.outputfile = ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Code/results' filesep, '15022023_fitModel'];
 %FlPlot = false;
 
 % Hyperspace Settings
 
 Settings.hyperspace.nsamples = 2000;
-Settings.hyperspace.outputfile = ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Code/results' filesep '14022023_fitModel_hyperspace'];
+Settings.hyperspace.outputfile = ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Code/results' filesep '15022023_fitModel_hyperspace'];
 
 % Posterior
-Settings.hyperspace.outputfile2 = ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Code/results' filesep '14022023_paramDist'];
+Settings.hyperspace.outputfile2 = ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Code/results' filesep '15022023_paramDist'];
 
 
