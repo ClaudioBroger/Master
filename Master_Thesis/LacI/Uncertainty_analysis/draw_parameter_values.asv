@@ -1,0 +1,66 @@
+%Load data
+load('2023_02_09_fitModel_Hyperspace_npoints20_Eline.mat')
+%Load model
+model = sbioloadproject('LacImodel');
+%Load model settings
+ModelSettings_4;
+%Specify number of random draws
+num_draws = 10;
+
+%find estimated parameters in data
+paramSpecs = paramSpecs(Settings.model.PIdx,:);
+if ~isfield(OutV,'colnames')
+    OutV.colnames = paramSpecs.names;
+end
+NotProjectedIdx = find(ismember(paramSpecs.names,OutV.colnames));
+% paraoptestimated = paraopt(NotProjectedIdx); % to add fitted parameter point
+
+%create table
+paramSpecsestimated = paramSpecs(NotProjectedIdx,:);
+data = OutV;
+if isfield(OutV,'V')
+    data.rowmat = data.V;
+end
+
+%take minimum and maximum from estimated parameters
+paramNames = paramSpecsestimated.names;
+bmin = paramSpecsestimated.bmin;
+bmax = paramSpecsestimated.bmax;
+bmin(paramSpecsestimated.islog==1) = log10(bmin(paramSpecsestimated.islog==1));
+bmax(paramSpecsestimated.islog==1) = log10(bmax(paramSpecsestimated.islog==1));
+paramtoplot = paramNames;
+n = length(paramtoplot);
+
+%%%nMperUnit was at position 7 -> need to take out column 7 from
+%%%data.rowmat to not include it in further steps
+data.rowmat(:,7) = [];
+
+%create minimum and maximum
+indices = zeros(1,n);
+x = zeros(length(data.rowmat(:,1)),n);
+xmin = zeros(1,n);
+xmax = zeros(1,n);
+for k =1:n
+    indices(k) = find(ismember(paramNames,paramtoplot{k}));
+    x(:,k) =  data.rowmat(:,k);
+    xmin(k,:) = bmin(indices(k));
+    xmax(k,:) = bmax(indices(k));
+end
+
+for draw=1:num_draws
+    for k=1:n
+        pd = fitdist(x(:,k),'Kernel');
+         X = xmin(k):0.1:xmax(k);
+         Y = pdf(pd,X);
+         %rand_parameter(k,1) = k;
+         rand_parameter(k,draw) = Y(randi(length(Y)));
+         while rand_parameter(k,draw) == 0
+             rand_parameter(k,draw) = Y(randi(length(Y)));
+         end
+
+    end
+end
+% rand_parameter = num2cell(rand_parameter);
+% rand_parameter(:,1) = paramSpecs.names;
+
+save('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/rand_parameter.mat','rand_parameter')

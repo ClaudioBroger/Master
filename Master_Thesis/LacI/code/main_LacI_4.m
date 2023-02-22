@@ -6,7 +6,7 @@ estimate_parameters         = 1;
 select_optimal_param        = 1;
 plot_meigo                  = 1;
 runHyperspace               = 0;
-plot_param_post             = 0;
+plot_param_post             = 1;
 
 %initPaths; do add dependencies (to do)
 

@@ -52,7 +52,7 @@ for k=1:(n-1),
     pos(4) = factor*pos(4);
     set(gca, 'Position', pos, 'XTick',[]);       
     axis([xmin(1) xmax(1) xmin(k) xmax(k)]);
-    for l =2:(k-1),
+    for l=2:(k-1),
         subplot(n,n,(k-1)*n+l)
         [~,density,X,Y] = kde2d([x(:,l),x(:,k)],10);
         contour(X,Y,density,'LineWidth',1);
