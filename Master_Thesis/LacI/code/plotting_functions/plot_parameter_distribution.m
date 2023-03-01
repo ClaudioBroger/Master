@@ -1,5 +1,9 @@
-%% plot cost
 
+load('2023_02_09_fitModel_Hyperspace_npoints20_Eline.mat')
+%Load model
+model = sbioloadproject('LacImodel');
+%Load model settings
+ModelSettings_4;
 paramSpecs = paramSpecs(Settings.model.PIdx,:);
 
 if ~isfield(OutV,'colnames')
@@ -41,7 +45,7 @@ end
 
 factor = 1.25;
 map = copper();
-for k=1:(n-1),
+for k=1:n,
     %subplot(3,7,k)
     [~,density,X,Y] = kde2d([x(:,1),x(:,k)],10);
     %contour(X,Y,density,'LineWidth',1);
@@ -76,3 +80,4 @@ for k=1:(n-1),
 %     set(gca, 'Position', pos, 'XTick',[],'YTick',[]);       
 %     axis([[xmin(k) xmax(k)] 0 max(Y)]);       
 end
+

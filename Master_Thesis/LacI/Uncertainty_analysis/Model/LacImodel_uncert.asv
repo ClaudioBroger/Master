@@ -1,0 +1,42 @@
+%Create model
+LacImodel_uncertainty = sbiomodel('LacImodel_uncertainty');
+
+%Create compartement
+c = addcompartment(LacImodel_uncertainty, 'comp');
+
+%Add the system's species
+s1 = addspecies(LacImodel_uncertainty, 'LacI', 'InitialAmount', 0);
+s2 = addspecies(LacImodel_uncertainty, 'Citimmature', 'InitialAmount', 0);
+s3 = addspecies(LacImodel_uncertainty, 'Citrine', 'InitialAmount', 0);
+s4 = addspecies(LacImodel_uncertainty, 'LacIfree');
+s5 = addspecies(LacImodel_uncertainty, 'IPTG', 'InitialAmount', 0);
+s6 = addspecies(LacImodel_uncertainty, 'IPTG_InUnit', 'InitialAmount', 0);
+s7 = addspecies(LacImodel_uncertainty, 'KdLacI_InUnit', 'InitialAmount', 0);
+
+%Add parameters
+p1 = addparameter(LacImodel_uncertainty, 'kLacI', 'Value', 1.0803, 'ValueUnits', '(molarity)/minute');
+p2 = addparameter(LacImodel_uncertainty, 'kCit', 'Value',1.3389, 'ValueUnits', '(molarity)/minute');
+p3 = addparameter(LacImodel_uncertainty, 'dLacI', 'Value', 0.0014, 'ValueUnits', '1/minute');
+p4 = addparameter(LacImodel_uncertainty, 'dCit', 'Value', 0.0077, 'ValueUnits', '1/minute');
+p5 = addparameter(LacImodel_uncertainty, 'LacIrep', 'Value', 0.3607, 'ValueUnits', 'molarity');
+p6 = addparameter(LacImodel_uncertainty, 'mu', 'Value', 0.0077, 'Valueunits', '1/minute');
+p7 = addparameter(LacImodel_uncertainty, 'kmaturation', 'Value', 0.0173, 'ValueUnits', '1/minute');
+p8 = addparameter(LacImodel_uncertainty, 'nMperUnit', 'Value', 1.6552, 'ValueUnits', 'dimensionless');
+p9 = addparameter(LacImodel_uncertainty, 'nLacI', 'Value', 1.001, 'ValueUnits', 'dimensionless');
+p10 = addparameter(LacImodel_uncertainty, 'CitL', 'Value', 0.0077, 'ValueUnits', 'dimensionless');
+p11 = addparameter(LacImodel_uncertainty, 'KdLacI', 'Value', 0.4532, 'ValueUnits', 'mole/liter');
+p12 = addparameter(LacImodel_uncertainty, 'LacIrep2', 'Value', 0.3607, 'ValueUnits', 'molarity');
+p13 = addparameter(LacImodel_uncertainty, 'LacIrep3', 'Value', 0.3607, 'ValueUnits', 'molarity');
+
+%Scaling factor
+scaling1 = addrule(LacImodel_uncertainty, 'KdLacI_InUnit = KdLacI/nMperUnit', 'RuleType', 'repeatedAssignment');
+scaling2 = addrule(LacImodel_uncertainty, 'IPTG_InUnit = IPTG/nMperUnit', 'RuleType', 'repeatedAssignment');
+
+%raterules
+raterule1 = addrule(LacImodel_uncertainty, 'LacI = kLacI - (dLacI + mu) * LacI', 'RuleType', 'rate');
+raterule2 = addrule(LacImodel_uncertainty, 'Citrimmature = kCit * (CitL + (1 - CitL)/1 + (LacIfree/LacIrep+LacIrep2+LacIrep3)^nLacI) - (dCit + mu) * Citrimmature', 'RuleType', 'rate');
+raterule3 = addrule(LacImodel_uncertainty, 'Citrine = kmaturation * Citrimmature - (dCit + mu) * Citrine', 'RuleType', 'rate');
+
+%Add repeated assignment rule
+repassrule = addrule(LacImodel_uncertainty, 'LacIfree = max(0, LacI/2 - KdLacI_InUnit/2 - IPTG_InUnit/2 + sqrt(KdLacI_InUnit^2 + 2*KdLacI_InUnit*LacI + 2*KdLacI_InUnit*IPTG_InUnit + LacI^2 - 2*LacI*IPTG_InUnit + IPTG_InUnit^2)/2)', 'RuleType', 'repeatedAssignment');
+

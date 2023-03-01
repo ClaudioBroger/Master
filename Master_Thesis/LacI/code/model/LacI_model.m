@@ -5,6 +5,13 @@ LacImodel = sbiomodel('LacImodel');
 c = addcompartment(LacImodel, 'comp');
 
 %Add the system's species
+s1 = addspecies(LacImodel, 'LacI', 'InitialAmount', 0);
+s2 = addspecies(LacImodel, 'Citimmature', 'InitialAmount', 0);
+s3 = addspecies(LacImodel, 'Citimmature_1', 'InitialAmount', 0);
+s4 = addspecies(LacImodel, 'Citrine', 'InitialAmount', 0);
+s5 = addspecies(LacImodel, 'LacIfree');
+s6 = addspecies(LacImodel, 'IPTG', 'InitialAmount', 0);
+s7 = addspecies(LacImodel, 'IPTG_InUnit', 'InitialAmount', 0);
 s8 = addspecies(LacImodel, 'KdLacI_InUnit', 'InitialAmount', 0);
 
 %Add parameters
@@ -30,13 +37,7 @@ p19 = addparameter(LacImodel, 'dLacI_pt7', 'Value', 0.0014, 'ValueUnits', '1/min
 p20 = addparameter(LacImodel, 'nLacI_P3', 'Value', 1.001, 'ValueUnits', 'dimensionless');
 p21 = addparameter(LacImodel, 'LacI_rep_3mut_P3', 'Value', 0.3607, 'ValueUnits', 'molarity');
 
-s1 = addspecies(LacImodel, 'LacI', 'InitialAmount', 0);
-s2 = addspecies(LacImodel, 'Citimmature', 'InitialAmount', 0);
-s3 = addspecies(LacImodel, 'Citimmature_1', 'InitialAmount', 0);
-s4 = addspecies(LacImodel, 'Citrine', 'InitialAmount', 0);
-s5 = addspecies(LacImodel, 'LacIfree');
-s6 = addspecies(LacImodel, 'IPTG', 'InitialAmount', 0);
-s7 = addspecies(LacImodel, 'IPTG_InUnit', 'InitialAmount', 0);
+
 %Add scaling factor to KdLacI and IPTG
 scaling1 = addrule(LacImodel, 'KdLacI_InUnit = KdLacI/nMperUnit', 'RuleType', 'repeatedAssignment');
 scaling2 = addrule(LacImodel, 'IPTG_InUnit = IPTG/nMperUnit', 'RuleType', 'repeatedAssignment');
