@@ -15,7 +15,7 @@ data.std = data_raw.Stdev(strcmp(data_raw.Strain, 'P4Lacn.2_cit + PAct1_LacI'));
 modulenames{1} = 'PA_LacI-P4Lacn_cit';
 
 dose = data_raw.Dose(strcmp(data_raw.Strain, 'P4Lacn.2_cit + PAct1_LacI'))*1000;
-timepoint = data_raw.Time(strcmp(data_raw.Strain, 'P4Lacn.2_cit + PAct1_LacI'));
+timepoint = data_raw.Time(strcmp(data_raw.Strain, 'P4Lacn.2_cit + PAct1_LacI'))*60;
 
 save('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/DataForEstimation/data.mat','data', 'modulenames', 'dose', 'timepoint')
 
@@ -27,7 +27,7 @@ data.std = data_raw.Stdev(strcmp(data_raw.Strain, 'P4Lacn.2_cit + PAct1_LacI(W22
 modulenames{1} = 'PAct1_LacI(W220F)_tCyc1';
 
 dose = data_raw.Dose(strcmp(data_raw.Strain, 'P4Lacn.2_cit + PAct1_LacI(W220F)'))*1000;
-timepoint = data_raw.Time(strcmp(data_raw.Strain, 'P4Lacn.2_cit + PAct1_LacI(W220F)'));
+timepoint = data_raw.Time(strcmp(data_raw.Strain, 'P4Lacn.2_cit + PAct1_LacI(W220F)'))*60;
 
 save('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/DataForEstimation/data_W220F.mat','data', 'modulenames', 'dose', 'timepoint')
 
@@ -42,7 +42,7 @@ data.std = data_raw.Stdev(strcmp(data_raw.Strain, 'P4Lacn.2_cit + P4Lacn.2_LacI(
 modulenames{1} = 'P4Lacn.2_LacI(W220F,Q60G, T167A)_tCyc1';
 
 dose = data_raw.Dose(strcmp(data_raw.Strain, 'P4Lacn.2_cit + P4Lacn.2_LacI(W220F,Q60G, T167A)'))*1000;
-timepoint = data_raw.Time(strcmp(data_raw.Strain, 'P4Lacn.2_cit + P4Lacn.2_LacI(W220F,Q60G, T167A)'));
+timepoint = data_raw.Time(strcmp(data_raw.Strain, 'P4Lacn.2_cit + P4Lacn.2_LacI(W220F,Q60G, T167A)'))*60;
 
 save('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/DataForEstimation/data_W220F_Q60G_T167A.mat','data', 'modulenames', 'dose', 'timepoint')
 
@@ -56,7 +56,7 @@ data.std = data_raw.Stdev(strcmp(data_raw.Strain, 'P3Lacn.5_cit + PAct1_citrine-
 modulenames{1} = 'PAct1_citrine-pt7-LacI(W220F, Q60G, T167A)';
 
 dose = data_raw.Dose(strcmp(data_raw.Strain, 'P3Lacn.5_cit + PAct1_citrine-pt7-LacI(W220F, Q60G, T167A)'))*1000;
-timepoint = data_raw.Time(strcmp(data_raw.Strain, 'P3Lacn.5_cit + PAct1_citrine-pt7-LacI(W220F, Q60G, T167A)'));
+timepoint = data_raw.Time(strcmp(data_raw.Strain, 'P3Lacn.5_cit + PAct1_citrine-pt7-LacI(W220F, Q60G, T167A)'))*60;
 
 save('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/DataForEstimation/data_pt7.mat','data', 'modulenames', 'dose', 'timepoint')
 
@@ -70,7 +70,7 @@ data.std = data_raw.Stdev(strcmp(data_raw.Strain, 'P4Lacn.2_cit + PAct1_citrine-
 modulenames{1} = 'P4Lacn.2_citrine-pt7-LacI(W220F, Q60G, T167A)';
 
 dose = data_raw.Dose(strcmp(data_raw.Strain, 'P4Lacn.2_cit + PAct1_citrine-pt7-LacI(W220F, Q60G, T167A)'))*1000;
-timepoint = data_raw.Time(strcmp(data_raw.Strain, 'P4Lacn.2_cit + PAct1_citrine-pt7-LacI(W220F, Q60G, T167A)'));
+timepoint = data_raw.Time(strcmp(data_raw.Strain, 'P4Lacn.2_cit + PAct1_citrine-pt7-LacI(W220F, Q60G, T167A)'))*60;
 
 save('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/DataForEstimation/data_pt7_5circuit.mat','data', 'modulenames', 'dose', 'timepoint')
 

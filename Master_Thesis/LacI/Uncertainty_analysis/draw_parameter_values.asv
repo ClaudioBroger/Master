@@ -1,7 +1,7 @@
 %Load data
 load('2023_02_09_fitModel_Hyperspace_npoints20_Eline.mat')
 %Load model
-model = sbioloadproject('LacImodel');
+model = sbioloadproject('LacImodel_uncertainty');
 %Load model settings
 ModelSettings_4;
 %Specify number of random draws
@@ -35,7 +35,8 @@ n = length(paramtoplot);
 %%%data.rowmat to not include it in further steps
 data.rowmat(:,7) = [];
 
-%create minimum and maximum
+%create minimum and maximum vectors from data
+%minimum and maximum vectors not the same length -> fill the rest with 0s
 indices = zeros(1,n);
 x = zeros(length(data.rowmat(:,1)),n);
 xmin = zeros(1,n);
@@ -47,20 +48,24 @@ for k =1:n
     xmax(k,:) = bmax(indices(k));
 end
 
+%Fit the probability density function depending on the parameter values
+%draw random values from the probability density function
+%many 0s -> onyl chose random parameters which are not 0
 for draw=1:num_draws
     for k=1:n
         pd = fitdist(x(:,k),'Kernel');
          X = xmin(k):0.1:xmax(k);
          Y = pdf(pd,X);
-         %rand_parameter(k,1) = k;
-         rand_parameter(k,draw) = Y(randi(length(Y)));
+         rand_parameter(k,draw) = randsample(Y,draw,true,pd);
          while rand_parameter(k,draw) == 0
-             rand_parameter(k,draw) = Y(randi(length(Y)));
-         end
+             %rand_parameter(k,draw) = Y(randi(length(Y)));
+         %end
 
     end
 end
-% rand_parameter = num2cell(rand_parameter);
-% rand_parameter(:,1) = paramSpecs.names;
 
+%save random parameters
 save('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/rand_parameter.mat','rand_parameter')
+
+
+randsample(Y, 10, true, x)
