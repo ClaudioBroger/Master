@@ -132,7 +132,7 @@ for draw = 1:num_draws
             para = paraValues;
             dataPos = strcat(dataPath, "data.mat");
             data = load(dataPos);
-
+            
             NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep3', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
             IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
             para(IdxToZero) = 0;
@@ -142,12 +142,14 @@ for draw = 1:num_draws
             DataStd = data.data.std;
             data.dose(1) = 1;
             
+
         %plot
         if FlPlot
             figure(3)
             hold on;
             plot(log10(data.dose),SimFluoValues3,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-rep3-', num2str(draw)), 'Color', C(draw,:));
             errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
+            xlim([0 15]);
             xlabel('log IPTG (nM)', 'FontSize', 18)
             ylabel('mean Fluorescence','FontSize', 18)
             title('P4Lacn.2-cit + PAct1-LacI, 3rd repression coefficient', 'FontSize',20)

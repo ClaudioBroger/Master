@@ -1,23 +1,41 @@
 dataPath = ('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/DataForEstimation/');
 
-random = 0;
-around_paraopt = 1;
+random = 1;
+around_paraopt = 0;
 
 dataPos = strcat(dataPath, "data.mat");
 data = load(dataPos);
 
-for k= 1:num_draws
+%%Draw random parameters, Simulate, find best correlating,
+%%maximise/minimise one parameter at the time
+%%For all repression coefficients
+if random
+    draw_parameter_values;
+    Simulate_random_parameters_3rep_coefficients;
+    close all
+    for k= 1:num_draws
         figure(1)
         subplot(4,5,k)
         plot(data.data.means(:), SimFluoValues1combined.SimFluoValues(SimFluoValues1combined.Draw == k))
         c = corrcoef(data.data.means(:), SimFluoValues1combined.SimFluoValues(SimFluoValues1combined.Draw == k));
         corr(k,1) = c(1,2);
-end
+    end
 
-index_min = find(corr == min(corr));
-index_max = find(corr == max(corr));
+    index_min = find(corr == min(corr));
+    index_max = find(corr == max(corr));
 
-if random
+    for k= 1:num_draws
+
+        subplot(4,5,k)
+        figure(6)
+        plot(data.data.means(:), SimFluoValues2combined.SimFluoValues(SimFluoValues2combined.Draw == k))
+        c = corrcoef(data.data.means(:), SimFluoValues2combined.SimFluoValues(SimFluoValues2combined.Draw == k));
+        corr2(k,1) = c(1,2);
+    end
+
+    index_min = find(corr2 == min(corr2));
+    index_max = find(corr2 == max(corr2));
+
     for k = 1:width(rand_parameter)
         diff(k) = table2array(rand_parameter(index_min, k)) - table2array(rand_parameter(index_max, k));
     end
@@ -66,7 +84,6 @@ if random
             title('P4Lacn.2-cit + PAct1-LacI,LacIrep1 1 parameter set to minimum at the time', 'FontSize',20)
             
         end
-        hold off
         legend("show", 'Location', 'northeastoutside')
     
         %%max parameter
@@ -98,7 +115,6 @@ if random
             title('P4Lacn.2-cit + PAct1-LacI,LacIrep1 1 parameter set to maximum at the time', 'FontSize',20)
             
         end
-        hold off
         legend("show", 'Location', 'northeastoutside')
     end
 end
@@ -132,7 +148,7 @@ if around_paraopt
         dataPos = strcat(dataPath, "data.mat");
                 data = load(dataPos);
     
-        NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep2', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+        NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
         IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
         para(IdxToZero) = 0;
     
@@ -152,7 +168,6 @@ if around_paraopt
             title('P4Lacn.2-cit + PAct1-LacI, 1 parameter set to minimum at the time', 'FontSize',20)
             
         end
-        hold off
         legend("show", 'Location', 'northeastoutside')
     
         %%max parameter
@@ -164,7 +179,7 @@ if around_paraopt
         dataPos = strcat(dataPath, "data.mat");
                 data = load(dataPos);
     
-        NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep2', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+        NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
         IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
         para(IdxToZero) = 0;
     
@@ -184,7 +199,6 @@ if around_paraopt
             title('P4Lacn.2-cit + PAct1-LacI, 1 parameter set to maximum at the time', 'FontSize',20)
             
         end
-        hold off
         legend("show", 'Location', 'northeastoutside')
     end
 end
@@ -192,17 +206,7 @@ end
 
 
 
-for k= 1:num_draws
 
-        subplot(4,5,k)
-        figure(6)
-        plot(data.data.means(:), SimFluoValues2combined.SimFluoValues(SimFluoValues2combined.Draw == k))
-        c = corrcoef(data.data.means(:), SimFluoValues2combined.SimFluoValues(SimFluoValues2combined.Draw == k));
-        corr2(k,1) = c(1,2);
-end
-
-index_min = find(corr2 == min(corr2));
-index_max = find(corr2 == max(corr2));
 
 if random
     for k = 1:width(rand_parameter)
@@ -253,7 +257,6 @@ if random
             title('P4Lacn.2-cit + PAct1-LacI,LacIrep2 1 parameter set to minimum at the time', 'FontSize',20)
             
         end
-        hold off
         legend("show", 'Location', 'northeastoutside')
     
         %%max parameter
@@ -265,7 +268,7 @@ if random
         dataPos = strcat(dataPath, "data.mat");
                 data = load(dataPos);
     
-        NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+        NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep2', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
         IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
         para(IdxToZero) = 0;
     
@@ -285,7 +288,6 @@ if random
             title('P4Lacn.2-cit + PAct1-LacI,LacIrep2 1 parameter set to maximum at the time', 'FontSize',20)
             
         end
-        hold off
         legend("show", 'Location', 'northeastoutside')
     end
 end
@@ -319,7 +321,7 @@ if around_paraopt
         dataPos = strcat(dataPath, "data.mat");
                 data = load(dataPos);
     
-        NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+        NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep2', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
         IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
         para(IdxToZero) = 0;
     
@@ -351,7 +353,7 @@ if around_paraopt
         dataPos = strcat(dataPath, "data.mat");
                 data = load(dataPos);
     
-        NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+        NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep2', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
         IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
         para(IdxToZero) = 0;
     
@@ -371,7 +373,6 @@ if around_paraopt
             title('P4Lacn.2-cit + PAct1-LacI,LacIrep2 1 parameter set to maximum at the time', 'FontSize',20)
             
         end
-        hold off
         legend("show", 'Location', 'northeastoutside')
     end
 end
@@ -419,7 +420,7 @@ if random
         dataPos = strcat(dataPath, "data.mat");
         data = load(dataPos);
     
-        NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+        NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep3', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
         IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
         para(IdxToZero) = 0;
     
@@ -439,7 +440,6 @@ if random
             title('P4Lacn.2-cit + PAct1-LacI,LacIrep3 1 parameter set to minimum at the time', 'FontSize',20)
             
         end
-        hold off
         legend("show", 'Location', 'northeastoutside')
     
         %%max parameter
@@ -451,7 +451,7 @@ if random
         dataPos = strcat(dataPath, "data.mat");
         data = load(dataPos);
     
-        NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+        NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep3', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
         IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
         para(IdxToZero) = 0;
     
@@ -471,7 +471,6 @@ if random
             title('P4Lacn.2-cit + PAct1-LacI,LacIrep3 1 parameter set to maximum at the time', 'FontSize',20)
             
         end
-        hold off
         legend("show", 'Location', 'northeastoutside')
     end
 end
@@ -505,7 +504,7 @@ if around_paraopt
         dataPos = strcat(dataPath, "data.mat");
                 data = load(dataPos);
     
-        NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+        NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep3', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
         IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
         para(IdxToZero) = 0;
     
@@ -537,7 +536,7 @@ if around_paraopt
         dataPos = strcat(dataPath, "data.mat");
                 data = load(dataPos);
     
-        NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+        NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep3', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
         IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
         para(IdxToZero) = 0;
     

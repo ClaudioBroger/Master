@@ -6,18 +6,37 @@ around_paraopt = 0;
 dataPos = strcat(dataPath, "data.mat");
 data = load(dataPos);
 
-for k= 1:num_draws
+%%Draw random parameters, Simulate, find best correlating,
+%%maximise/minimise one parameter at the time
+%%For all repression coefficients
+if random
+    draw_parameter_values;
+    Simulate_random_parameters_3rep_coefficients;
+    close all
+    %for first repression coefficient
+    for k= 1:num_draws
         figure(1)
         subplot(4,5,k)
         plot(data.data.means(:), SimFluoValues1combined.SimFluoValues(SimFluoValues1combined.Draw == k))
         c = corrcoef(data.data.means(:), SimFluoValues1combined.SimFluoValues(SimFluoValues1combined.Draw == k));
         corr(k,1) = c(1,2);
-end
+    end
 
-index_min = find(corr == min(corr));
-index_max = find(corr == max(corr));
+    index_min = find(corr == min(corr));
+    index_max = find(corr == max(corr));
 
-if random
+%     for k= 1:num_draws
+% 
+%         subplot(4,5,k)
+%         figure(6)
+%         plot(data.data.means(:), SimFluoValues2combined.SimFluoValues(SimFluoValues2combined.Draw == k))
+%         c = corrcoef(data.data.means(:), SimFluoValues2combined.SimFluoValues(SimFluoValues2combined.Draw == k));
+%         corr2(k,1) = c(1,2);
+%     end
+% 
+%     index_min = find(corr2 == min(corr2));
+%     index_max = find(corr2 == max(corr2));
+
     for k = 1:width(rand_parameter)
         diff(k) = table2array(rand_parameter(index_min, k)) - table2array(rand_parameter(index_max, k));
     end
@@ -74,8 +93,7 @@ if random
     
     
         para = parametervalues';
-        dataPos = strcat(dataPath, "data.mat");
-                data = load(dataPos);
+
     
         NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
         IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
@@ -188,17 +206,7 @@ end
 
 
 
-for k= 1:num_draws
 
-        subplot(4,5,k)
-        figure(6)
-        plot(data.data.means(:), SimFluoValues2combined.SimFluoValues(SimFluoValues2combined.Draw == k))
-        c = corrcoef(data.data.means(:), SimFluoValues2combined.SimFluoValues(SimFluoValues2combined.Draw == k));
-        corr2(k,1) = c(1,2);
-end
-
-index_min = find(corr2 == min(corr2));
-index_max = find(corr2 == max(corr2));
 
 if random
     for k = 1:width(rand_parameter)

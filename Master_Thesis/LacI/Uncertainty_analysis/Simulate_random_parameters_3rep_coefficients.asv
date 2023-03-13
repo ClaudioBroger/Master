@@ -142,12 +142,14 @@ for draw = 1:num_draws
             DataStd = data.data.std;
             data.dose(1) = 1;
             
+            
         %plot
         if FlPlot
             figure(3)
             hold on;
             plot(log10(data.dose),SimFluoValues3,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-rep3-', num2str(draw)), 'Color', C(draw,:));
             errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
+            xlim([0 15]);
             xlabel('log IPTG (nM)', 'FontSize', 18)
             ylabel('mean Fluorescence','FontSize', 18)
             title('P4Lacn.2-cit + PAct1-LacI, 3rd repression coefficient', 'FontSize',20)
@@ -214,23 +216,23 @@ for draw = 1:num_draws
             SimFluoValues1combined = SimFluoValues1;
             SimFluoValues2combined = SimFluoValues2;
             SimFluoValues3combined = SimFluoValues3;
+            SimFluoValuescombined = [SimFluoValues1; SimFluoValues2; SimFluoValues3];
         else
             SimFluoValues1combined = [SimFluoValues1combined; SimFluoValues1];
             SimFluoValues2combined = [SimFluoValues2combined; SimFluoValues2];
             SimFluoValues3combined = [SimFluoValues3combined; SimFluoValues3];
+            SimFluoValuescombined = [SimFluoValuescombined; SimFluoValues1; SimFluoValues2; SimFluoValues3];
         end
 
-        SimFluoValuescombined = [SimFluoValues1; SimFluoValues2; SimFluoValues3];
+        
         
 
         %set the figure to be sceensize
             set(figure(draw+3), 'Position', get(0, 'Screensize'));
             %save figure
             saveas(figure(draw+3), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/', datestr(now, 'dd-mmm-yyyy'),num2str(draw),'Figure_draw_allrep', '.jpg']);
-            %savefig(fig, '/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Figure_draw_', num2str(draw))
-            %save simulated fluoresence values
-            save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/', datestr(now, 'dd-mmm-yyyy'),'_draw_', num2str(draw),'SimulationFluoValues_allrep', '.mat'], 'SimFluoValuescombined');
 
+            
 
 end
             %save simulated fluoresence values
@@ -243,6 +245,8 @@ end
             save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/', datestr(now, 'dd-mmm-yyyy'),'SimulationFluoValues_rep3_', '.mat'], 'SimFluoValues3combined');
             writetable(SimFluoValues3combined,['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/', datestr(now, 'dd-mmm-yyyy'),'SimulationFluoValues_rep3_', '.csv']);
            
+            save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/', datestr(now, 'dd-mmm-yyyy'),'_draw_', num2str(draw),'SimulationFluoValues_allrep', '.mat'], 'SimFluoValuescombined');
+
             %func = @(x) colorspace('RGB->Lab',x);
             %cmp=distinguishable_colors(30);
             %set the figure to be sceensize
