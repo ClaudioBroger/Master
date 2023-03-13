@@ -1,4 +1,11 @@
-
+path = '/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/';
+dataPos = strcat(path, "13-Mar-2023SimulationFluoValues_rep1_.mat");
+dataPos2 = strcat(path, "13-Mar-2023SimulationFluoValues_rep2_.mat");
+dataPos3 = strcat(path, "13-Mar-2023SimulationFluoValues_rep3_.mat");
+load(dataPos);
+load(dataPos2);
+load(dataPos3);
+num_draws = 20;
 
 for k= 1:num_draws
         [hill(k,1) ec50(k,1)] = doseResponse(SimFluoValues1combined.Dose(SimFluoValues1combined.Draw == k), SimFluoValues1combined.SimFluoValues(SimFluoValues1combined.Draw == k));
@@ -25,13 +32,4 @@ plot(hill3)
 
 
 
-SimFluoValuescombined([SimFluoValuescombined.Repression_Coefficient == 'LacIrep1' SimFluoValuescombined.Draw == 3])
 
-
-reps = ["LacIrep1" "LacIrep2" "LacIrep3"];
-for k = 1:num_draws
-    for j = 1:length(reps)
-        Values = SimFluoValuescombined(SimFluoValuescombined.Repression_Coefficient == reps(j),:);
-        [hillcombined(k+j,1) ec50combined(k+j,1)] = doseResponse(Values.Dose(Values.Draw == k), Values.SimFluoValues(Values.Draw==k));
-    end
-end

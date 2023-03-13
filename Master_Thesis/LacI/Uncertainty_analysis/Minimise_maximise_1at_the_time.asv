@@ -1,0 +1,485 @@
+dataPath = ('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/DataForEstimation/');
+dataPos = strcat(dataPath, "data.mat");
+data = load(dataPos);
+new_random_data = 0;
+old_random_data = 1;
+days_back = 1;
+
+%% Random parameters
+
+draw_parameter_values;
+Simulate_random_parameters_3rep_coefficients;
+close all
+
+
+
+for k = 1:num_draws
+    c1 = corrcoef(data.data.means(:), SimFluoValues1combined.SimFluoValues(SimFluoValues1combined.Draw == k));
+    c2 = corrcoef(data.data.means(:), SimFluoValues2combined.SimFluoValues(SimFluoValues2combined.Draw == k));
+    c3 = corrcoef(data.data.means(:), SimFluoValues3combined.SimFluoValues(SimFluoValues3combined.Draw == k));
+    corr1(k,1) = c1(1,2);
+    corr2(k,1) = c2(1,2);
+    corr3(k,1) = c3(1,2);
+end
+
+index_min1 = find(corr1 == min(corr1));
+index_max1 = find(corr1 == max(corr1));
+index_min2 = find(corr2 == min(corr2));
+index_max2 = find(corr2 == max(corr2));
+index_min3 = find(corr3 == min(corr3));
+index_max3 = find(corr3 == max(corr3));
+
+rand_parameter = table2array(rand_parameter);
+
+for k = 1:width(rand_parameter)
+        max_range(k) = max(rand_parameter(:,k));
+        min_range(k) = min(rand_parameter(:,k));
+end
+
+%% First repression coefficient
+
+objf  = [];
+objfn = {};
+ndata = 0;
+
+ %minimise one parameter at the time
+ parametervalues = rand_parameter(index_max1,:);
+ 
+C = linspecer(width(rand_parameter));
+for variable = 1:width(rand_parameter)
+    %%Min parameter 
+    parametervalues(variable) = min_range(variable);
+
+    para = parametervalues';
+
+    NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+    IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
+    para(IdxToZero) = 0;
+
+    SimFluoValues1min = simulate_DR_IPTG(para,data,ParaNames,model);
+    DataMeans = data.data.means;
+    DataStd = data.data.std;
+    data.dose(1) = 1;
+    
+    %plot
+    if FlPlot
+        figure(1)
+        hold on;
+        plot(log10(data.dose),SimFluoValues1min,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-min-parameter-',string(ParaNames(variable))), 'Color', C(variable,:));
+        errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
+        xlabel('log IPTG (nM)', 'FontSize', 18)
+        ylabel('mean Fluorescence','FontSize', 18)
+        title('P4Lacn.2-cit + PAct1-LacI,LacIrep1 1 parameter set to minimum at the time', 'FontSize',20)
+        
+    end
+    legend("show", 'Location', 'northeastoutside')
+
+    %maximise one parameter at the time
+    parametervalues(variable) = max_range(variable);
+    
+    para = parametervalues';
+
+
+    NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+    IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
+    para(IdxToZero) = 0;
+
+    SimFluoValues1max = simulate_DR_IPTG(para,data,ParaNames,model);
+    DataMeans = data.data.means;
+    DataStd = data.data.std;
+    data.dose(1) = 1;
+    
+    %plot
+    if FlPlot
+        figure(2)
+        hold on;
+        plot(log10(data.dose),SimFluoValues1max,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-max-parameter-',string(ParaNames(variable))), 'Color', C(variable,:));
+        errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
+        xlabel('log IPTG (nM)', 'FontSize', 18)
+        ylabel('mean Fluorescence','FontSize', 18)
+        title('P4Lacn.2-cit + PAct1-LacI,LacIrep1 1 parameter set to maximum at the time', 'FontSize',20)
+        
+    end
+    legend("show", 'Location', 'northeastoutside')
+end
+    %% Second repression coefficient
+
+objf  = [];
+objfn = {};
+ndata = 0;
+
+ %minimise one parameter at the time
+ parametervalues = rand_parameter(index_max2,:);
+ 
+C = linspecer(width(rand_parameter));
+for variable = 1:width(rand_parameter)
+    %%Min parameter 
+    parametervalues(variable) = min_range(variable);
+
+    para = parametervalues';
+
+    NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep2', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+    IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
+    para(IdxToZero) = 0;
+
+    SimFluoValues2min = simulate_DR_IPTG(para,data,ParaNames,model);
+    DataMeans = data.data.means;
+    DataStd = data.data.std;
+    data.dose(1) = 1;
+    
+    %plot
+    if FlPlot
+        figure(3)
+        hold on;
+        plot(log10(data.dose),SimFluoValues2min,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-min-parameter-',string(ParaNames(variable))), 'Color', C(variable,:));
+        errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
+        xlabel('log IPTG (nM)', 'FontSize', 18)
+        ylabel('mean Fluorescence','FontSize', 18)
+        title('P4Lacn.2-cit + PAct1-LacI,LacIrep2 1 parameter set to minimum at the time', 'FontSize',20)
+        
+    end
+    legend("show", 'Location', 'northeastoutside')
+
+    %maximise one parameter at the time
+    parametervalues(variable) = max_range(variable);
+    
+    para = parametervalues';
+
+
+    NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep2', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+    IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
+    para(IdxToZero) = 0;
+
+    SimFluoValues2max = simulate_DR_IPTG(para,data,ParaNames,model);
+    DataMeans = data.data.means;
+    DataStd = data.data.std;
+    data.dose(1) = 1;
+    
+    %plot
+    if FlPlot
+        figure(4)
+        hold on;
+        plot(log10(data.dose),SimFluoValues2max,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-max-parameter-',string(ParaNames(variable))), 'Color', C(variable,:));
+        errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
+        xlabel('log IPTG (nM)', 'FontSize', 18)
+        ylabel('mean Fluorescence','FontSize', 18)
+        title('P4Lacn.2-cit + PAct1-LacI,LacIrep2 1 parameter set to maximum at the time', 'FontSize',20)
+        
+    end
+    legend("show", 'Location', 'northeastoutside')
+end
+
+%% 3rd repression coefficient
+
+objf  = [];
+objfn = {};
+ndata = 0;
+
+ %minimise one parameter at the time
+ parametervalues = rand_parameter(index_max3,:);
+ 
+C = linspecer(width(rand_parameter));
+for variable = 1:width(rand_parameter)
+    %%Min parameter 
+    parametervalues(variable) = min_range(variable);
+
+    para = parametervalues';
+
+    NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep3', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+    IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
+    para(IdxToZero) = 0;
+
+    SimFluoValues3min = simulate_DR_IPTG(para,data,ParaNames,model);
+    DataMeans = data.data.means;
+    DataStd = data.data.std;
+    data.dose(1) = 1;
+    
+    %plot
+    if FlPlot
+        figure(5)
+        hold on;
+        plot(log10(data.dose),SimFluoValues3min,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-min-parameter-',string(ParaNames(variable))), 'Color', C(variable,:));
+        errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
+        xlabel('log IPTG (nM)', 'FontSize', 18)
+        ylabel('mean Fluorescence','FontSize', 18)
+        title('P4Lacn.2-cit + PAct1-LacI,LacIrep3 1 parameter set to minimum at the time', 'FontSize',20)
+        
+    end
+    legend("show", 'Location', 'northeastoutside')
+
+    %maximise one parameter at the time
+    parametervalues(variable) = max_range(variable);
+    
+    para = parametervalues';
+
+
+    NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep3', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+    IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
+    para(IdxToZero) = 0;
+
+    SimFluoValues3max = simulate_DR_IPTG(para,data,ParaNames,model);
+    DataMeans = data.data.means;
+    DataStd = data.data.std;
+    data.dose(1) = 1;
+    
+    %plot
+    if FlPlot
+        figure(6)
+        hold on;
+        plot(log10(data.dose),SimFluoValues3max,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-max-parameter-',string(ParaNames(variable))), 'Color', C(variable,:));
+        errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
+        xlabel('log IPTG (nM)', 'FontSize', 18)
+        ylabel('mean Fluorescence','FontSize', 18)
+        title('P4Lacn.2-cit + PAct1-LacI,LacIrep3 1 parameter set to maximum at the time', 'FontSize',20)
+        
+    end
+    legend("show", 'Location', 'northeastoutside')
+end
+
+set(figure(1), 'Position', get(0, 'Screensize'));
+set(figure(2), 'Position', get(0, 'Screensize'));
+set(figure(3), 'Position', get(0, 'Screensize'));
+set(figure(4), 'Position', get(0, 'Screensize'));
+set(figure(5), 'Position', get(0, 'Screensize'));
+set(figure(6), 'Position', get(0, 'Screensize'));
+
+saveas(figure(1), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/', datestr(now, 'dd-mmm-yyyy'),num2str(draw),'_Figure_minmax', '.jpg']);
+saveas(figure(2), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/', datestr(now, 'dd-mmm-yyyy'),num2str(draw),'_Figure_draw_allrep', '.jpg']);
+saveas(figure(3), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/', datestr(now, 'dd-mmm-yyyy'),num2str(draw),'_Figure_draw_allrep', '.jpg']);
+saveas(figure(4), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/', datestr(now, 'dd-mmm-yyyy'),num2str(draw),'_Figure_draw_allrep', '.jpg']);
+saveas(figure(5), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/', datestr(now, 'dd-mmm-yyyy'),num2str(draw),'_Figure_draw_allrep', '.jpg']);
+saveas(figure(5), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/', datestr(now, 'dd-mmm-yyyy'),num2str(draw),'_Figure_draw_allrep', '.jpg']);
+
+close all
+
+%% Maximise and minimise for parameters around the paraopt
+
+Simulate_around_paraopt;
+close all
+
+for k = 1:num_draws
+    c1 = corrcoef(data.data.means(:), SimFluoValues1combined.SimFluoValues(SimFluoValues1combined.Draw == k));
+    c2 = corrcoef(data.data.means(:), SimFluoValues2combined.SimFluoValues(SimFluoValues2combined.Draw == k));
+    c3 = corrcoef(data.data.means(:), SimFluoValues3combined.SimFluoValues(SimFluoValues3combined.Draw == k));
+    corr1(k,1) = c1(1,2);
+    corr2(k,1) = c2(1,2);
+    corr3(k,1) = c3(1,2);
+end
+
+index_min1 = find(corr1 == min(corr1));
+index_max1 = find(corr1 == max(corr1));
+index_min2 = find(corr2 == min(corr2));
+index_max2 = find(corr2 == max(corr2));
+index_min3 = find(corr3 == min(corr3));
+index_max3 = find(corr3 == max(corr3));
+
+paraopt_range = table2array(paraopt_range);
+
+for k = 1:width(rand_parameter)
+        max_range(k) = max(paraopt_range(:,k));
+        min_range(k) = min(paraopt_range(:,k));
+end
+
+%% First repression coefficient
+
+objf  = [];
+objfn = {};
+ndata = 0;
+
+ %minimise one parameter at the time
+ parametervalues = paraopt_range(index_max1,:);
+ 
+C = linspecer(width(paraopt_range));
+for variable = 1:width(paraopt_range)
+    %%Min parameter 
+    parametervalues(variable) = min_range(variable);
+
+    para = parametervalues';
+
+    NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+    IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
+    para(IdxToZero) = 0;
+
+    SimFluoValues1min = simulate_DR_IPTG(para,data,ParaNames,model);
+    DataMeans = data.data.means;
+    DataStd = data.data.std;
+    data.dose(1) = 1;
+    
+    %plot
+    if FlPlot
+        figure(7)
+        hold on;
+        plot(log10(data.dose),SimFluoValues1min,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-min-parameter-',string(ParaNames(variable))), 'Color', C(variable,:));
+        errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
+        xlabel('log IPTG (nM)', 'FontSize', 18)
+        ylabel('mean Fluorescence','FontSize', 18)
+        title('P4Lacn.2-cit + PAct1-LacI,around paraopt LacIrep1 1 parameter set to minimum at the time', 'FontSize',20)
+        
+    end
+    legend("show", 'Location', 'northeastoutside')
+
+    %maximise one parameter at the time
+    parametervalues(variable) = max_range(variable);
+    
+    para = parametervalues';
+
+
+    NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+    IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
+    para(IdxToZero) = 0;
+
+    SimFluoValues1max = simulate_DR_IPTG(para,data,ParaNames,model);
+    DataMeans = data.data.means;
+    DataStd = data.data.std;
+    data.dose(1) = 1;
+    
+    %plot
+    if FlPlot
+        figure(8)
+        hold on;
+        plot(log10(data.dose),SimFluoValues1max,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-max-parameter-',string(ParaNames(variable))), 'Color', C(variable,:));
+        errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
+        xlabel('log IPTG (nM)', 'FontSize', 18)
+        ylabel('mean Fluorescence','FontSize', 18)
+        title('P4Lacn.2-cit + PAct1-LacI,around paraopt LacIrep1 1 parameter set to maximum at the time', 'FontSize',20)
+        
+    end
+    legend("show", 'Location', 'northeastoutside')
+end
+    %% Second repression coefficient
+
+objf  = [];
+objfn = {};
+ndata = 0;
+
+ %minimise one parameter at the time
+ parametervalues = paraopt_range(index_max2,:);
+ 
+C = linspecer(width(paraopt_range));
+for variable = 1:width(paraopt_range)
+    %%Min parameter 
+    parametervalues(variable) = min_range(variable);
+
+    para = parametervalues';
+
+    NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep2', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+    IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
+    para(IdxToZero) = 0;
+
+    SimFluoValues2min = simulate_DR_IPTG(para,data,ParaNames,model);
+    DataMeans = data.data.means;
+    DataStd = data.data.std;
+    data.dose(1) = 1;
+    
+    %plot
+    if FlPlot
+        figure(9)
+        hold on;
+        plot(log10(data.dose),SimFluoValues2min,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-min-parameter-',string(ParaNames(variable))), 'Color', C(variable,:));
+        errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
+        xlabel('log IPTG (nM)', 'FontSize', 18)
+        ylabel('mean Fluorescence','FontSize', 18)
+        title('P4Lacn.2-cit + PAct1-LacI, around paraopt LacIrep2 1 parameter set to minimum at the time', 'FontSize',20)
+        
+    end
+    legend("show", 'Location', 'northeastoutside')
+
+    %maximise one parameter at the time
+    parametervalues(variable) = max_range(variable);
+    
+    para = parametervalues';
+
+
+    NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep2', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+    IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
+    para(IdxToZero) = 0;
+
+    SimFluoValues2max = simulate_DR_IPTG(para,data,ParaNames,model);
+    DataMeans = data.data.means;
+    DataStd = data.data.std;
+    data.dose(1) = 1;
+    
+    %plot
+    if FlPlot
+        figure(10)
+        hold on;
+        plot(log10(data.dose),SimFluoValues2max,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-max-parameter-',string(ParaNames(variable))), 'Color', C(variable,:));
+        errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
+        xlabel('log IPTG (nM)', 'FontSize', 18)
+        ylabel('mean Fluorescence','FontSize', 18)
+        title('P4Lacn.2-cit + PAct1-LacI, around paraopt LacIrep2 1 parameter set to maximum at the time', 'FontSize',20)
+        
+    end
+    legend("show", 'Location', 'northeastoutside')
+end
+
+%% 3rd repression coefficient
+
+objf  = [];
+objfn = {};
+ndata = 0;
+
+ %minimise one parameter at the time
+ parametervalues = paraopt_range(index_max3,:);
+ 
+C = linspecer(width(paraopt_range));
+for variable = 1:width(paraopt_range)
+    %%Min parameter 
+    parametervalues(variable) = min_range(variable);
+
+    para = parametervalues';
+
+    NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep3', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+    IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
+    para(IdxToZero) = 0;
+
+    SimFluoValues3min = simulate_DR_IPTG(para,data,ParaNames,model);
+    DataMeans = data.data.means;
+    DataStd = data.data.std;
+    data.dose(1) = 1;
+    
+    %plot
+    if FlPlot
+        figure(11)
+        hold on;
+        plot(log10(data.dose),SimFluoValues3min,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-min-parameter-',string(ParaNames(variable))), 'Color', C(variable,:));
+        errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
+        xlabel('log IPTG (nM)', 'FontSize', 18)
+        ylabel('mean Fluorescence','FontSize', 18)
+        title('P4Lacn.2-cit + PAct1-LacI,around paraopt LacIrep3 1 parameter set to minimum at the time', 'FontSize',20)
+        
+    end
+    legend("show", 'Location', 'northeastoutside')
+
+    %maximise one parameter at the time
+    parametervalues(variable) = max_range(variable);
+    
+    para = parametervalues';
+
+
+    NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep3', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
+    IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
+    para(IdxToZero) = 0;
+
+    SimFluoValues3max = simulate_DR_IPTG(para,data,ParaNames,model);
+    DataMeans = data.data.means;
+    DataStd = data.data.std;
+    data.dose(1) = 1;
+    
+    %plot
+    if FlPlot
+        figure(12)
+        hold on;
+        plot(log10(data.dose),SimFluoValues3max,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-max-parameter-',string(ParaNames(variable))), 'Color', C(variable,:));
+        errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
+        xlabel('log IPTG (nM)', 'FontSize', 18)
+        ylabel('mean Fluorescence','FontSize', 18)
+        title('P4Lacn.2-cit + PAct1-LacI,around paraopt LacIrep3 1 parameter set to maximum at the time', 'FontSize',20)
+        
+    end
+    legend("show", 'Location', 'northeastoutside')
+end
+
+
+
+
