@@ -3,7 +3,7 @@ load('2023_02_09_fitModel_Hyperspace_npoints20_Eline.mat')
 %Load model
 dataPath = ('/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/DataForEstimation/');
 model = sbioloadproject('LacImodel');
-FlPlot = true;
+FlPlot = false;
 %Load model settings
 ModelSettings_4;
 
@@ -19,7 +19,7 @@ max_para = 1.1*paraopt;
 %min_para([1 2 3 4 5 6 8 9 10 11 12 13 14 15 17]) = 10.^(min_para([1 2 3 4 5 6 8 9 10 11 12 13 14 15 17]));
 %max_para([1 2 3 4 5 6 8 9 10 11 12 13 14 15 17]) = 10.^(max_para([1 2 3 4 5 6 8 9 10 11 12 13 14 15 17]));
 
-num_draws = 20;
+num_draws = 200;
 
 for k = 1:length(paraopt)
     for j = 1:num_draws
@@ -61,30 +61,32 @@ for draw = 1:num_draws
         %% module 1: ptetTetR + ptetCitrine
             para = paraValues;
             dataPos = strcat(dataPath, "data.mat");
-            data = load(dataPos);
+             data1 = load(dataPos);
+%             data1.dose = [min(data1.dose):100000:10^2 10^2:1000:10^5 10^5:100000:max(data1.dose)];
+%             data1.dose = data1.dose';
 
             NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
             IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
             para(IdxToZero) = 0;
 
-            SimFluoValues1 = simulate_DR_IPTG(para,data,ParaNames,model);
-            DataMeans = data.data.means;
-            DataStd = data.data.std;
-            data.dose(1) = 1;
+            SimFluoValues1 = simulate_DR_IPTG(para,data1,ParaNames,model);
+            DataMeans = data1.data.means;
+            DataStd = data1.data.std;
+            data1.dose(1) = 1;
             
         %plot
-        if FlPlot
-            figure(1)
-            hold on;
-            plot(log10(data.dose),SimFluoValues1,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-rep1-', num2str(draw)),'Color',C(draw,:));
-            errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
-            xlabel('log IPTG (nM)', 'FontSize', 18)
-            ylabel('mean Fluorescence','FontSize', 18)
-            title('P4Lacn.2-cit + PAct1-LacI, 1st repression coefficient', 'FontSize',20)
-            
-        end
-        hold off
-        legend("show", 'Location', 'northeastoutside')
+%         if FlPlot
+%             figure(1)
+%             hold on;
+%             plot(log10(data1.dose),SimFluoValues1,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-rep1-', num2str(draw)),'Color',C(draw,:));
+%             %errorbar(log10(data1.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
+%             xlabel('log IPTG (nM)', 'FontSize', 18)
+%             ylabel('mean Fluorescence','FontSize', 18)
+%             title('P4Lacn.2-cit + PAct1-LacI, 1st repression coefficient', 'FontSize',20)
+%             
+%         end
+%         hold off
+%         legend("show", 'Location', 'northeastoutside')
 
     
      
@@ -97,29 +99,31 @@ for draw = 1:num_draws
         %% module 1: ptetTetR + ptetCitrine
             para = paraValues;
             dataPos = strcat(dataPath, "data.mat");
-            data = load(dataPos);
+             data2 = load(dataPos);
+%             data2.dose = [min(data2.dose):1000000:10^5 10^5:10000:10^7 10^7:1000000:max(data2.dose)];
+%             data2.dose = data2.dose';
 
             NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep2', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
             IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
             para(IdxToZero) = 0;
 
-            SimFluoValues2 = simulate_DR_IPTG(para,data,ParaNames,model);
-            DataMeans = data.data.means;
-            DataStd = data.data.std;
-            data.dose(1) = 1;
+            SimFluoValues2 = simulate_DR_IPTG(para,data2,ParaNames,model);
+            DataMeans = data2.data.means;
+            DataStd = data2.data.std;
+            data2.dose(1) = 1;
             
         %plot
-        if FlPlot
-            figure(2)
-            hold on;
-            plot(log10(data.dose),SimFluoValues2,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-rep2-', num2str(draw)),'Color',C(draw,:));
-            errorbar(log10(data.dose),DataMeans,DataStd,'o','HandleVisibility','off');
-            xlabel('log IPTG (nM)', 'FontSize', 18)
-            ylabel('mean Fluorescence','FontSize', 18)
-            title('P4Lacn.2-cit + PAct1-LacI, 2nd repression coefficient', 'FontSize',20)
-        end
-        hold off
-        legend("show", 'Location', 'northeastoutside')
+%         if FlPlot
+%             figure(2)
+%             hold on;
+%             plot(log10(data2.dose),SimFluoValues2,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-rep2-', num2str(draw)),'Color',C(draw,:));
+%             %errorbar(log10(data2.dose),DataMeans,DataStd,'o','HandleVisibility','off');
+%             xlabel('log IPTG (nM)', 'FontSize', 18)
+%             ylabel('mean Fluorescence','FontSize', 18)
+%             title('P4Lacn.2-cit + PAct1-LacI, 2nd repression coefficient', 'FontSize',20)
+%         end
+%         hold off
+%         legend("show", 'Location', 'northeastoutside')
   
     
      
@@ -132,43 +136,45 @@ for draw = 1:num_draws
         %% module 1: ptetTetR + ptetCitrine
             para = paraValues;
             dataPos = strcat(dataPath, "data.mat");
-            data = load(dataPos);
+             data3 = load(dataPos);
+%             data3.dose = [min(data3.dose):10000000:10^6.5 10^6.5:10000:10^8.5 10^8.5:1000000000:10^10];
+%             data3.dose = data3.dose';
 
             NamestoZero = setdiff(ParaNames,{'kLacI','kCit', 'CitL', 'dLacI', 'LacIrep3', 'nLacI', 'KdLacI', 'mu', 'nMperUnit', 'kmaturation', 'indTime' });                            
             IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
             para(IdxToZero) = 0;
 
-            SimFluoValues3 = simulate_DR_IPTG(para,data,ParaNames,model);
-            DataMeans = data.data.means;
-            DataStd = data.data.std;
-            data.dose(1) = 1;
+            SimFluoValues3 = simulate_DR_IPTG(para,data3,ParaNames,model);
+            DataMeans = data3.data.means;
+            DataStd = data3.data.std;
+            data3.dose(1) = 1;
             
         %plot
-        if FlPlot
-            figure(3)
-            hold on;
-            plot(log10(data.dose),SimFluoValues3,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-rep3-', num2str(draw)),'Color',C(draw,:));
-            errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
-            xlabel('log IPTG (nM)', 'FontSize', 18)
-            ylabel('mean Fluorescence','FontSize', 18)
-            title('P4Lacn.2-cit + PAct1-LacI, 3rd repression coefficient', 'FontSize',20)
-        end
-        hold off
-        legend("show", 'Location', 'northeastoutside')
+%         if FlPlot
+%             figure(3)
+%             hold on;
+%             plot(log10(data3.dose),SimFluoValues3,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-rep3-', num2str(draw)),'Color',C(draw,:));
+%             %errorbar(log10(data3.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
+%             xlabel('log IPTG (nM)', 'FontSize', 18)
+%             ylabel('mean Fluorescence','FontSize', 18)
+%             title('P4Lacn.2-cit + PAct1-LacI, 3rd repression coefficient', 'FontSize',20)
+%         end
+%         hold off
+%         legend("show", 'Location', 'northeastoutside')
 
-        if FlPlot
-            figure(draw+3)
-            hold on;
-            plot(log10(data.dose), SimFluoValues1, '-', 'LineWidth',2, 'DisplayName',strcat('Simulation-rep1-', num2str(draw)));
-            plot(log10(data.dose), SimFluoValues2, '-', 'LineWidth',2, 'DisplayName',strcat('Simulation-rep2-', num2str(draw)));
-            plot(log10(data.dose), SimFluoValues3, '-', 'LineWidth',2, 'DisplayName',strcat('Simulation-rep3-', num2str(draw)));
-            errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
-            xlabel('log IPTG (nM)', 'FontSize', 18)
-            ylabel('mean Fluorescence','FontSize', 18)
-            title('P4Lacn.2-cit + PAct1-LacI, all repression coefficients, draw',strcat(num2str(draw)), 'FontSize',20);
-        end
-        hold off
-        legend("show", 'Location', 'northeastoutside')
+%         if FlPlot
+%             figure(draw+3)
+%             hold on;
+%             plot(log10(data1.dose), SimFluoValues1, '-', 'LineWidth',2, 'DisplayName',strcat('Simulation-rep1-', num2str(draw)));
+%             plot(log10(data2.dose), SimFluoValues2, '-', 'LineWidth',2, 'DisplayName',strcat('Simulation-rep2-', num2str(draw)));
+%             plot(log10(data3.dose), SimFluoValues3, '-', 'LineWidth',2, 'DisplayName',strcat('Simulation-rep3-', num2str(draw)));
+%             %errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
+%             xlabel('log IPTG (nM)', 'FontSize', 18)
+%             ylabel('mean Fluorescence','FontSize', 18)
+%             title('P4Lacn.2-cit + PAct1-LacI, all repression coefficients, draw',strcat(num2str(draw)), 'FontSize',20);
+%         end
+%         hold off
+%         legend("show", 'Location', 'northeastoutside')
 
          %set SimFluoValues to table
         SimFluoValues1 = array2table(SimFluoValues1);
@@ -193,9 +199,9 @@ for draw = 1:num_draws
         SimFluoValues2.Properties.VariableNames = {'SimFluoValues', 'Dose', 'Repression_Coefficient', 'Draw'};
         SimFluoValues3.Properties.VariableNames = {'SimFluoValues', 'Dose', 'Repression_Coefficient', 'Draw'};
         
-        SimFluoValues1.Dose = data.dose;
-        SimFluoValues2.Dose = data.dose;
-        SimFluoValues3.Dose = data.dose;
+        SimFluoValues1.Dose = data1.dose;
+        SimFluoValues2.Dose = data2.dose;
+        SimFluoValues3.Dose = data3.dose;
 
         SimFluoValues1.Draw(:) = draw;
         SimFluoValues2.Draw(:) = draw;
@@ -225,11 +231,11 @@ for draw = 1:num_draws
         SimFluoValuescombined = [SimFluoValues1; SimFluoValues2; SimFluoValues3];
         
 
-        %set the figure to be sceensize
-            set(figure(draw+3), 'Position', get(0, 'Screensize'));
-            %save figure
-            saveas(figure(draw+3), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/', datestr(now, 'dd-mmm-yyyy'),num2str(draw),'Figure_around_paraopt_draw_allrep', '.jpg']);
-            %savefig(fig, '/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Figure_draw_', num2str(draw))
+%         %set the figure to be sceensize
+%             set(figure(draw+3), 'Position', get(0, 'Screensize'));
+%             %save figure
+%             saveas(figure(draw+3), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/', datestr(now, 'dd-mmm-yyyy'),num2str(draw),'Figure_around_paraopt_draw_allrep', '.jpg']);
+%             %savefig(fig, '/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Figure_draw_', num2str(draw))
             %save simulated fluoresence values
             save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/', datestr(now, 'dd-mmm-yyyy'),'_draw_', num2str(draw),'SimulationFluoValues_around_paraopt_allrep', '.mat'], 'SimFluoValuescombined');
 
@@ -246,25 +252,25 @@ end
             writetable(SimFluoValues3combined,['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/', datestr(now, 'dd-mmm-yyyy'),'SimulationFluoValues_rep3_', '.csv']);
            
             %func = @(x) colorspace('RGB->Lab',x);
-            %cmp=distinguishable_colors(30);
-            %set the figure to be sceensize
-            set(figure(1), 'Position', get(0, 'Screensize'));
-% %          ax = gca(figure(1));
-% %          ax.ColorOrder = cmp;
-            %save figure
-            saveas(figure(1), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/', datestr(now, 'dd-mmm-yyyy'),'_draw_', num2str(draw),'_Figure_around_paraopt_rep1_', '.jpg']);
-           
-            %set the figure to be sceensize
-            set(figure(2), 'Position', get(0, 'Screensize'));
-%             ax = gca(figure(2));
-%             ax.ColorOrder = cmp;
-            %save figure
-            saveas(figure(2), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/', datestr(now, 'dd-mmm-yyyy'),'_draw_', num2str(draw),'_Figure_around_paraopt_rep2_', '.jpg']);
-            
-            %set the figure to be sceensize
-            set(figure(3), 'Position', get(0, 'Screensize'));
-%             ax = gca(figure(3));
-%             ax.ColorOrder = cmp;
-            %save figure
-            saveas(figure(3), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/', datestr(now, 'dd-mmm-yyyy'),'_draw_', num2str(draw),'_Figure_around_paraopt_rep3_', '.jpg']);
-           
+%             %cmp=distinguishable_colors(30);
+%             %set the figure to be sceensize
+%             set(figure(1), 'Position', get(0, 'Screensize'));
+% % %          ax = gca(figure(1));
+% % %          ax.ColorOrder = cmp;
+%             %save figure
+%             saveas(figure(1), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/', datestr(now, 'dd-mmm-yyyy'),'_draw_', num2str(draw),'_Figure_around_paraopt_rep1_', '.jpg']);
+%            
+%             %set the figure to be sceensize
+%             set(figure(2), 'Position', get(0, 'Screensize'));
+% %             ax = gca(figure(2));
+% %             ax.ColorOrder = cmp;
+%             %save figure
+%             saveas(figure(2), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/', datestr(now, 'dd-mmm-yyyy'),'_draw_', num2str(draw),'_Figure_around_paraopt_rep2_', '.jpg']);
+%             
+%             %set the figure to be sceensize
+%             set(figure(3), 'Position', get(0, 'Screensize'));
+% %             ax = gca(figure(3));
+% %             ax.ColorOrder = cmp;
+%             %save figure
+%             saveas(figure(3), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/', datestr(now, 'dd-mmm-yyyy'),'_draw_', num2str(draw),'_Figure_around_paraopt_rep3_', '.jpg']);
+%            

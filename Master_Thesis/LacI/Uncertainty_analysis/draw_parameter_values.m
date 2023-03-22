@@ -5,7 +5,7 @@ model = sbioloadproject('LacImodel');
 %Load model settings
 ModelSettings_4;
 %Specify number of random draws
-num_draws = 20;
+num_draws = 200;
 
 %find estimated parameters in data
 paramSpecs = paramSpecs(Settings.model.PIdx,:);
@@ -70,7 +70,7 @@ end
 rand_parameter = array2table(rand_parameter, 'VariableNames',paramtoplot);
 
 %save random parameters
-save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/',datestr(now, 'dd-mmm-yyyy'),'_rand_parameter.mat'],'rand_parameter')
+save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/',datestr(now, 'dd-mmm-yyyy'),'_rand_parameter_ec50.mat'],'rand_parameter')
 
 
 
