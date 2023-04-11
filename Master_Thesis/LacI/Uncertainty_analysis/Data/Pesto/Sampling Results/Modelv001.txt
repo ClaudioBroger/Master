@@ -1,0 +1,134 @@
+********** MODEL NAME
+Evolverator Parts v004a
+
+********** NOTES
+% Claudio -> Get Uncertainty
+
+********** MODEL STATES
+d/dt(TetR) = R1 + R2  - D1
+d/dt(TetRTup1) = R3 - D2
+d/dt(PMA1) = R4 - D3
+d/dt(Citimmature) = R5 + R10 + R11 - D4 - R6
+d/dt(Citrine) = R6 - D5
+d/dt(LacI) = R7 + R8 - D6
+
+% total species concentrations in nM
+TetR(0)         = 0          
+TetRTup1(0)     = 1e-08      
+PMA1(0)         = 0
+Citimmature(0)  = 0          
+Citrine(0)      = 0                    
+LacI(0)         = 0         
+
+********** MODEL PARAMETERS
+% k_        production rate (_promoter_gene)    Unit/min
+k7tetTetR        = 50
+kactTetR         = 50
+krnrTup1         = 50
+k7tetPMA1        = 50
+k7tetCit         = 50
+kactLacI         = 50
+k4lacLacI         = 50
+kactLacICit         = 50
+k3lacCit         = 50
+k4lacCit         = 50
+
+ 
+% d_        degradation rate                    min-1
+dTetR          = 0.5
+dTup1          = 0.5 
+dPMA1          = 0.5
+dCit           = 0
+dLacI          = 0.5
+dLacICit       = 0.5
+
+
+% kL_       leakage term of promoter            nM/min
+kL7tet          = 1e-02
+kl4lac          = 1e-02
+kl3lac          = 1e-02
+
+% theta_    repression coefficient              nM
+thetaTetR      = 1
+thetaTup1      = 1
+thetaLacI      = 1
+thetaLacImut      = 1
+thetaLacI3mut      = 1 %4lac
+thetaLacI3mut_2      = 1 %3lac
+
+% Kd_       dissociation constant               nM
+KdTetR         = 0.5
+KdLacI         = 0.5
+
+% n_        Hill coefficient
+nTetR          = 2.5
+nTup1          = 2.5
+nLacI          = 2 %4lac
+nLacI2      = 2 %3lac
+
+% growth rate calculation parameters
+p1              = 5             % point of inflection growth/PMA1
+p2              = 5             % Hill coefficient of growth/PMA1
+growthMIN      = 0             % nM/min, minimum growth rate
+growthMAX      = 0.0077        % nM/min, maximum growth rate
+
+% induction parameters
+atcAdded        = 0             % nM total aTc conc.  
+IPTGAdded       = 0
+indTime         = 2000         % induction time (time for reaching steady state)
+
+% data selection, switching parameters
+growthFix           = 0.0077        % set to zero when calculating growth
+
+% nM to Unit parameters
+nMperUnit       = 1
+ 
+% Maturation time Citrine (from Claudes)
+kmaturation = 0.0173  % 40min maturation time Citrine
+
+% make sure there's no division by zero
+a = 1
+f=1
+g=1       
+********** MODEL VARIABLES
+% 0 until induction and then inducer concentration
+aTc             = piecewiseIQM(atcAdded/nMperUnit,ge(time,indTime),0);
+IPTG            = piecewiseIQM(IPTGAdded/nMperUnit,ge(time,indTime),0);
+
+% converting to Unit
+KdTetR_InUnit  = KdTetR/nMperUnit;
+KdLacI_InUnit  = KdLacI/nMperUnit;
+
+% solutions to the equilibrium condition
+TetRfree       = piecewiseIQM(TetR - (TetR*(TetR*TetRTup1 + TetRTup1*aTc - TetRTup1*(KdTetR_InUnit^2 + 2*KdTetR_InUnit*TetR + 2*KdTetR_InUnit*TetRTup1 + 2*KdTetR_InUnit*aTc + TetR^2 + 2*TetR*TetRTup1 - 2*TetR*aTc + TetRTup1^2 - 2*TetRTup1*aTc + aTc^2)^(1/2) + TetRTup1^2 + KdTetR_InUnit*TetRTup1))/(2*TetRTup1*(TetR + TetRTup1)),ge(TetR,1e-4),0);
+Tup1free       = piecewiseIQM(TetRTup1 - (TetR*TetRTup1 + TetRTup1*aTc - TetRTup1*(KdTetR_InUnit^2 + 2*KdTetR_InUnit*TetR + 2*KdTetR_InUnit*TetRTup1 + 2*KdTetR_InUnit*aTc + TetR^2 + 2*TetR*TetRTup1 - 2*TetR*aTc + TetRTup1^2 - 2*TetRTup1*aTc + aTc^2)^(1/2) + TetRTup1^2 + KdTetR_InUnit*TetRTup1)/(2*(TetR + TetRTup1)),ge(TetRTup1,1e-4),0);
+LacIfree       = max(0,LacI/2 - KdLacI_InUnit/2 - IPTG/2 + (KdLacI_InUnit^2 + 2*KdLacI_InUnit*LacI + 2*KdLacI_InUnit*IPTG + LacI^2 - 2*LacI*IPTG + IPTG^2)^(1/2)/2);
+mu             = growthMAX  + (growthMIN  - growthMAX )/(1 + exp(p2*(log(PMA1*nMperUnit)-p1))) + growthFix ;
+
+********** MODEL REACTIONS
+R1 = kactTetR
+R2 = k7tetTetR*(kL7tet+(1-kL7tet)/(1+(TetRfree/thetaTetR)^nTetR))
+R3 = krnrTup1
+R4 = k7tetPMA1*(kL7tet+(1-kL7tet)/(1+(TetRfree*f/thetaTetR)^nTetR+(Tup1free*g/thetaTup1)^nTup1))
+R5 = k7tetCit*(kL7tet+(1-kL7tet)/(1+(TetRfree*f/thetaTetR)^nTetR+(Tup1free*g/thetaTup1)^nTup1))
+R6 = kmaturation* Citimmature 
+R7 = kactLacI + kactLacICit
+R8 = k4lacLacI*(kl4lac+(1-kl4lac)/(1+(LacIfree/thetaLacI3mut)^nLacI))
+R10 = k4lacCit*(kl4lac+(1-kl4lac)/(1+(LacIfree/(thetaLacI+thetaLacImut+(thetaLacI3mut*a)))^nLacI))
+R11 = k3lacCit*(kl3lac+(1-kl3lac)/(1+(LacIfree/(thetaLacI3mut_2))^nLacI2))
+
+                                           
+D1 = (dTetR+mu)*TetR
+D2 = (dTup1+mu)*TetRTup1 
+D3 = (dPMA1+mu)*PMA1   
+D4 = (dCit +mu)*Citimmature
+D5 = (dCit +mu)*Citrine 
+D6 = (dLacI+dLacICit+mu)*LacI
+             
+********** MODEL FUNCTIONS
+
+ 
+********** MODEL EVENTS
+
+
+********** MODEL MATLAB FUNCTIONS
