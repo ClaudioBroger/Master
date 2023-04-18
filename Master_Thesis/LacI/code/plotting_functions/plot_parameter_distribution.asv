@@ -1,5 +1,10 @@
-%% plot cost
 
+load('2023_02_09_fitModel_Hyperspace_npoints20_Eline.mat')
+%Load model
+model = sbioloadproject('LacImodel');
+names = ["PAct1LacI", "P4LacnCit", "dLacI", "LacIrepWT", "KdLacI", "nLacI", "nMperUnit", "LacIrepW220F", "P4LacnLacI", "P4LacnLacIL", "LacIrep3mut", "pt7LacI", "P3Lacn5Cit", "P3Lacn5CitL", "dLacIpt7", "nLacIP3", "LacIrep3mutP3"];
+%Load model settings
+ModelSettings_4;
 paramSpecs = paramSpecs(Settings.model.PIdx,:);
 
 if ~isfield(OutV,'colnames')
@@ -41,7 +46,7 @@ end
 
 factor = 1.25;
 map = copper();
-for k=1:(n-1),
+for k=1:n,
     %subplot(3,7,k)
     [~,density,X,Y] = kde2d([x(:,1),x(:,k)],10);
     %contour(X,Y,density,'LineWidth',1);
@@ -68,8 +73,16 @@ for k=1:(n-1),
     pd = fitdist(x(:,k),'Kernel');
     X = xmin(k):0.1:xmax(k);
     Y = pdf(pd,X);
-    plot(X,Y,'Color','black','LineWidth',1);
-    title(paramtoplot{k});
+    while Y(1) ~ 0;
+        min(X) = min(x)-1;
+    end
+    while Y(end) ~ 0
+        max(X) = max(X) +1;
+    end
+    plot(X,Y,'Color','black','LineWidth',2);
+    title(names{k}, 'FontSize', 12);
+    ax = gca;
+    ax.FontSize = 20;
     pos = get(gca, 'Position');
     pos(3) = 0.7*factor*pos(3);
     pos(4) = factor*pos(4);

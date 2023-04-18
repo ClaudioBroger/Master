@@ -2,6 +2,7 @@
 load('2023_02_09_fitModel_Hyperspace_npoints20_Eline.mat')
 %Load model
 model = sbioloadproject('LacImodel');
+names = ["PAct1LacI", "P4LacnCit", "dLacI", "LacIrepWT", "KdLacI", "nLacI", "nMperUnit", "LacIrepW220F", "P4LacnLacI", "P4LacnLacIL", "LacIrep3mut", "pt7LacI", "P3Lacn5Cit", "P3Lacn5CitL", "dLacIpt7", "nLacIP3", "LacIrep3mutP3"];
 %Load model settings
 ModelSettings_4;
 paramSpecs = paramSpecs(Settings.model.PIdx,:);
@@ -68,12 +69,15 @@ for k=1:n,
 %         set(gca, 'Position', pos, 'XTick',[],'YTick',[]);       
 %         axis([xmin(l) xmax(l) xmin(k) xmax(k)]);   
     end
-    subplot(3,7,k)
+    subplot(3,6,k)
     pd = fitdist(x(:,k),'Kernel');
     X = xmin(k):0.1:xmax(k);
     Y = pdf(pd,X);
-    plot(X,Y,'Color','black','LineWidth',1);
-    title(paramtoplot{k});
+    plot(X,Y,'Color','black','LineWidth',2);
+    axis 'auto xy'
+    title(names{k}, 'FontSize', 12);
+    ax = gca;
+    ax.FontSize = 20;
     pos = get(gca, 'Position');
     pos(3) = 0.7*factor*pos(3);
     pos(4) = factor*pos(4);

@@ -66,34 +66,86 @@ var_ec90_3 = var(ec90_3(:,2));
 all_ec50s = [ec50_1(:,2) ec50_2(:,2) ec50_3(:,2)];
 group = ["rep1" "rep2" "rep3"];
 [p_50,tbl_50,stats_50] = anova1(all_ec50s, group);
+figure(2)
+hold on
+title('ANOVA all repression coefficients - parameter sets from hyperspace', 'FontSize',24);
+ax = gca;
+ax.FontSize = 20;
+set(figure(2), 'Position', get(0, 'Screensize'))
+saveas(figure(1), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from Hyperspace/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC50_alltable', '.jpg']);
+saveas(figure(2), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from Hyperspace/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC50_all', '.jpg']);
+close all
 
 ec50_1_2 = [ec50_1(:,2) ec50_2(:,2)];
 group = ["rep1" "rep2"];
 [p_50_1_2, tbl_50_1_2, stats_50_1_2] = anova1(ec50_1_2, group);
+figure(2)
+hold on
+title('ANOVA repression coefficients 1 and 2 - parameter sets from hyperspace', 'FontSize',24);
+ax = gca;
+ax.FontSize = 20;
+set(figure(2), 'Position', get(0, 'Screensize'))
+saveas(figure(1), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from Hyperspace/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC50_rep1_rep2_table', '.jpg']);
+saveas(figure(2), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from Hyperspace/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC50_rep1_rep2', '.jpg']);
+close all
 
 ec50_1_3 = [ec50_1(:,2) ec50_3(:,2)];
 group = ["rep1" "rep3"];
 [p_50_1_3, tbl_50_1_3, stats_50_1_3] = anova1(ec50_1_3, group);
+figure(2)
+hold on
+title('ANOVA repression coefficients 1 and 3 - parameter sets from hyperspace', 'FontSize',24);
+ax = gca;
+ax.FontSize = 20;
+set(figure(2), 'Position', get(0, 'Screensize'))
+saveas(figure(1), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from Hyperspace/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC50_rep1_rep3_table', '.jpg']);
+saveas(figure(2), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from Hyperspace/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC50_rep1_rep3', '.jpg']);
+close all
 
 ec50_2_3 = [ec50_2(:,2) ec50_3(:,2)];
 group = ["rep2" "rep3"];
 [p_50_2_3, tbl_50_2_3, stats_50_2_3] = anova1(ec50_2_3, group);
+figure(2)
+hold on
+title('ANOVA repression coefficients 1 and 3 - parameter sets from hyperspace', 'FontSize',24);
+ax = gca;
+ax.FontSize = 20;
+set(figure(2), 'Position', get(0, 'Screensize'))
+saveas(figure(1), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from Hyperspace/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC50_rep2_rep3_table', '.jpg']);
+saveas(figure(2), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from Hyperspace/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC50_rep2_rep3', '.jpg']);
+close all
 
 all_ec90s = [ec90_1(:,2) ec90_2(:,2) ec90_3(:,2)];
 group = ["rep1" "rep2" "rep3"];
 [p_90,tbl_90,stats_90] = anova1(all_ec90s, group);
+set(figure(2), 'Position', get(0, 'Screensize'))
+saveas(figure(1), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from Hyperspace/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC90_all_table', '.jpg']);
+saveas(figure(2), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from Hyperspace/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC90_all', '.jpg']);
+close all
 
 ec90_1_2 = [ec90_1(:,2) ec90_2(:,2)];
 group = ["rep1" "rep2"];
 [p_90_1_2, tbl_90_1_2, stats_90_1_2] = anova1(ec90_1_2, group);
+set(figure(2), 'Position', get(0, 'Screensize'))
+saveas(figure(1), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from Hyperspace/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC90_rep1_rep2_table', '.jpg']);
+saveas(figure(2), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from Hyperspace/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC90_rep1_rep2', '.jpg']);
+close all
 
 ec90_1_3 = [ec90_1(:,2) ec90_3(:,2)];
 group = ["rep1" "rep3"];
 [p_90_1_3, tbl_90_1_3, stats_90_1_3] = anova1(ec90_1_3, group);
+set(figure(2), 'Position', get(0, 'Screensize'))
+saveas(figure(1), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from Hyperspace/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC90_rep1_rep3_table', '.jpg']);
+saveas(figure(2), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from Hyperspace/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC90_rep1_rep3', '.jpg']);
+close all
 
 ec90_2_3 = [ec90_2(:,2) ec90_3(:,2)];
 group = ["rep2" "rep3"];
 [p_90_2_3, tbl_90_2_3, stats_90_2_3] = anova1(ec90_2_3, group);
+set(figure(2), 'Position', get(0, 'Screensize'))
+saveas(figure(1), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from Hyperspace/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC90_rep2_rep3_table', '.jpg']);
+saveas(figure(2), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from Hyperspace/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC90_rep2_rep3', '.jpg']);
+close all
 
 %Coefficient of Variation
 CV50_1 = (std(ec50_1(:,2))/mean(ec50_1(:,2))) * 100;
@@ -181,9 +233,24 @@ statistics_hyperspace.ANOVA.all.p = p_50;
 statistics_hyperspace.ANOVA.all.tbl = tbl_50;
 statistics_hyperspace.ANOVA.all.stats = stats_50;
 
-statistics_hyperspace.ANOVA.rep1_rep3.p = p_50;
-statistics_hyperspace.ANOVA.all.tbl = tbl_50;
-statistics_hyperspace.ANOVA.all.stats = stats_50;
+statistics_hyperspace.ANOVA.rep1_rep3.p = p_50_1_3;
+statistics_hyperspace.ANOVA.rep1_rep3.tbl = tbl_50_1_3;
+statistics_hyperspace.ANOVA.rep1_rep3.stats = stats_50_1_3;
+
+statistics_hyperspace.ANOVA.rep1_rep2.p = p_50_1_2;
+statistics_hyperspace.ANOVA.rep1_rep2.tbl = tbl_50_1_2;
+statistics_hyperspace.ANOVA.rep1_rep2.stats = stats_50_1_2;
+
+statistics_hyperspace.ANOVA.rep2_rep3.p = p_50_2_3;
+statistics_hyperspace.ANOVA.rep2_rep3.tbl = tbl_50_2_3;
+statistics_hyperspace.ANOVA.rep2_rep3.stats = stats_50_2_3;
+
+statistics_hyperspace.CV1 = CV50_1;
+statistics_hyperspace.CV2 = CV50_2;
+statistics_hyperspace.CV3 = CV50_3;
+
+save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from Hyperspace/',datestr(now, 'dd-mmm-yyyy'),'_statistics_hyperspace.mat'],'statistics_hyperspace')
+
 
 
 

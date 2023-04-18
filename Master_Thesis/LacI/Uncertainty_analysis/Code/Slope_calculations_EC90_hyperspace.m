@@ -41,7 +41,7 @@ for k = 1:length(ec90_3)
     deltadose = upper_dose - lower_dose;
     slopes_ec90_3(k,:) = deltafluo/deltadose;
 end
-save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from Hyperspace/', datestr(now, 'dd-mmm-yyyy'),'slopes_EC50_3_hyperspace', '.mat'], 'slopes_ec90_3');
+save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from Hyperspace/', datestr(now, 'dd-mmm-yyyy'),'slopes_EC90_3_hyperspace', '.mat'], 'slopes_ec90_3');
 
 %statistics for slopes around EC50
 %standard error
