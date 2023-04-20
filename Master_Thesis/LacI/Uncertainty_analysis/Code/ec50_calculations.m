@@ -26,7 +26,7 @@ for k = 1:num_draws
     ec50_1(k,6) = k;
     counter = counter +1
 end
-save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/', datestr(now, 'dd-mmm-yyyy'),'ec50_1_random_200', '.mat'], 'ec50_1');
+save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/', datestr(now, 'dd-mmm-yyyy'),'ec50_1_more_random_200', '.mat'], 'ec50_1');
 
 counter = 0;
 for k = 1:num_draws
@@ -45,7 +45,7 @@ for k = 1:num_draws
     counter = counter +1
 end
 
-save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/', datestr(now, 'dd-mmm-yyyy'),'ec50_2_random_200', '.mat'], 'ec50_2');
+save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/', datestr(now, 'dd-mmm-yyyy'),'ec50_2_more_random_200', '.mat'], 'ec50_2');
 
 counter = 0;
 for k = 1:num_draws
@@ -63,7 +63,7 @@ for k = 1:num_draws
     ec50_3(k,6) = k;
     counter = counter +1
 end
-save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/', datestr(now, 'dd-mmm-yyyy'),'ec50_3_random_200', '.mat'], 'ec50_3');
+save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/', datestr(now, 'dd-mmm-yyyy'),'ec50_3_more_random_200', '.mat'], 'ec50_3');
 
 
 C = linspecer(num_draws);
