@@ -41,7 +41,7 @@ function SimFluoValues = simulate_DR_IPTG(para, data_IPTG,data_aTc, ParaNames,mo
         d1.Amount = data_IPTG.dose(kdose,1); % IPTG To Do: remove nMperUnit, place it inside the model  
         d2.Amount = data_aTc.dose(kdose,1);
         try      
-            [t,sd,species] = sbiosimulate(model.mw_sbmod1, [d1 d2]);
+            [t,sd,species] = sbiosimulate(model.mw_sbmod1, [d1, d2]);
             index = ismember(species, 'Citrine');
             SimCitrineValues = sd(end,index);
             SimFluoValues(kdose) = x_scal*SimCitrineValues + data.data.empty;
