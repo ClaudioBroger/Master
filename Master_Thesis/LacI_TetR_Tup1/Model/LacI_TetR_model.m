@@ -64,7 +64,7 @@ p39 = addparameter(LacI_TetR_Tup1_model, 'f', 'Value', 1, 'ValueUnits', 'dimensi
 p40 = addparameter(LacI_TetR_Tup1_model, 'g', 'Value', 1, 'ValueUnits', 'dimensionless');
 p41 = addparameter(LacI_TetR_Tup1_model, 'p1', 'Value', 5, 'ValueUnits', 'dimensionless');
 p42 = addparameter(LacI_TetR_Tup1_model, 'p2', 'Value', 5, 'ValueUnits', 'dimensionless');
-
+p43 = addparameter(LacI_TetR_Tup1_model, 'dCit', 'Value', 0, 'ValueUnits', '1/minute');
 
 %scaling factor
 scaling1 = addrule(LacI_TetR_Tup1_model, 'KdLacI_InUnit = KdLacI/nMperUnit', 'RuleType', 'repeatedAssignment');
