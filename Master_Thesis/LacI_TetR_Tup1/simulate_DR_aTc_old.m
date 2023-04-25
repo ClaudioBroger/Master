@@ -1,4 +1,4 @@
-function SimFluoValues = simulate_DR_aTc(para, data, ParaNames,model)
+function SimFluoValues = simulate_DR_aTc_old(para, data, ParaNames,model)
 % simulates the fluorescent values with parameters para using the
 % timepoints from the data
 
@@ -12,17 +12,17 @@ function SimFluoValues = simulate_DR_aTc(para, data, ParaNames,model)
     cs.SolverType = 'sundials';
     
 % Doses, Scaling Factor
-    dose = data.dose;
+    dose = data.data.dose;
     d1 = sbiodose('d1','schedule');
     d1.Amount = 0;
     d1.time = indTime;
-    d1.TargetName = 'aTc';
+    d1.TargetName = 'atc';
     d1.Active = true;
     %x_scal = 0.0077*(data.tdh3 - data.empty); % scaling factor
-    x_scal =  (data.tdh3 - data.empty)*0.0077*(0.0173+0.0077)/0.0173;  % scaling factor (Fact - F0)*rho*(km+rho)/km       
+    x_scal =  (data.data.tdh3 - data.data.empty)*0.0077*(0.0173+0.0077)/0.0173;  % scaling factor (Fact - F0)*rho*(km+rho)/km       
 
 % Apply parametervalues to the model
-    for index = 1:length(para)
+    for index = 1:length(model.mw_sbmod1.Parameters)
         model.mw_sbmod1.Parameters(index).Value = para(index,1);
     end
     
@@ -30,7 +30,7 @@ function SimFluoValues = simulate_DR_aTc(para, data, ParaNames,model)
 
     SimFluoValues = zeros(length(dose),1);
     for kdose = 1:length(dose)
-        d1.Amount = data.dose(kdose); % aTc To Do: remove nMperUnit, place it inside the model  
+        d1.Amount = data.data.dose(kdose); % aTc To Do: remove nMperUnit, place it inside the model  
         try      
             [t,sd,species] = sbiosimulate(model.mw_sbmod1, d1);
             index = ismember(species, 'Citrine');

@@ -49,8 +49,9 @@ end
 
 rand_parameter = array2table(rand_parameter);
 
-rand_parameter.Properties.VariableNames(1:5) = ParaNames(1:5);
-rand_parameter.Properties.VariableNames(6:13) = ParaNames(9:16);
+rand_parameter.Properties.VariableNames(1:3) = ParaNames(1:3);
+rand_parameter.Properties.VariableNames(4) = ParaNames(5);
+rand_parameter.Properties.VariableNames(5:9) = ParaNames(8:12);
 
 rand_parameter.mu(:) = 0.0077;
 rand_parameter.kmaturation(:) = 0.0173;
@@ -65,9 +66,8 @@ rand_parameter.b(:) = 1;
 rand_parameter = rand_parameter(:,[string(ParaNames)]);
 rand_parameter.dCit(:) = 0;
 
-rand_parameter(:,1:3) = array2table(10.^table2array(rand_parameter(:,1:3)));
-rand_parameter(:,5) = array2table(10.^table2array(rand_parameter(:,5)));
-rand_parameter(:,10:15) = array2table(10.^table2array(rand_parameter(:,10:15)));
+rand_parameter(:,1:4) = array2table(10.^table2array(rand_parameter(:,1:4)));
+rand_parameter(:,7:8) = array2table(10.^table2array(rand_parameter(:,7:8)));
 rand_parameter.p1(:) = 5;
 rand_parameter.p2(:) = 5;
 save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Pesto/',datestr(now, 'dd-mmm-yyyy'),'_rand_parameter_Pesto.mat'],'rand_parameter')
@@ -95,7 +95,7 @@ for draw = 1:num_draws
             
             
             
-            NamestoZero = setdiff(ParaNames,{'kactTetR','k7tetCit', 'kL7tet', 'dTetR', 'dCit', 'thetaTetR', 'nTetR', 'f', 'nTup1', 'KdTetR', 'growthFix', 'nMperUnit', 'kmaturation', 'indTime' , 'thetaTup1', 'a', 'p1', 'p2'});                            
+            NamestoZero = setdiff(ParaNames,{'krnrTup1','k7tetCit', 'kL7tet', 'f', 'nTup1', 'KdTetR', 'nMperUnit', 'kmaturation', 'indTime' , 'thetaTup1', 'g'});                            
             IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
             para(IdxToZero) = 0;
 
