@@ -1,0 +1,53 @@
+load('1704_fitModel_Pesto.mat')
+
+num_draws = 30;
+
+
+parameters_unfiltered = array2table(parameters.S.par');
+parameters_unfiltered.Properties.VariableNames = parameters.name;
+
+parameters_unfiltered.Properties.VariableNames("kactLacI") = "kLacI";
+parameters_unfiltered.Properties.VariableNames("krnrTup1") = "kTetRTup1";
+parameters_unfiltered.Properties.VariableNames("dTup1") = "dTetRTup1";
+parameters_unfiltered.Properties.VariableNames("dTup1adh1") = "degtag";
+parameters_unfiltered.Properties.VariableNames("thetaLacI") = "LacIrep";
+parameters_unfiltered.Properties.VariableNames("thetaLacImut") = "LacIrep2";
+parameters_unfiltered.Properties.VariableNames("thetaLacI3mut") = "LacIrep3";
+parameters_unfiltered.Properties.VariableNames("k7tetCit") = "kCit";
+parameters_unfiltered.Properties.VariableNames("dLacICit") = "dCit";
+parameters_unfiltered.Properties.VariableNames("kL7tet") = "CitL";
+parameters_unfiltered.Properties.VariableNames("kl3lac") = "TetRTup1L";
+parameters_unfiltered.Properties.VariableNames("nTup1") = "nTetRTup1";
+parameters_unfiltered.Properties.VariableNames("thetaTup1") = "TetRTup1rep";
+
+parameters_unfiltered.mu(:) = 0.0077;
+parameters_unfiltered.kmaturation(:) = 0.0173;
+parameters_unfiltered.dCit(:) = 0;
+parameters_filtered = parameters_unfiltered(:,{model.mw_sbmod1.Parameters.Name});
+
+
+
+
+parameters.name = cell2table(parameters.name);
+
+[~,index] = ismember(ParaNames,parameters.name{:,:});
+index = nonzeros(index);
+
+min_par = parameters.min(index);
+max_par = parameters.max(index);
+
+
+prob = parameters.S.par(index,:)';
+
+for draw=1:num_draws
+    for k=1:width(parameters_filtered)
+        pd = fitdist(table2array(prob(:,k)),'Kernel');
+         X = min_par(k):0.001:max_par(k);
+         Y = pdf(pd,X);
+%          figure(1)
+%          subplot(2,6,k)
+         plot(Y)
+         rand_parameter(draw,k) = randsample(X,1,true,Y);
+         
+    end
+end
