@@ -1,4 +1,4 @@
-function SimFluoValues = simulate_DR_IPTG(para, data_IPTG,data, ParaNames,model)
+function SimFluoValues = simulate_DR_IPTG_TetR_aTc(para, data_IPTG,data, ParaNames,model)
 % simulates the fluorescent values with parameters para using the
 % timepoints from the data
 
@@ -47,10 +47,10 @@ function SimFluoValues = simulate_DR_IPTG(para, data_IPTG,data, ParaNames,model)
             [t,sd,species] = sbiosimulate(model.mw_sbmod1, [d1, d2]);
             index = ismember(species, 'Citrine');
             SimCitrineValues = sd(end,index);
-            SimFluoValues(kdose) = x_scal_aTc*SimCitrineValues + data.empty;
+            SimFluoValues(adose) = x_scal_aTc*SimCitrineValues + data.empty;
         catch ME
             disp(ME)
         end
         
-    end     
-end  
+        end     
+    end  

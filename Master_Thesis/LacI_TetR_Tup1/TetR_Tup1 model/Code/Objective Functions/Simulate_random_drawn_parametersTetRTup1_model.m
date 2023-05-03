@@ -1,10 +1,9 @@
-num_draws = 1;
 C = linspecer(num_draws);
 counter = 0;
 for draw = 1:num_draws
     
     %define parameter values as the values randomly drawn
-     paraValues = table2array(rand(draw,:));
+     paraValues = table2array(rand_parameter(draw,:));
      paraValues = paraValues';
     %TFlMode = FlMode;
     
@@ -18,11 +17,13 @@ for draw = 1:num_draws
         %% module 1: ptetTetR + ptetCitrine
             para = paraValues;
 
-            NamestoZero = setdiff(ParaNames,{'kLacI','dLacI', 'kTetRTup1', 'dTetRTup1', 'degtag','LacIrep', 'kCit', 'CitL', 'TetRTup1L', 'nLacI', 'indTime', 'nTetRTup1', 'KdLacI', 'KdTetR', 'kmaturation', 'nMperUnit', 'mu', 'TetRTup1rep'});                            
+            NamestoZero = setdiff(ParaNames,{'kLacI','dLacI', 'kTetRTup1', 'dTetRTup1', 'degtag','LacIrep', 'kCit', 'CitL', 'TetRTup1L', 'nLacI', 'indTime', 'nTetRTup1', 'KdLacI', 'KdTetR', 'kmaturation', 'nMperUnit', 'mu', 'TetRTup1rep', 'kTetR', 'dTetR'});                            
             IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
             para(IdxToZero) = 0;
 
-            SimFluoValues1 = simulate_DR_IPTG_TetR(para,data,ParaNames,model);
+     
+
+            SimFluoValues1 = simulate_DR_IPTG_TetR_aTc(para,data_IPTG,data,ParaNames,model);
            
             
 
@@ -32,7 +33,7 @@ for draw = 1:num_draws
             hold on;
             plot(log10(data.dose),SimFluoValues1,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-rep1-', num2str(draw)), 'Color', C(draw,:));
             %errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
-            xlabel('log IPTG (nM)', 'FontSize', 18)
+            xlabel('log aTc (nM)', 'FontSize', 18)
             ylabel('mean Fluorescence','FontSize', 18)
             title('LacI (1st repression coefficient) & TetRTup1', 'FontSize',20)
             
@@ -53,11 +54,12 @@ for draw = 1:num_draws
         %% module 1: ptetTetR + ptetCitrine
             para = paraValues;
 
-            NamestoZero = setdiff(ParaNames,{'kLacI','dLacI', 'kTetRTup1', 'dTetRTup1', 'degtag','LacIrep2', 'kCit', 'CitL', 'TetRTup1L', 'nLacI', 'indTime', 'nTetRTup1', 'KdLacI', 'KdTetR', 'kmaturation', 'nMperUnit', 'mu', 'TetRTup1rep'});                            
+            NamestoZero = setdiff(ParaNames,{'kLacI','dLacI', 'kTetRTup1', 'dTetRTup1', 'degtag','LacIrep2', 'kCit', 'CitL', 'TetRTup1L', 'nLacI', 'indTime', 'nTetRTup1', 'KdLacI', 'KdTetR', 'kmaturation', 'nMperUnit', 'mu', 'TetRTup1rep', 'kTetR', 'dTetR'});                            
             IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
             para(IdxToZero) = 0;
 
-            SimFluoValues2 = simulate_DR_IPTG_TetR(para,data,ParaNames,model);
+
+            SimFluoValues2 = simulate_DR_IPTG_TetR_aTc(para,data_IPTG,data,ParaNames,model);
 
            
             
@@ -67,7 +69,7 @@ for draw = 1:num_draws
             hold on;
             plot(log10(data.dose),SimFluoValues2,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-rep2-', num2str(draw)), 'Color', C(draw,:));
             %errorbar(log10(data.dose),DataMeans,DataStd,'o','HandleVisibility','off');
-            xlabel('log IPTG (nM)', 'FontSize', 18)
+            xlabel('log aTc (nM)', 'FontSize', 18)
             ylabel('mean Fluorescence','FontSize', 18)
             title('LacI (2nd repression coefficient) & TetRTup1', 'FontSize',20)
 
@@ -84,14 +86,14 @@ for draw = 1:num_draws
         %% module 1: ptetTetR + ptetCitrine
             para = paraValues;
 
-            NamestoZero = setdiff(ParaNames,{'kLacI','dLacI', 'kTetRTup1', 'dTetRTup1', 'degtag','LacIrep3', 'kCit', 'CitL', 'TetRTup1L', 'nLacI', 'indTime', 'nTetRTup1', 'KdLacI', 'KdTetR', 'kmaturation', 'nMperUnit', 'mu', 'TetRTup1rep'});                            
+            NamestoZero = setdiff(ParaNames,{'kLacI','dLacI', 'kTetRTup1', 'dTetRTup1', 'degtag','LacIrep3', 'kCit', 'CitL', 'TetRTup1L', 'nLacI', 'indTime', 'nTetRTup1', 'KdLacI', 'KdTetR', 'kmaturation', 'nMperUnit', 'mu', 'TetRTup1rep', 'kTetR', 'dTetR'});                            
             IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
             para(IdxToZero) = 0;
 
-            SimFluoValues3 = simulate_DR_IPTG_TetR(para,data,ParaNames,model);
 
-            %[hill3(draw,1) ec50_3(draw,1)] = doseResponse(data3.dose, SimFluoValues3);
+            SimFluoValues3 = simulate_DR_IPTG_TetR_aTc(para,data_IPTG,data,ParaNames,model);
 
+            
             
 
         %plot
@@ -100,10 +102,9 @@ for draw = 1:num_draws
             hold on;
             plot(log10(data.dose),SimFluoValues3,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-rep3-', num2str(draw)), 'Color', C(draw,:));
             %errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
-            xlim([0 10]);
-            xlabel('log IPTG (nM)', 'FontSize', 18)
+            xlabel('log aTc (nM)', 'FontSize', 18)
             ylabel('mean Fluorescence','FontSize', 18)
-            title('LacI (3rd repression coefficient & TetRTup1', 'FontSize',20)
+            title('LacI (3rd repression coefficient) & TetRTup1', 'FontSize',20)
 
         hold off
         legend("show", 'Location', 'northeastoutside')
@@ -145,9 +146,9 @@ for draw = 1:num_draws
         SimFluoValues2.Properties.VariableNames = {'SimFluoValues', 'Dose', 'Repression_Coefficient', 'Draw'};
         SimFluoValues3.Properties.VariableNames = {'SimFluoValues', 'Dose', 'Repression_Coefficient', 'Draw'};
         
-        SimFluoValues1.Dose = data.dose;
-        SimFluoValues2.Dose = data.dose;
-        SimFluoValues3.Dose = data.dose;
+        SimFluoValues1.Dose = data_IPTG.dose;
+        SimFluoValues2.Dose = data_IPTG.dose;
+        SimFluoValues3.Dose = data_IPTG.dose;
 
         SimFluoValues1.Draw(:) = draw;
         SimFluoValues2.Draw(:) = draw;
@@ -188,3 +189,7 @@ for draw = 1:num_draws
 
 
 end
+
+save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI_TetR_Tup1/TetR_Tup1 model/', datestr(now, 'dd-mmm-yyyy'),'SimFluoValues1_LacI_TetRTup1', '.mat'], 'SimFluoValues1combined');
+save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI_TetR_Tup1/TetR_Tup1 model/', datestr(now, 'dd-mmm-yyyy'),'SimFluoValues2_LacI_TetRTup1', '.mat'], 'SimFluoValues2combined');
+save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI_TetR_Tup1/TetR_Tup1 model/', datestr(now, 'dd-mmm-yyyy'),'SimFluoValues3_LacI_TetRTup1', '.mat'], 'SimFluoValues3combined');

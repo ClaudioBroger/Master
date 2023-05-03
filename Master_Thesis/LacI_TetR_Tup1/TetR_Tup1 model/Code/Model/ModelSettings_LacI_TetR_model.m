@@ -16,11 +16,11 @@ Settings.model.PIdxfixed = find(strcmp(paramSpecs.estimate, 'no'));
 Settings.model.FlMode = [1 2 3];
 Settings.model.objF = 'objf_LacI_TetR_simple';
 
-data_IPTG.dose = logspace(0,9,1000)';
+data_IPTG.dose = logspace(0,9,100)';
 data_IPTG.time = 1200;
 data_IPTG.tdh3 = 85.8657;
 data_IPTG.empty = 0.5198;
 
 load("dataSRtup1.mat")
-data.dose = data.dose*3.3*(1/480.9);
+data.dose = linspace(min(data.dose), max(data.dose), 100)';
 %data.dose = linspace(min(data.dose), max(data.dose), 1000);
