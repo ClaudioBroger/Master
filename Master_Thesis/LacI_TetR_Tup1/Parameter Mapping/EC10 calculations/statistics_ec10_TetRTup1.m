@@ -44,7 +44,7 @@ group = ["rep1" "rep2" "rep3"];
 [p_10,tbl_10,stats_10] = anova1(all_ec10s, group);
 figure(2)
 hold on
-title('ANOVA all repression coefficients - LacI & TetRTup1', 'FontSize',24);
+title('ANOVA  EC10 all repression coefficients - LacI & TetRTup1', 'FontSize',24);
 ax = gca;
 ax.FontSize = 20;
 lines = findobj(gcf,'Type','Line');
@@ -61,7 +61,7 @@ group = ["rep1" "rep2"];
 [p_10_1_2, tbl_10_1_2, stats_10_1_2] = anova1(ec10_1_2, group);
 figure(2)
 hold on
-title('ANOVA repression coefficients 1 and 2 - LacI & TetRTup1', 'FontSize',24);
+title('ANOVA EC10 repression coefficients 1 and 2 - LacI & TetRTup1', 'FontSize',24);
 ax = gca;
 ax.FontSize = 20;
 lines = findobj(gcf,'Type','Line');
@@ -78,7 +78,7 @@ group = ["rep1" "rep3"];
 [p_10_1_3, tbl_10_1_3, stats_10_1_3] = anova1(ec10_1_3, group);
 figure(2)
 hold on
-title('ANOVA repression coefficients 1 and 3 - parameter sets from hyperspace', 'FontSize',24);
+title('ANOVA EC10 repression coefficients 1 and 3 - parameter sets from hyperspace', 'FontSize',24);
 ax = gca;
 ax.FontSize = 20;
 lines = findobj(gcf,'Type','Line');
@@ -95,7 +95,7 @@ group = ["rep2" "rep3"];
 [p_10_2_3, tbl_10_2_3, stats_10_2_3] = anova1(ec10_2_3, group);
 figure(2)
 hold on
-title('ANOVA repression coefficients 2 and 3 - LacI & TetRTup1', 'FontSize',24);
+title('ANOVA EC10 repression coefficients 2 and 3 - LacI & TetRTup1', 'FontSize',24);
 ax = gca;
 ax.FontSize = 20;
 lines = findobj(gcf,'Type','Line');

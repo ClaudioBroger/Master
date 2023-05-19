@@ -31,7 +31,7 @@ for draw = 1:num_draws
 
             figure(2)
             hold on;
-            plot(log10(data.dose),SimFluoValues1,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-rep1-', num2str(draw)), 'Color', C(draw,:));
+            plot(log10(data_IPTG.dose),SimFluoValues1,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-rep1-', num2str(draw)), 'Color', C(draw,:));
             %errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
             xlabel('log aTc (nM)', 'FontSize', 18)
             ylabel('mean Fluorescence','FontSize', 18)
@@ -67,7 +67,7 @@ for draw = 1:num_draws
 
             figure(3)
             hold on;
-            plot(log10(data.dose),SimFluoValues2,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-rep2-', num2str(draw)), 'Color', C(draw,:));
+            plot(log10(data_IPTG.dose),SimFluoValues2,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-rep2-', num2str(draw)), 'Color', C(draw,:));
             %errorbar(log10(data.dose),DataMeans,DataStd,'o','HandleVisibility','off');
             xlabel('log aTc (nM)', 'FontSize', 18)
             ylabel('mean Fluorescence','FontSize', 18)
@@ -100,7 +100,7 @@ for draw = 1:num_draws
 
             figure(4)
             hold on;
-            plot(log10(data.dose),SimFluoValues3,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-rep3-', num2str(draw)), 'Color', C(draw,:));
+            plot(log10(data_IPTG.dose),SimFluoValues3,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-rep3-', num2str(draw)), 'Color', C(draw,:));
             %errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
             xlabel('log aTc (nM)', 'FontSize', 18)
             ylabel('mean Fluorescence','FontSize', 18)
@@ -190,6 +190,6 @@ for draw = 1:num_draws
 
 end
 
-save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI_TetR_Tup1/TetR_Tup1 model/', datestr(now, 'dd-mmm-yyyy'),'SimFluoValues1_LacI_TetRTup1', '.mat'], 'SimFluoValues1combined');
-save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI_TetR_Tup1/TetR_Tup1 model/', datestr(now, 'dd-mmm-yyyy'),'SimFluoValues2_LacI_TetRTup1', '.mat'], 'SimFluoValues2combined');
-save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI_TetR_Tup1/TetR_Tup1 model/', datestr(now, 'dd-mmm-yyyy'),'SimFluoValues3_LacI_TetRTup1', '.mat'], 'SimFluoValues3combined');
+save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI_TetR_Tup1/TetR_Tup1 model/', datestr(now, 'dd-mmm-yyyy'),'SimFluoValues1_LacI_TetRTup1_only_IPTG', '.mat'], 'SimFluoValues1combined');
+save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI_TetR_Tup1/TetR_Tup1 model/', datestr(now, 'dd-mmm-yyyy'),'SimFluoValues2_LacI_TetRTup1_only_IPTG', '.mat'], 'SimFluoValues2combined');
+save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI_TetR_Tup1/TetR_Tup1 model/', datestr(now, 'dd-mmm-yyyy'),'SimFluoValues3_LacI_TetRTup1_only_IPTG', '.mat'], 'SimFluoValues3combined');

@@ -54,6 +54,7 @@ raterule5 = addrule(LacI_TetRTup1_model, 'TetR = kTetR - (dTetR + mu) * TetR', '
 
 repassrule1 = addrule(LacI_TetRTup1_model, 'LacIfree = max(0, LacI/2 - KdLacI_InUnit/2 - IPTG_InUnit/2 + (KdLacI_InUnit^2 + 2*KdLacI_InUnit*LacI + 2*KdLacI_InUnit*IPTG_InUnit + LacI^2 - 2*LacI*IPTG_InUnit + IPTG_InUnit^2)^(1/2)/2)', 'RuleType', 'repeatedAssignment');
 repassrule2 = addrule(LacI_TetRTup1_model, 'TetRTup1free = max(TetRTup1 - (TetR*TetRTup1 + TetRTup1*aTc_InUnit - TetRTup1*(KdTetR_InUnit^2 + 2*KdTetR_InUnit*TetR + 2*KdTetR_InUnit*TetRTup1 + 2*KdTetR_InUnit*aTc_InUnit + TetR^2 + 2*TetR*TetRTup1 - 2*TetR*aTc_InUnit + TetRTup1^2 - 2*TetRTup1*aTc_InUnit + aTc_InUnit^2)^(1/2) + TetRTup1^2 + KdTetR_InUnit*TetRTup1)/(2*(TetR + TetRTup1)),0)', 'RuleType', 'repeatedAssignment');
+%repassrule2 = addrule(LacI_TetRTup1_model, 'TetRTup1free = max(0, TetRTup1/2 - KdTetR_InUnit/2 - aTc_InUnit/2 + (KdTetR_InUnit^2 + 2*KdTetR_InUnit*TetRTup1 + 2*KdTetR_InUnit*aTc_InUnit + TetRTup1^2 - 2*TetRTup1*aTc_InUnit + aTc_InUnit^2)^(1/2)/2)', 'RuleType', 'repeatedAssignment');
 
 
 

@@ -4,7 +4,7 @@ num_draws = 30;
 
 [ParaNames] = (get(model.mw_sbmod1.parameters, {'Name'}));
 
-parameters.name(1) = {"kLacI"};
+parameters.name(6) = {"kLacI"};
 parameters.name(3) = {"kTetRTup1"};
 parameters.name(13) = {"dTetRTup1"};
 parameters.name(14) = {"degtag"};
@@ -61,5 +61,5 @@ rand_parameter.dCit(:) = 0;
 
 rand_parameter = rand_parameter(:,[string(ParaNames)]);
 
-save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI_TetR_Tup1/TetR_Tup1 model/',datestr(now, 'dd-mmm-yyyy'),'_rand_parameter_LacI_TetR.mat'],'rand_parameter')
+save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI_TetR_Tup1/TetR_Tup1 model/',datestr(now, 'dd-mmm-yyyy'),'_rand_parameter_LacI_TetR_new.mat'],'rand_parameter')
 

@@ -4,7 +4,7 @@ num_draws = 200;
 
 [ParaNames] = (get(model.mw_sbmod1.parameters, {'Name'}));
 
-parameters.name(1) = {"kLacI"};
+parameters.name(6) = {"kLacI"};
 parameters.name(3) = {"kTetRTup1"};
 parameters.name(13) = {"dTetRTup1"};
 parameters.name(14) = {"degtag"};

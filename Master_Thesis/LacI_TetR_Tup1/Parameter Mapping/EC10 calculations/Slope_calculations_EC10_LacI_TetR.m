@@ -91,6 +91,15 @@ var_slopes_ec10_3 = var(slopes_ec10_3(:));
 all_slopes_ec10s = [slopes_ec10_1(:) slopes_ec10_2(:) slopes_ec10_3(:)];
 group = ["rep1" "rep2" "rep3"];
 [p_10_slopes,tbl_10_slopes,stats_10_slopes] = anova1(all_slopes_ec10s, group);
+figure(2)
+hold on
+title('ANOVA slopes around EC10 all repression coefficients - LacI & TetRTup1', 'FontSize',24);
+ax = gca;
+ax.FontSize = 20;
+lines = findobj(gcf,'Type','Line');
+for i = 1:numel(lines)
+  lines(i).LineWidth = 1.5;
+end
 set(figure(2), 'Position', get(0, 'Screensize'))
 saveas(figure(1), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI_TetR_Tup1/Parameter Mapping/EC10 calculations/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_slopes_EC10_all_table', '.jpg']);
 saveas(figure(2), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI_TetR_Tup1/Parameter Mapping/EC10 calculations/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_slopes_EC10_all', '.jpg']);
@@ -99,6 +108,15 @@ close all
 ec10_slopes_1_2 = [slopes_ec10_1(:) slopes_ec10_2(:)];
 group = ["rep1" "rep2"];
 [p_10_1_2_slopes, tbl_10_1_2_slopes, stats_10_1_2_slopes] = anova1(ec10_slopes_1_2, group);
+figure(2)
+hold on
+title('ANOVA slopes around EC10 repression coefficients 1 and 2 - LacI & TetRTup1', 'FontSize',24);
+ax = gca;
+ax.FontSize = 20;
+lines = findobj(gcf,'Type','Line');
+for i = 1:numel(lines)
+  lines(i).LineWidth = 1.5;
+end
 set(figure(2), 'Position', get(0, 'Screensize'))
 saveas(figure(1), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI_TetR_Tup1/Parameter Mapping/EC10 calculations/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_slopes_EC10_rep1_rep2_table', '.jpg']);
 saveas(figure(2), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI_TetR_Tup1/Parameter Mapping/EC10 calculations/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_slopes_EC10_rep1_rep2', '.jpg']);
@@ -107,6 +125,15 @@ close all
 ec10_slopes_1_3 = [slopes_ec10_1(:) slopes_ec10_3(:)];
 group = ["rep1" "rep3"];
 [p_10_1_3_slopes, tbl_10_1_3_slopes, stats_10_1_3_slopes] = anova1(ec10_slopes_1_3, group);
+figure(2)
+hold on
+title('ANOVA slopes around EC10 repression coefficients 1 and 3 - LacI & TetRTup1', 'FontSize',24);
+ax = gca;
+ax.FontSize = 20;
+lines = findobj(gcf,'Type','Line');
+for i = 1:numel(lines)
+  lines(i).LineWidth = 1.5;
+end
 set(figure(2), 'Position', get(0, 'Screensize'))
 saveas(figure(1), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI_TetR_Tup1/Parameter Mapping/EC10 calculations/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_slopes_EC10_rep1_rep3_table', '.jpg']);
 saveas(figure(2), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI_TetR_Tup1/Parameter Mapping/EC10 calculations/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_slopes_EC10_rep1_rep3', '.jpg']);
@@ -115,6 +142,15 @@ close all
 ec10_slopes_2_3 = [slopes_ec10_2(:) slopes_ec10_3(:)];
 group = ["rep2" "rep3"];
 [p_10_2_3_slopes, tbl_10_2_3_slopes, stats_10_2_3_slopes] = anova1(ec10_slopes_2_3, group);
+figure(2)
+hold on
+title('ANOVA slopes around EC10 repression coefficients 2 and 3 - LacI & TetRTup1', 'FontSize',24);
+ax = gca;
+ax.FontSize = 20;
+lines = findobj(gcf,'Type','Line');
+for i = 1:numel(lines)
+  lines(i).LineWidth = 1.5;
+end
 set(figure(2), 'Position', get(0, 'Screensize'))
 saveas(figure(1), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI_TetR_Tup1/Parameter Mapping/EC10 calculations/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_slopes_EC10_rep2_rep3_table', '.jpg']);
 saveas(figure(2), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI_TetR_Tup1/Parameter Mapping/EC10 calculations/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_slopes_EC10_rep2_rep3', '.jpg']);
