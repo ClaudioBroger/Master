@@ -20,6 +20,7 @@ parameters.name(22) = {"TetRTup1rep"};
 parameters.name(2) = {"kTetR"};
 parameters.name(4) = {"kPMA1"};
 parameters.name(21) = {"TetRrep"};
+parameters.name(11) = {"kLacTetRTup1"}
 
 
 
@@ -66,6 +67,7 @@ rand_parameter.growthMIN(:) = 0;
 rand_parameter.growthMAX(:) = 0.0077;
 rand_parameter.f(:) = 1;
 rand_parameter.g(:) = 1;
+rand_parameter.PMAfactor(:) = 1;
 
 rand_parameter = rand_parameter(:,[string(ParaNames)]);
 

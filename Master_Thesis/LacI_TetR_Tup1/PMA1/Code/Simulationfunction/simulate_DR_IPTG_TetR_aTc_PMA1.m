@@ -1,4 +1,4 @@
-function SimFluoValues = simulate_DR_IPTG_TetR_aTc(para, data_IPTG,data, ParaNames,model)
+function growth_rate = simulate_DR_IPTG_TetR_aTc(para, data_IPTG,data, ParaNames,model)
 % simulates the fluorescent values with parameters para using the
 % timepoints from the data
 
@@ -38,18 +38,19 @@ function SimFluoValues = simulate_DR_IPTG_TetR_aTc(para, data_IPTG,data, ParaNam
     
 % Simuate model
 
-    SimFluoValues = zeros(height(dose),1);
+    SimPMA1Values = zeros(height(dose),1);
     for kdose = 1:height(dose)
         d1.Amount = data_IPTG.dose(kdose,1); % IPTG To Do: remove nMperUnit, place it inside the model
         for adose = 1:height(dose_aTc)
             d2.Amount = data.dose(adose,1);
         try      
             [t,sd,species] = sbiosimulate(model.mw_sbmod1, [d1, d2]);
-%             index = ismember(species, 'mu');
-%             SimCitrineValues = sd(end,index);
-%             SimFluoValues(adose, kdose) = x_scal_aTc*SimCitrineValues + data.empty;
+            index = ismember(species, 'PMA1');
+            SimPMA1Values = sd(end,index);
+            SimPMA1Values(adose, kdose) = x_scal_aTc*SimPMA1Values + data.empty;
+            growth_rate = max(0,para(29)  + (para(28)  - para(29) )/(1 + exp(5*(log(SimPMA1Values*para(12))-5))));
         catch ME
-%             disp(ME)
+            disp(ME)
         end
         
         end     
