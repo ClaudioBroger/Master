@@ -31,6 +31,7 @@ p0_Fix = paramSpecs.p0(Settings.model.PIdxfixed);
 for nFix=1:length(Settings.model.PIdxfixed)
     model.mw_sbmod1.Parameters(Settings.model.PIdxfixed(nFix)).Value = p0_Fix(nFix,1);
 end
+dataPath = Settings.model.dataPath;
 
 %% estimate parameters
 if estimate_parameters

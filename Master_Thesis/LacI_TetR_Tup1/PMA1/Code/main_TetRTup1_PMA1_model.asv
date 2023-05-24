@@ -7,7 +7,10 @@ sbiosaveproject('LacI_TetRTup1_PMA1_model');
 model = sbioloadproject('LacI_TetRTup1_PMA1_model');
 num_draws = 30;
 
-optionsObj = get(configsetObj, 'CompileOptions');
+configsetObj = getconfigset(model);
+optionsObj = get(configsetObj,'CompileOptions');
+set(optionsObj,'DimensionalAnalysis', false);
+
 
 sbioaccelerate(model.mw_sbmod1)
 
@@ -27,6 +30,6 @@ draw_parameters_LacI_TetR_with_aTc_EC50;
 %Simulate with drawn parameters for EC50
 Simulate_random_drawn_parametersTetRTup1_model_EC50;
 
-
+model.mw_sbmod1.getconfigset
 
 rand_parameter.kTetR = randomValues;

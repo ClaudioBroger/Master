@@ -7,9 +7,10 @@ sbiosaveproject('LacI_TetRTup1_PMA1_model');
 model = sbioloadproject('LacI_TetRTup1_PMA1_model');
 num_draws = 30;
 
-% configsetObj = model.mw_sbmod1.getconfigset;
-% optionsObj = get(configsetObj, 'CompileOptions');
-% set(optionsObj,'DimensionalAnalysis', false)
+configsetObj = model.mw_sbmod1.getconfigset;
+optionsObj = get(configsetObj,'CompileOptions');
+set(optionsObj,'DimensionalAnalysis', false);
+
 sbioaccelerate(model.mw_sbmod1)
 
 %Modelsettings

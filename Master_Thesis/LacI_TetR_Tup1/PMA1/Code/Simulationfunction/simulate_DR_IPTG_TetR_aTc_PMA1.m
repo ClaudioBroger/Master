@@ -39,6 +39,7 @@ function growth_rate = simulate_DR_IPTG_TetR_aTc(para, data_IPTG,data, ParaNames
 % Simuate model
 
     SimPMA1Values = zeros(height(dose),1);
+    growth_rate_o_t = zeros(height(dose),1);
     for kdose = 1:height(dose)
         d1.Amount = data_IPTG.dose(kdose,1); % IPTG To Do: remove nMperUnit, place it inside the model
         for adose = 1:height(dose_aTc)
@@ -47,11 +48,19 @@ function growth_rate = simulate_DR_IPTG_TetR_aTc(para, data_IPTG,data, ParaNames
             [t,sd,species] = sbiosimulate(model.mw_sbmod1, [d1, d2]);
             index = ismember(species, 'PMA1');
             SimPMA1Values = sd(end,index);
-            SimPMA1Values(adose, kdose) = x_scal_aTc*SimPMA1Values + data.empty;
-            growth_rate = max(0,para(29)  + (para(28)  - para(29) )/(1 + exp(5*(log(SimPMA1Values*para(12))-5))));
+            SimPMA1Values_over_time = sd(:,index)';
+            %SimPMA1Values(adose, kdose) = x_scal_aTc*SimPMA1Values + data.empty;
+            growth_rate(adose,kdose) = max(0,para(29)  + (para(28)  - para(29) )/(1 + exp(para(27)*(log((SimPMA1Values)*para(17))-para(26)))));
+%             growth_rate_o_t(adose,:) = max(0,para(29)  + (para(28)  - para(29) )./(1 + exp(5*(log((SimPMA1Values_over_time)*para(17))-5))));
+%             time = t;
         catch ME
             disp(ME)
         end
         
-        end     
+        end   
+%     if kdose == 1    
+%         growth_rate_over_time = growth_rate_o_t;
+%     else
+%         growth_rate_over_time = [growth_rate_o_t; growth_rate_over_time];
+%     end
     end  

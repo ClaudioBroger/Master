@@ -32,6 +32,7 @@ while ~isempty(TFlMode) %true when TflMode is not empty
         case{1}
         %% module 1: ptetTetR + ptetCitrine
             para = paraValues;
+            
             dataPos = strcat(dataPath, "data.mat");
             data = load(dataPos);
 
@@ -39,7 +40,7 @@ while ~isempty(TFlMode) %true when TflMode is not empty
             IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
             para(IdxToZero) = 0;
 
-            SimFluoValues = simulate_DR_IPTG(para,data.data,ParaNames,model);
+            SimFluoValues = simulate_DR_IPTG(para,data,ParaNames,model);
             DataMeans = data.data.means;
             DataStd = data.data.std;
             
@@ -74,9 +75,9 @@ while ~isempty(TFlMode) %true when TflMode is not empty
             IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
             para(IdxToZero) = 0;
 
-            SimFluoValues = simulate_DR_IPTG(para,data_W220F.data_W220F,ParaNames,model);
-            DataMeans = data_W220F.data_W220F.means;
-            DataStd = data_W220F.data_W220F.std;
+            SimFluoValues = simulate_DR_IPTG(para,data_W220F,ParaNames,model);
+            DataMeans = data_W220F.data.means;
+            DataStd = data_W220F.data.std;
             
             if noise           
             res = (SimFluoValues + normrnd(0,DataStd) - DataMeans)./DataStd;
@@ -85,7 +86,7 @@ while ~isempty(TFlMode) %true when TflMode is not empty
             end
  
             objf(end+1) = sum(res.^2);
-            objfn{end+1} = data_W220F.modulenames_W220F{1};
+            objfn{end+1} = data_W220F.modulenames{1};
             ndata = ndata + numel(res);
         %plot
         if FlPlot
@@ -109,9 +110,9 @@ while ~isempty(TFlMode) %true when TflMode is not empty
             IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
             para(IdxToZero) = 0;
 
-            SimFluoValues = simulate_DR_IPTG(para,data_W220F_Q60G_T167A.data_W220F_Q60G_T167A,ParaNames,model);
-            DataMeans = data_W220F_Q60G_T167A.data_W220F_Q60G_T167A.means;
-            DataStd = data_W220F_Q60G_T167A.data_W220F_Q60G_T167A.std;
+            SimFluoValues = simulate_DR_IPTG(para,data_W220F_Q60G_T167A,ParaNames,model);
+            DataMeans = data_W220F_Q60G_T167A.data.means;
+            DataStd = data_W220F_Q60G_T167A.data.std;
             
             if noise           
             res = (SimFluoValues + normrnd(0,DataStd) - DataMeans)./DataStd;
@@ -120,7 +121,7 @@ while ~isempty(TFlMode) %true when TflMode is not empty
             end
  
             objf(end+1) = sum(res.^2);
-            objfn{end+1} = data_W220F_Q60G_T167A.modulenames_W220F_Q60G_T167A{1};
+            objfn{end+1} = data_W220F_Q60G_T167A.modulenames{1};
             ndata = ndata + numel(res);
         %plot
         if FlPlot
