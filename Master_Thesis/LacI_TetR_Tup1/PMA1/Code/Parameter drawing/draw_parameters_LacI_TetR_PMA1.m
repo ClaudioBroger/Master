@@ -11,13 +11,10 @@ parameters.name(14) = {"degtag"};
 parameters.name(23) = {"LacIrep"};
 parameters.name(25) = {"LacIrep2"};
 parameters.name(26) = {"LacIrep3"};
-parameters.name(5) = {"kCit"};
-parameters.name(17) = {"dCit"};
 parameters.name(18) = {"PMA1L"};
 parameters.name(20) = {"TetRTup1L"};
 parameters.name(31) = {"nTetRTup1"};
 parameters.name(22) = {"TetRTup1rep"};
-parameters.name(2) = {"kTetR"};
 parameters.name(4) = {"kPMA1"};
 parameters.name(21) = {"TetRrep"};
 parameters.name(11) = {"kLacTetRTup1"}
@@ -48,11 +45,10 @@ for draw=1:num_draws
     end
 end
 
-rand_parameter(:,1:11) = 10.^rand_parameter(:,1:11);
-rand_parameter(:,15) = 10.^rand_parameter(:,15);
-rand_parameter(:,17:22) = 10.^rand_parameter(:,17:22);
-rand_parameter(:,24) = 10.^rand_parameter(:,24);
-rand_parameter(:,26:27) = 10.^rand_parameter(:,26:27);
+rand_parameter(:,1:9) = 10.^rand_parameter(:,1:9);
+rand_parameter(:,13) = 10.^rand_parameter(:,13);
+rand_parameter(:,15:19) = 10.^rand_parameter(:,15:19);
+rand_parameter(:,21:22) = 10.^rand_parameter(:,21:22);
 rand_parameter = array2table(rand_parameter);
 rand_parameter.Properties.VariableNames(:) = table2array(parameters.name(index,:));
 
@@ -60,9 +56,6 @@ rand_parameter.nMperUnit(:) = 10^1.1;
 
 rand_parameter.mu(:) = 0.0077;
 rand_parameter.kmaturation(:) = 0.0173;
-rand_parameter.dCit(:) = 0;
-%rand_parameter.p1(:) = 5;
-%rand_parameter.p2(:) = 5;
 rand_parameter.growthMIN(:) = 0;
 rand_parameter.growthMAX(:) = 0.0077;
 rand_parameter.f(:) = 1;

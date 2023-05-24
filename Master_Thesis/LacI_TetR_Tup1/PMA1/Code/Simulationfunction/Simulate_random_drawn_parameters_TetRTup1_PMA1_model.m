@@ -17,7 +17,7 @@ for k = 1:height(rand_parameter)
         %% module 1: ptetTetR + ptetCitrine
             para = paraValues;
 
-            NamestoZero = setdiff(ParaNames,{'kLacI','dLacI', 'kTetRTup1', 'dTetRTup1', 'degtag','LacIrep', 'TetRTup1L', 'nLacI', 'indTime', 'nTetRTup1', 'KdLacI', 'KdTetR', 'kmaturation', 'nMperUnit', 'mu', 'TetRTup1rep', 'kTetR', 'dTetR', 'nTetR', 'p1', 'p2', 'growthMIN', 'growthMAX', 'f', 'g', 'kPMA1', 'dPMA1', 'PMAfactor', 'kLacTetRTup1'});                            
+            NamestoZero = setdiff(ParaNames,{'kLacI','dLacI', 'kTetRTup1', 'dTetRTup1', 'degtag','LacIrep', 'TetRTup1L', 'nLacI', 'indTime', 'nTetRTup1', 'KdLacI', 'KdTetR', 'kmaturation', 'nMperUnit', 'mu', 'TetRTup1rep', 'p1', 'p2', 'growthMIN', 'growthMAX', 'f', 'g', 'kPMA1', 'dPMA1', 'PMAfactor', 'kLacTetRTup1'});                            
             IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
             para(IdxToZero) = 0;
 
@@ -78,7 +78,7 @@ for k = 1:height(rand_parameter)
         %% module 1: ptetTetR + ptetCitrine
             para = paraValues;
 
-            NamestoZero = setdiff(ParaNames,{'kLacI','dLacI', 'kTetRTup1', 'dTetRTup1', 'degtag','LacIrep2', 'kCit', 'CitL', 'TetRTup1L', 'nLacI', 'indTime', 'nTetRTup1', 'KdLacI', 'KdTetR', 'kmaturation', 'nMperUnit', 'mu', 'TetRTup1rep', 'kTetR', 'dTetR', 'nTetR', 'p1', 'p2', 'growthMIN', 'growthMAX', 'f', 'g', 'kPMA1', 'dPMA1', 'PMAfactor', 'kLacTetRTup1'});                            
+            NamestoZero = setdiff(ParaNames,{'kLacI','dLacI', 'kTetRTup1', 'dTetRTup1', 'degtag','LacIrep2', 'kCit', 'CitL', 'TetRTup1L', 'nLacI', 'indTime', 'nTetRTup1', 'KdLacI', 'KdTetR', 'kmaturation', 'nMperUnit','mu', 'TetRTup1rep', 'p1', 'p2', 'growthMIN', 'growthMAX', 'f', 'g', 'kPMA1', 'dPMA1', 'PMAfactor', 'kLacTetRTup1'});                            
             IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
             para(IdxToZero) = 0;
 
@@ -134,7 +134,7 @@ for k = 1:height(rand_parameter)
         %% module 1: ptetTetR + ptetCitrine
             para = paraValues;
 
-            NamestoZero = setdiff(ParaNames,{'kLacI','dLacI', 'kTetRTup1', 'dTetRTup1', 'degtag','LacIrep3', 'kCit', 'CitL', 'TetRTup1L', 'nLacI', 'indTime', 'nTetRTup1', 'KdLacI', 'KdTetR', 'kmaturation', 'nMperUnit', 'mu', 'TetRTup1rep', 'kTetR', 'dTetR', 'nTetR', 'p1', 'p2', 'growthMIN', 'growthMAX', 'f', 'g', 'kPMA1', 'dPMA1', 'PMAfactor', 'kLacTetRTup1'});                            
+            NamestoZero = setdiff(ParaNames,{'kLacI','dLacI', 'kTetRTup1', 'dTetRTup1', 'degtag','LacIrep3', 'kCit', 'CitL', 'TetRTup1L', 'nLacI', 'indTime', 'nTetRTup1', 'KdLacI', 'KdTetR', 'kmaturation', 'nMperUnit','mu', 'TetRTup1rep', 'p1', 'p2', 'growthMIN', 'growthMAX', 'f', 'g', 'kPMA1', 'dPMA1', 'PMAfactor', 'kLacTetRTup1'});                            
             IdxToZero = find(ismember(ParaNames, NamestoZero)) ;           
             para(IdxToZero) = 0;
 
@@ -246,12 +246,12 @@ for k = 1:height(rand_parameter)
 % 
 %         
 %         
-for k = 1:num_draws
+
         %set the figure to be sceensize
              set(figure(k), 'Position', get(0, 'Screensize'));
             %save figure
              saveas(figure(k), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI_TetR_Tup1/PMA1/Plots/Full_aTc/More_time/More_aTc/Corrected/', datestr(now, 'dd-mmm-yyyy'),num2str(k),'LacI_TetRTup1_PMA1_more_aTc_more_time', '.jpg']);
-end
+
             counter = counter + 1
 
 
