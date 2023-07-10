@@ -112,7 +112,7 @@ for draw = 1:num_draws
             %errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
             xlabel('log IPTG (nM)', 'FontSize', 18)
             ylabel('mean Fluorescence','FontSize', 18)
-            title('P4Lacn.2-cit + PAct1-LacI, 1st repression coefficient', 'FontSize',20)
+            title('P4Lacn.2-cit + PAct1-LacI, 1st repression coefficient - parameter estimation with PESTO', 'FontSize',20)
             
         end
         hold off
@@ -154,7 +154,7 @@ for draw = 1:num_draws
             %errorbar(log10(data.dose),DataMeans,DataStd,'o','HandleVisibility','off');
             xlabel('log IPTG (nM)', 'FontSize', 18)
             ylabel('mean Fluorescence','FontSize', 18)
-            title('P4Lacn.2-cit + PAct1-LacI, 2nd repression coefficient', 'FontSize',20)
+            title('P4Lacn.2-cit + PAct1-LacI, 2nd repression coefficient - parameter estimation with PESTO', 'FontSize',20)
         end
         hold off
         legend("show", 'Location', 'northeastoutside')
@@ -195,25 +195,13 @@ for draw = 1:num_draws
             xlim([0 10]);
             xlabel('log IPTG (nM)', 'FontSize', 18)
             ylabel('mean Fluorescence','FontSize', 18)
-            title('P4Lacn.2-cit + PAct1-LacI, 3rd repression coefficient', 'FontSize',20)
+            title('P4Lacn.2-cit + PAct1-LacI, 3rd repression coefficient - parameter estimation with PESTO', 'FontSize',20)
         end
         hold off
         legend("show", 'Location', 'northeastoutside')
 
  
-%         if FlPlot
-%             figure(draw+3)
-%             hold on;
-%             plot(log10(data1.dose), SimFluoValues1, '-', 'LineWidth',2, 'DisplayName',strcat('Simulation-rep1-', num2str(draw)));
-%             plot(log10(data2.dose), SimFluoValues2, '-', 'LineWidth',2, 'DisplayName',strcat('Simulation-rep2-', num2str(draw)));
-%             plot(log10(data3.dose), SimFluoValues3, '-', 'LineWidth',2, 'DisplayName',strcat('Simulation-rep3-', num2str(draw)));
-%             %errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
-%             xlabel('log IPTG (nM)', 'FontSize', 18)
-%             ylabel('mean Fluorescence','FontSize', 18)
-%             title('P4Lacn.2-cit + PAct1-LacI, all repression coefficients, draw',strcat(num2str(draw)), 'FontSize',20);
-%         end
-%         hold off
-%         legend("show", 'Location', 'northeastoutside')
+%        
         %set SimFluoValues to table
         SimFluoValues1 = array2table(SimFluoValues1);
         SimFluoValues2 = array2table(SimFluoValues2);
@@ -281,40 +269,16 @@ for draw = 1:num_draws
 
 end
 %             %save simulated fluoresence values
-            save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Pesto/', datestr(now, 'dd-mmm-yyyy'),'SimulationFluoValues_rep1_ec50_Pesto_200', '.mat'], 'SimFluoValues1combined');
+            save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Pesto/', datestr(now, 'dd-mmm-yyyy'),'SimulationFluoValues_rep1_ec50_Pesto_30', '.mat'], 'SimFluoValues1combined');
 %             writetable(SimFluoValues1combined,['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/', datestr(now, 'dd-mmm-yyyy'),'SimulationFluoValues_rep1_ec50', '.csv']);
 %              %save simulated fluoresence values
-            save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Pesto/', datestr(now, 'dd-mmm-yyyy'),'SimulationFluoValues_rep2_ec50_Pesto_200', '.mat'], 'SimFluoValues2combined');
+            save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Pesto/', datestr(now, 'dd-mmm-yyyy'),'SimulationFluoValues_rep2_ec50_Pesto_30', '.mat'], 'SimFluoValues2combined');
 %             writetable(SimFluoValues2combined,['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/', datestr(now, 'dd-mmm-yyyy'),'SimulationFluoValues_rep2_ec50', '.csv']);
 %             %save simulated fluoresence values
-            save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Pesto/', datestr(now, 'dd-mmm-yyyy'),'SimulationFluoValues_rep3_ec50_Pesto_200', '.mat'], 'SimFluoValues3combined');
+            save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Pesto/', datestr(now, 'dd-mmm-yyyy'),'SimulationFluoValues_rep3_ec50_Pesto_30', '.mat'], 'SimFluoValues3combined');
 %             writetable(SimFluoValues3combined,['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/', datestr(now, 'dd-mmm-yyyy'),'SimulationFluoValues_rep3_ec50', '.csv']);
 %            
-%             save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/', datestr(now, 'dd-mmm-yyyy'),'_draw_', num2str(draw),'SimulationFluoValues_allrep_ec50', '.mat'], 'SimFluoValuescombined');
-
-%             %func = @(x) colorspace('RGB->Lab',x);
-%             %cmp=distinguishable_colors(30);
-%             %set the figure to be sceensize
-%             set(figure(2), 'Position', get(0, 'Screensize'));
-% % %             ax = gca(figure(1));
-% % %             ax.ColorOrder = cmp;
-% % %             %save figure
-%             saveas(figure(2), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Pesto/', datestr(now, 'dd-mmm-yyyy'),'_draw_', num2str(draw),'_Figure_rep1_Pesto', '.jpg']);
-% %            
-% % %             %set the figure to be sceensize
-%             set(figure(3), 'Position', get(0, 'Screensize'));
-% % %             ax = gca(figure(2));
-% % %             ax.ColorOrder = cmp;
-% % %             %save figure
-%             saveas(figure(3), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Pesto/', datestr(now, 'dd-mmm-yyyy'),'_draw_', num2str(draw),'_Figure_rep2_Pesto', '.jpg']);
-% %             
-% % %             %set the figure to be sceensize
-%             set(figure(4), 'Position', get(0, 'Screensize'));
-% % %             ax = gca(figure(3));
-% % %             ax.ColorOrder = cmp;
-% % %             %save figure
-%             saveas(figure(4), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Pesto/', datestr(now, 'dd-mmm-yyyy'),'_draw_', num2str(draw),'_Figure_rep3_Pesto', '.jpg']);
-% %     
+  
 
 
 counter = 0;
@@ -414,3 +378,50 @@ set(figure(2), 'Position', get(0, 'Screensize'));
 % % %             %save figure
             saveas(figure(4), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Pesto/', datestr(now, 'dd-mmm-yyyy'),'_draw_', num2str(draw),'_Figure_rep3_Pesto_ec50', '.jpg']);
 % %     
+
+
+C = linspecer(30);
+for draw = 1:30
+    
+    SimFluoValues1 = SimFluoValues1combined.SimFluoValues(SimFluoValues1combined.Draw == draw);
+    figure(2)
+    hold on;
+    plot(log10(data1.dose),SimFluoValues1,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-rep1-', num2str(draw)), 'Color', C(draw,:));
+    %errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
+    xlabel('log IPTG (nM)', 'FontSize', 18)
+    ylabel('mean Fluorescence','FontSize', 18)
+    title('P4Lacn.2-cit + PAct1-LacI, 1st repression coefficient - parameter estimation with PESTO', 'FontSize',20)
+    
+
+    hold off
+    legend("show", 'Location', 'northeastoutside')
+
+    SimFluoValues2 = SimFluoValues2combined.SimFluoValues(SimFluoValues2combined.Draw == draw);
+    
+
+    figure(3)
+    hold on;
+    plot(log10(data2.dose),SimFluoValues2,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-rep2-', num2str(draw)), 'Color', C(draw,:));
+    %errorbar(log10(data.dose),DataMeans,DataStd,'o','HandleVisibility','off');
+    xlabel('log IPTG (nM)', 'FontSize', 18)
+    ylabel('mean Fluorescence','FontSize', 18)
+    title('P4Lacn.2-cit + PAct1-LacI, 2nd repression coefficient - parameter estimation with PESTO', 'FontSize',20)
+
+    hold off
+    legend("show", 'Location', 'northeastoutside')
+    
+    SimFluoValues3 = SimFluoValues3combined.SimFluoValues(SimFluoValues3combined.Draw == draw);
+    
+    figure(4)
+    hold on;
+    plot(log10(data3.dose),SimFluoValues3,'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-rep3-', num2str(draw)), 'Color', C(draw,:));
+    %errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
+    xlim([0 10]);
+    xlabel('log IPTG (nM)', 'FontSize', 18)
+    ylabel('mean Fluorescence','FontSize', 18)
+    title('P4Lacn.2-cit + PAct1-LacI, 3rd repression coefficient - parameter estimation with PESTO', 'FontSize',20)
+
+    hold off
+    legend("show", 'Location', 'northeastoutside')
+
+end

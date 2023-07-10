@@ -130,7 +130,7 @@ for draw = 1:num_draws
         objf  = [];
         objfn = {};
         ndata = 0;
-end
+
         %% module 1: ptetTetR + ptetCitrine
             para = paraValues;
             dataPos = strcat(dataPath, "data.mat");
@@ -204,19 +204,19 @@ end
         legend("show", 'Location', 'northeastoutside')
 
  
-%         if FlPlot
-%             figure(draw+3)
-%             hold on;
-%             plot(log10(data1.dose), SimFluoValues1, '-', 'LineWidth',2, 'DisplayName',strcat('Simulation-rep1-', num2str(draw)));
-%             plot(log10(data2.dose), SimFluoValues2, '-', 'LineWidth',2, 'DisplayName',strcat('Simulation-rep2-', num2str(draw)));
-%             plot(log10(data3.dose), SimFluoValues3, '-', 'LineWidth',2, 'DisplayName',strcat('Simulation-rep3-', num2str(draw)));
-%             %errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
-%             xlabel('log IPTG (nM)', 'FontSize', 18)
-%             ylabel('mean Fluorescence','FontSize', 18)
-%             title('P4Lacn.2-cit + PAct1-LacI, all repression coefficients, draw',strcat(num2str(draw)), 'FontSize',20);
-%         end
-%         hold off
-%         legend("show", 'Location', 'northeastoutside')
+        if FlPlot
+            figure(draw+3)
+            hold on;
+            plot(log10(data1.dose), SimFluoValues1, '-', 'LineWidth',2, 'DisplayName',strcat('Simulation-rep1-', num2str(draw)));
+            plot(log10(data2.dose), SimFluoValues2, '-', 'LineWidth',2, 'DisplayName',strcat('Simulation-rep2-', num2str(draw)));
+            plot(log10(data3.dose), SimFluoValues3, '-', 'LineWidth',2, 'DisplayName',strcat('Simulation-rep3-', num2str(draw)));
+            %errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
+            xlabel('log IPTG (nM)', 'FontSize', 18)
+            ylabel('mean Fluorescence','FontSize', 18)
+            title('P4Lacn.2-cit + PAct1-LacI, all repression coefficients, draw',strcat(num2str(draw)), 'FontSize',20);
+        end
+        hold off
+        legend("show", 'Location', 'northeastoutside')
         %set SimFluoValues to table
         SimFluoValues1 = array2table(SimFluoValues1);
         SimFluoValues2 = array2table(SimFluoValues2);
@@ -275,9 +275,9 @@ end
 %         
 % 
 %         %set the figure to be sceensize
-%             set(figure(draw+3), 'Position', get(0, 'Screensize'));
-%             %save figure
-%             saveas(figure(draw+3), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/', datestr(now, 'dd-mmm-yyyy'),num2str(draw),'Figure_draw_allrep', '.jpg']);
+            set(figure(draw+3), 'Position', get(0, 'Screensize'));
+            %save figure
+            saveas(figure(draw+3), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/', datestr(now, 'dd-mmm-yyyy'),num2str(draw),'Figure_draw_allrep', '.jpg']);
 
             counter = counter + 1
             fprintf('End run', counter)

@@ -1,7 +1,22 @@
 C = linspecer(height(data.dose));
 counter = 0;
-% rand_parameter.kTetR = [];
-% rand_parameter.dTetR = [];
+plot_on = true;
+time_aTc_rep1_combined = cell(height(data.dose), height(rand_parameter));
+time_aTc_rep2_combined = cell(height(data.dose), height(rand_parameter));
+time_aTc_rep3_combined = cell(height(data.dose), height(rand_parameter));
+
+time_IPTG_rep1_combined = cell(height(data_IPTG.dose), height(rand_parameter));
+time_IPTG_rep2_combined = cell(height(data_IPTG.dose), height(rand_parameter));
+time_IPTG_rep3_combined = cell(height(data_IPTG.dose), height(rand_parameter));
+
+SimFluoValues1_over_time_aTc_combined = cell(height(data.dose), height(rand_parameter));
+SimFluoValues2_over_time_aTc_combined = cell(height(data.dose), height(rand_parameter));
+SimFluoValues3_over_time_aTc_combined = cell(height(data.dose), height(rand_parameter));
+
+SimFluoValues1_over_time_IPTG_combined = cell(height(data_IPTG.dose), height(rand_parameter));
+SimFluoValues2_over_time_IPTG_combined = cell(height(data_IPTG.dose), height(rand_parameter));
+SimFluoValues3_over_time_IPTG_combined = cell(height(data_IPTG.dose), height(rand_parameter));
+
 for k = 1:height(rand_parameter)
     paraValues = table2array(rand_parameter(k,:));
      paraValues = paraValues';
@@ -23,8 +38,9 @@ for k = 1:height(rand_parameter)
 
      
 
-            SimFluoValues1 = simulate_DR_IPTG_TetR_aTc(para,data_IPTG,data,ParaNames,model);
+            [SimFluoValues1, time_IPTG1, time_aTc1, SimFluoValues_over_time_aTc1, SimFluoValues_over_time_IPTG1] = simulate_DR_IPTG_TetR_aTc_more_output(para,data_IPTG,data,ParaNames,model);
            
+            if plot_on
             figure(k)
             for a = 1:height(data.dose)
                 subplot(3,1,1)
@@ -44,7 +60,7 @@ for k = 1:height(rand_parameter)
             end
             
             legend("show", 'Location', 'northeastoutside')
-
+            end
 %         %plot
 
             
@@ -70,7 +86,8 @@ for k = 1:height(rand_parameter)
             para(IdxToZero) = 0;
 
 
-            SimFluoValues2 = simulate_DR_IPTG_TetR_aTc(para,data_IPTG,data,ParaNames,model);
+            [SimFluoValues2, time_IPTG2, time_aTc2, SimFluoValues_over_time_aTc2, SimFluoValues_over_time_IPTG2] = simulate_DR_IPTG_TetR_aTc(para,data_IPTG,data,ParaNames,model);
+            if plot_on
             figure(k)
             for a = 1:height(data.dose)
                 subplot(3,1,2)
@@ -90,6 +107,7 @@ for k = 1:height(rand_parameter)
             end
             
             legend("show", 'Location', 'northeastoutside')
+            end
            
             
         %plot
@@ -111,12 +129,12 @@ for k = 1:height(rand_parameter)
             para(IdxToZero) = 0;
 
 
-            SimFluoValues3 = simulate_DR_IPTG_TetR_aTc(para,data_IPTG,data,ParaNames,model);
+            [SimFluoValues3, time_IPTG3, time_aTc3, SimFluoValues_over_time_aTc3, SimFluoValues_over_time_IPTG3] = simulate_DR_IPTG_TetR_aTc(para,data_IPTG,data,ParaNames,model);
 
 
 
         %plot
-
+            if plot_on
             figure(k)
             for a = 1:height(data.dose)
                 subplot(3,1,3)
@@ -136,6 +154,7 @@ for k = 1:height(rand_parameter)
             end
             
             legend("show", 'Location', 'northeastoutside')
+            end
             objf  = [];
             objfn = {};
             ndata = 0;
@@ -204,7 +223,22 @@ for k = 1:height(rand_parameter)
             SimFluoValues3combined = [SimFluoValues3combined; SimFluoValues3];
             
         end
-% 
+        time_aTc_rep1_combined(:,k) = time_aTc1;
+        time_aTc_rep2_combined(:,k) = time_aTc2;
+        time_aTc_rep3_combined(:,k) = time_aTc3;
+
+        time_IPTG_rep1_combined(:,k) = time_IPTG1;
+        time_IPTG_rep2_combined(:,k) = time_IPTG2;
+        time_IPTG_rep3_combined(:,k) = time_IPTG3;
+
+        SimFluoValues1_over_time_aTc_combined(:,k) = SimFluoValues_over_time_aTc1;
+        SimFluoValues2_over_time_aTc_combined(:,k) = SimFluoValues_over_time_aTc2;
+        SimFluoValues3_over_time_aTc_combined(:,k) = SimFluoValues_over_time_aTc3;
+        
+        SimFluoValues1_over_time_IPTG_combined(:,k) = SimFluoValues_over_time_IPTG1;
+        SimFluoValues2_over_time_IPTG_combined(:,k) = SimFluoValues_over_time_IPTG2;
+        SimFluoValues3_over_time_IPTG_combined(:,k) = SimFluoValues_over_time_IPTG3;
+        
 %         
 %         
 % 
@@ -222,4 +256,11 @@ save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI_TetR_Tup1/Te
 save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI_TetR_Tup1/TetR_Tup1 model/Results/', datestr(now, 'dd-mmm-yyyy'),'SimFluoValues2_LacI_TetRTup1', '.mat'], 'SimFluoValues2combined');
 save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI_TetR_Tup1/TetR_Tup1 model/Results/', datestr(now, 'dd-mmm-yyyy'),'SimFluoValues3_LacI_TetRTup1', '.mat'], 'SimFluoValues3combined');
 
+save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI_TetR_Tup1/TetR_Tup1 model/', datestr(now, 'dd-mmm-yyyy'),'SimFluoValues1_LacI_TetRTup1_over_time_aTc', '.mat'], 'SimFluoValues1_over_time_aTc_combined');
+save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI_TetR_Tup1/TetR_Tup1 model/', datestr(now, 'dd-mmm-yyyy'),'SimFluoValues2_LacI_TetRTup1_over_time_aTc', '.mat'], 'SimFluoValues2_over_time_aTc_combined');
+save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI_TetR_Tup1/TetR_Tup1 model/', datestr(now, 'dd-mmm-yyyy'),'SimFluoValues3_LacI_TetRTup1_over_time_aTc', '.mat'], 'SimFluoValues3_over_time_aTc_combined');
+
+save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI_TetR_Tup1/TetR_Tup1 model/', datestr(now, 'dd-mmm-yyyy'),'SimFluoValues1_LacI_TetRTup1_over_time_IPTG', '.mat'], 'SimFluoValues1_over_time_IPTG_combined');
+save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI_TetR_Tup1/TetR_Tup1 model/', datestr(now, 'dd-mmm-yyyy'),'SimFluoValues2_LacI_TetRTup1_over_time_IPTG', '.mat'], 'SimFluoValues2_over_time_IPTG_combined');
+save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI_TetR_Tup1/TetR_Tup1 model/', datestr(now, 'dd-mmm-yyyy'),'SimFluoValues3_LacI_TetRTup1_over_time_IPTG', '.mat'], 'SimFluoValues3_over_time_IPTG_combined');
 

@@ -1,12 +1,12 @@
 clear all; clc;
-%sbioreset
+sbioreset
 %%  Sections to run
 %%%%%%%%%%%%%%%%%%
 estimate_parameters         = 1;
 select_optimal_param        = 1;
 plot_meigo                  = 1;
 runHyperspace               = 0;
-plot_param_post             = 1;
+plot_param_post             = 0;
 
 %initPaths; do add dependencies (to do)
 
@@ -18,6 +18,9 @@ plot_param_post             = 1;
 
 % Step 2: Load model
 model = sbioloadproject('LacImodel');
+configsetObj = model.mw_sbmod1.getconfigset;
+optionsObj = get(configsetObj,'CompileOptions');
+set(optionsObj,'DimensionalAnalysis', false);
 
 % Step 3: Accelerate model
 sbioaccelerate(model.mw_sbmod1)

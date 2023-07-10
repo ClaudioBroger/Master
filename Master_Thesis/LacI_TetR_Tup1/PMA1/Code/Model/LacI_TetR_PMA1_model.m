@@ -20,7 +20,6 @@ s15 = addspecies(LacI_TetRTup1_PMA1_model, 'PMA1', 'InitialAmount',0);
 
 p1 = addparameter(LacI_TetRTup1_PMA1_model, 'kLacI', 'Value', 1.3389, 'ValueUnits', '(molarity)/minute');
 p2 = addparameter(LacI_TetRTup1_PMA1_model, 'dLacI', 'Value', 0.0014, 'ValueUnits', '1/minute');
-p3 = addparameter(LacI_TetRTup1_PMA1_model, 'kTetRTup1', 'Value', 1.3389, 'ValueUnits', '(molarity)/minute');
 p4 = addparameter(LacI_TetRTup1_PMA1_model, 'dTetRTup1', 'Value', 0.0014, 'ValueUnits', '1/minute');
 p5 = addparameter(LacI_TetRTup1_PMA1_model, 'degtag', 'Value', 0.0077, 'ValueUnits', '1/minute');
 p6 = addparameter(LacI_TetRTup1_PMA1_model, 'LacIrep', 'Value', 0.3607, 'ValueUnits', 'molarity');
@@ -37,7 +36,6 @@ p19 = addparameter(LacI_TetRTup1_PMA1_model, 'mu', 'Value', 0.0077, 'Valueunits'
 p20 = addparameter(LacI_TetRTup1_PMA1_model, 'TetRTup1rep', 'Value', 0.3607, 'ValueUnits', 'molarity');
 p23 = addparameter(LacI_TetRTup1_PMA1_model, 'kPMA1', 'Value', 1.3389, 'ValueUnits', '(molarity)/minute');
 p25 = addparameter(LacI_TetRTup1_PMA1_model, 'dPMA1', 'Value', 0.0014, 'ValueUnits', '1/minute');
-p26 = addparameter(LacI_TetRTup1_PMA1_model, 'TetRrep', 'Value', 0.3607, 'ValueUnits', 'molarity');
 p38 = addparameter(LacI_TetRTup1_PMA1_model, 'p1', 'Value', 5, 'ValueUnits', 'dimensionless');
 p39 = addparameter(LacI_TetRTup1_PMA1_model, 'p2', 'Value', 5, 'ValueUnits', 'dimensionless');
 p40 = addparameter(LacI_TetRTup1_PMA1_model, 'growthMIN', 'Value', 0, 'ValueUnits', '1/minute');
@@ -57,8 +55,8 @@ scaling3 = addrule(LacI_TetRTup1_PMA1_model, 'KdTetR_InUnit = KdTetR/nMperUnit',
 scaling4 = addrule(LacI_TetRTup1_PMA1_model, 'aTc_InUnit = aTc/nMperUnit', 'RuleType', 'repeatedAssignment');
 
 raterule1 = addrule(LacI_TetRTup1_PMA1_model, 'LacI = kLacI - (dLacI + mu) * LacI', 'RuleType', 'rate');
-raterule2 = addrule(LacI_TetRTup1_PMA1_model, 'TetRTup1 = kLacTetRTup1 * (TetRTup1L + (1 - TetRTup1L)/(1 + (LacIfree/(LacIrep+LacIrep2+LacIrep3))^nLacI)) - 2*(dTetRTup1 + mu + degtag) * TetRTup1', 'RuleType', 'rate');
-raterule3 = addrule(LacI_TetRTup1_PMA1_model, 'PMA1 = kPMA1 * (PMA1L + (1 - PMA1L)/(1 + (TetRTup1free * g/TetRTup1rep)^nTetRTup1)) - (dPMA1 + mu) * PMA1', 'RuleType', 'rate');
+raterule2 = addrule(LacI_TetRTup1_PMA1_model, 'TetRTup1 = 2*kLacTetRTup1 * (TetRTup1L + (1 - TetRTup1L)/(1 + (LacIfree/(LacIrep+LacIrep2+LacIrep3))^nLacI)) - (dTetRTup1 + mu + degtag) * TetRTup1', 'RuleType', 'rate');
+raterule3 = addrule(LacI_TetRTup1_PMA1_model, 'PMA1 = kPMA1 * (PMA1L + (1 - PMA1L)/(1 + (TetRTup1free/TetRTup1rep)^nTetRTup1)) - (dPMA1 + mu) * PMA1', 'RuleType', 'rate');
 
 repassrule1 = addrule(LacI_TetRTup1_PMA1_model, 'LacIfree = max(0, LacI/2 - KdLacI_InUnit/2 - IPTG_InUnit/2 + (KdLacI_InUnit^2 + 2*KdLacI_InUnit*LacI + 2*KdLacI_InUnit*IPTG_InUnit + LacI^2 - 2*LacI*IPTG_InUnit + IPTG_InUnit^2)^(1/2)/2)', 'RuleType', 'repeatedAssignment');
 repassrule2 = addrule(LacI_TetRTup1_PMA1_model, 'TetRTup1free = max(0, TetRTup1/2 - KdTetR_InUnit/2 - aTc_InUnit/2 + (KdTetR_InUnit^2 + 2*KdTetR_InUnit*TetRTup1 + 2*KdTetR_InUnit*aTc_InUnit + TetRTup1^2 - 2*TetRTup1*aTc_InUnit + aTc_InUnit^2)^(1/2)/2)', 'RuleType', 'repeatedAssignment');

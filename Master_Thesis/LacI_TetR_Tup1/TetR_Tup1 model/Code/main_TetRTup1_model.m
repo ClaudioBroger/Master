@@ -10,13 +10,13 @@ num_draws = 30;
 sbioaccelerate(model.mw_sbmod1)
 
 %Modelsettings
-ModelSettings_LacI_TetR_model_non_NF;
+ModelSettings_LacI_TetR_model_aTc;
 
 %draw parameter values
 draw_parameters_LacI_TetR_with_aTc;
 
 %Simulate with drawn parameters
-Simulate_random_drawn_parameters_TetRTup1_model;
+Simulate_random_drawn_parametersTetRTup1_model;
 
 %Drawing parameter values for EC50 ect calculations
 num_draws = 200;

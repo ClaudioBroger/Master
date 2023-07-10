@@ -330,9 +330,9 @@ group = ["rep1" "rep2" "rep3"];
 [p_50_pesto,tbl_50_pesto,stats_50_pesto] = anova1(all_ec50s_pesto, group);
 figure(2)
 hold on
-title('ANOVA all repression coefficients - parameter sets from PESTO CI', 'FontSize',24);
+title('ANOVA all Rep - parameter sets from PESTO CI', 'FontSize',70);
 ax = gca;
-ax.FontSize = 20;
+ax.FontSize = 40;
 lines = findobj(gcf,'Type','Line');
 for i = 1:numel(lines)
   lines(i).LineWidth = 1.5;

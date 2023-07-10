@@ -21,7 +21,7 @@ model = sbioloadproject('LacI_TetRTup1_model');
 
 sbioaccelerate(model.mw_sbmod1)
 %Modelsettings
-ModelSettings_LacI_TetR_model;
+ModelSettings_LacI_TetR_model_aTc;
 
 %%Find Baseline expression
 dynamic_range_rep1 = zeros(num_rows, height(data_IPTG.dose));
@@ -37,7 +37,7 @@ for k = 1:num_rows
         min_value = min(min(table2array(data_baseline_rep1(:,dose))));
         baseline_rep1(k,dose) = min_value;
         [row_index, col_index] = find(table2array(data_baseline_rep1(:,dose)) == min_value);
-        aTc_baseline_rep1(k,dose) = data.dose(row_index(1));
+        %aTc_baseline_rep1(k,dose) = data.dose(row_index(1));
         IPTG_baseline_rep1(k,dose) = data_IPTG.dose(col_index(1));
 
 
@@ -45,12 +45,13 @@ for k = 1:num_rows
         max_value = max(max(table2array(data_baseline_rep1(:,dose))));
         max_values_rep1(k,dose) = max_value;
         [row_index, col_index] = find(table2array(data_baseline_rep1(:,dose)) == max_value);
-        aTc_max_rep1(k,dose) = data.dose(row_index(1));
+        %aTc_max_rep1(k,dose) = data.dose(row_index(1));
         IPTG_max_rep1(k,dose) = data_IPTG.dose(col_index(1));
 
 
         % Calculate the dynamic range
-        dynamic_range_rep1(k,dose) = max_value / min_value;
+         dynamic_range_rep1(k,dose) = max_value / min_value;
+
 
         data_baseline_rep2 = SimFluoValues2_combined_aTc(SimFluoValues2_combined_aTc.draw == k,:);
         total_columns = size(data_baseline_rep2,2);
@@ -60,7 +61,7 @@ for k = 1:num_rows
         min_value = min(min(table2array(data_baseline_rep2(:,dose))));
         baseline_rep2(k,dose) = min_value;
         [row_index, col_index] = find(table2array(data_baseline_rep2(:,dose)) == min_value);
-        aTc_baseline_rep2(k,dose) = data.dose(row_index(1));
+        %aTc_baseline_rep2(k,dose) = data.dose(row_index(1));
         IPTG_baseline_rep2(k,dose) = data_IPTG.dose(col_index(1));
 
 
@@ -68,12 +69,13 @@ for k = 1:num_rows
         max_value = max(max(table2array(data_baseline_rep2(:,dose))));
         max_values_rep2(k,dose) = max_value;
         [row_index, col_index] = find(table2array(data_baseline_rep2(:,dose)) == max_value);
-        aTc_baseline_rep2(k,dose) = data.dose(row_index(1));
+        %aTc_baseline_rep2(k,dose) = data.dose(row_index(1));
         IPTG_baseline_rep2(k,dose) = data_IPTG.dose(col_index(1));
 
 
         % Calculate the dynamic range
-        dynamic_range_rep2(k,dose) = max_value / min_value;
+         dynamic_range_rep2(k,dose) = max_value / min_value;
+
 
         data_baseline_rep3 = SimFluoValues3_combined_aTc(SimFluoValues3_combined_aTc.draw == k,:);
         total_columns = size(data_baseline_rep3,2);
@@ -83,7 +85,7 @@ for k = 1:num_rows
         min_value = min(min(table2array(data_baseline_rep3(:,dose))));
         baseline_rep3(k,dose) = min_value;
         [row_index, col_index] = find(table2array(data_baseline_rep3(:,dose)) == min_value);
-        aTc_baseline_rep3(k,dose) = data.dose(row_index(1));
+        %aTc_baseline_rep3(k,dose) = data.dose(row_index(1));
         IPTG_baseline_rep3(k,dose) = data_IPTG.dose(col_index(1));
 
 
@@ -91,12 +93,13 @@ for k = 1:num_rows
         max_value = max(max(table2array(data_baseline_rep3(:,dose))));
         max_values_rep3(k,dose) = max_value;
         [row_index, col_index] = find(table2array(data_baseline_rep3(:,dose)) == max_value);
-        aTc_baseline_rep3(k,dose) = data.dose(row_index(1));
+        %aTc_baseline_rep3(k,dose) = data.dose(row_index(1));
         IPTG_baseline_rep3(k,dose) = data_IPTG.dose(col_index(1));
 
 
         % Calculate the dynamic range
-        dynamic_range_rep3(k,dose) = max_value / min_value;
+         dynamic_range_rep3(k,dose) = max_value / min_value;
+
     end
 end
 
@@ -145,38 +148,72 @@ end
 for k = 1:num_rows
     figure(1)
     hold on;
-    plot(log10(data_IPTG.dose),dynamic_range_rep1(k,:),'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-rep1-parameterset: ', num2str(k)));
+    plot(log10(data_IPTG.dose),dynamic_range_rep1(k,:),'-', 'LineWidth', 2);
     %errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
-    xlabel('log IPTG (nM)', 'FontSize', 18)
-    ylabel('Dynamic range','FontSize', 18)
-    title('Dynamic range LacI TetR-Tup1 repression coefficient 1', 'FontSize',20)
+    xlabel('log IPTG (nM)', 'FontSize', 30)
+    ylabel('Dynamic range','FontSize', 30)
+    title('Dynamic range LacI TetR-Tup1 repression coefficient 1', 'FontSize',40)
 end
 
-hold off
-legend("show", 'Location', 'northeastoutside')
+
 
 for k = 1:num_rows
     figure(2)
     hold on;
-    plot(log10(data_IPTG.dose),dynamic_range_rep2(k,:),'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-rep2-parameterset: ', num2str(k)));
+    plot(log10(data_IPTG.dose),dynamic_range_rep2(k,:),'-', 'LineWidth',2);
     %errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
-    xlabel('log IPTG (nM)', 'FontSize', 18)
-    ylabel('Dynamic range','FontSize', 18)
-    title('Dynamic range LacI TetR-Tup1 repression coefficient 2', 'FontSize',20)
+    xlabel('log IPTG (nM)', 'FontSize', 30)
+    ylabel('Dynamic range','FontSize', 30)
+    title('Dynamic range LacI TetR-Tup1 repression coefficient 2', 'FontSize',40)
 end
 
-hold off
-legend("show", 'Location', 'northeastoutside')
+
 
 for k = 1:num_rows
     figure(3)
     hold on;
-    plot(log10(data_IPTG.dose),dynamic_range_rep3(k,:),'-', 'LineWidth', 2, 'DisplayName',strcat('Simulation-rep3-parameterset: ', num2str(k)));
+    plot(log10(data_IPTG.dose),dynamic_range_rep3(k,:),'-', 'LineWidth', 2);
     %errorbar(log10(data.dose),DataMeans,DataStd,'o', 'HandleVisibility','off');
-    xlabel('log IPTG (nM)', 'FontSize', 18)
-    ylabel('Dynamic range','FontSize', 18)
-    title('Dynamic range LacI TetR-Tup1 repression coefficient 3', 'FontSize',20)
+    xlabel('log IPTG (nM)', 'FontSize', 30)
+    ylabel('Dynamic range','FontSize', 30)
+    title('Dynamic range LacI TetR-Tup1 repression coefficient 3', 'FontSize',40)
 end
 
-hold off
-legend("show", 'Location', 'northeastoutside')
+figure(4)
+hold on;
+plot(log10(data_IPTG.dose), dynamic_range_rep1(28,:),'-', 'LineWidth', 2, 'DisplayName', 'Repression coefficient 1', 'Color', 'red');
+plot(log10(data_IPTG.dose), dynamic_range_rep2(28,:),'-', 'LineWidth', 2, 'DisplayName', 'Repression coefficient 2', 'Color', 'blue');
+plot(log10(data_IPTG.dose), dynamic_range_rep3(28,:),'-', 'LineWidth', 2, 'DisplayName', 'Repression coefficient 3', 'Color', 'green');
+xlabel('log IPTG (nM)', 'FontSize', 50)
+ylabel('Dynamic range','FontSize', 50)
+title('Dynamic range LacI TetR-Tup1 all Rep', 'FontSize',60)
+legend("show", 'Location', 'northeastoutside', 'FontSize', 25);
+ax = gca; % Get the current axes
+ax.XAxis.FontSize = 25; % X axis font size
+ax.YAxis.FontSize = 25; % Y axis font size
+
+figure(5)
+hold on;
+plot(log10(data_IPTG.dose), dynamic_range_rep1(29,:),'-', 'LineWidth', 2, 'DisplayName', 'Repression coefficient 1', 'Color', 'red');
+plot(log10(data_IPTG.dose), dynamic_range_rep2(29,:),'-', 'LineWidth', 2, 'DisplayName', 'Repression coefficient 2', 'Color', 'blue');
+plot(log10(data_IPTG.dose), dynamic_range_rep3(29,:),'-', 'LineWidth', 2, 'DisplayName', 'Repression coefficient 3', 'Color', 'green');
+xlabel('log IPTG (nM)', 'FontSize', 50)
+ylabel('Dynamic range','FontSize', 50)
+title('Dynamic range LacI TetR-Tup1 all Rep', 'FontSize',60)
+legend("show", 'Location', 'northeastoutside', 'FontSize', 25);
+ax = gca; % Get the current axes
+ax.XAxis.FontSize = 25; % X axis font size
+ax.YAxis.FontSize = 25; % Y axis font size
+
+figure(6)
+hold on;
+plot(log10(data_IPTG.dose), dynamic_range_rep1(30,:),'-', 'LineWidth', 2, 'DisplayName', 'Repression coefficient 1', 'Color', 'red');
+plot(log10(data_IPTG.dose), dynamic_range_rep2(30,:),'-', 'LineWidth', 2, 'DisplayName', 'Repression coefficient 2', 'Color', 'blue');
+plot(log10(data_IPTG.dose), dynamic_range_rep3(30,:),'-', 'LineWidth', 2, 'DisplayName', 'Repression coefficient 3', 'Color', 'green');
+xlabel('log IPTG (nM)', 'FontSize', 50)
+ylabel('Dynamic range','FontSize', 50)
+title('Dynamic range LacI TetR-Tup1 all Rep', 'FontSize',60)
+legend("show", 'Location', 'northeastoutside', 'FontSize', 25);
+ax = gca; % Get the current axes
+ax.XAxis.FontSize = 25; % X axis font size
+ax.YAxis.FontSize = 25; % Y axis font size

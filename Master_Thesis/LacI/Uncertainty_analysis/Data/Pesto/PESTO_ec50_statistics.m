@@ -331,16 +331,16 @@ group = ["rep1" "rep2" "rep3"];
 [p_50_pesto,tbl_50_pesto,stats_50_pesto] = anova1(all_ec50s_pesto, group);
 figure(2)
 hold on
-title('ANOVA all repression coefficients - parameter sets from PESTO', 'FontSize',24);
+title('ANOVA EC50 all Rep - parameter sets from PESTO', 'FontSize',70);
 ax = gca;
-ax.FontSize = 20;
+ax.FontSize = 40;
 lines = findobj(gcf,'Type','Line');
 for i = 1:numel(lines)
-  lines(i).LineWidth = 1.5;
+  lines(i).LineWidth = 3;
 end
 set(figure(2), 'Position', get(0, 'Screensize'))
-saveas(figure(1), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from PESTO/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC50_all_table_PESTO', '.jpg']);
-saveas(figure(2), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from PESTO/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC50_all_PESTO', '.jpg']);
+saveas(figure(1), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from PESTO CI/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC50_all_table_PESTO_CI', '.jpg']);
+saveas(figure(2), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from PESTO CI/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC50_all_PESTO_CI', '.jpg']);
 close all
 
 ec50_1_2_pesto = [ec50_1_pesto(:,2) ec50_2_pesto(:,2)];
@@ -348,16 +348,16 @@ group = ["rep1" "rep2"];
 [p_50_1_2_pesto, tbl_50_1_2_pesto, stats_50_1_2_pesto] = anova1(ec50_1_2_pesto, group);
 figure(2)
 hold on
-title('ANOVA repression coefficients 1 and 2 - parameter sets from PESTO', 'FontSize',24);
+title('ANOVA EC50 repression coefficients 1 and 2 - parameter sets from PESTO CI', 'FontSize',24);
 ax = gca;
-ax.FontSize = 20;
+ax.FontSize = 30;
 lines = findobj(gcf,'Type','Line');
 for i = 1:numel(lines)
-  lines(i).LineWidth = 1.5;
+  lines(i).LineWidth = 3;
 end
 set(figure(2), 'Position', get(0, 'Screensize'))
-saveas(figure(1), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from PESTO/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC50_rep1_rep2_table_PESTO', '.jpg']);
-saveas(figure(2), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from PESTO/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC50_rep1_rep2_PESTO', '.jpg']);
+saveas(figure(1), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from PESTO CI/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC50_rep1_rep2_table_PESTO_CI', '.jpg']);
+saveas(figure(2), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from PESTO CI/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC50_rep1_rep2_PESTO_CI', '.jpg']);
 close all
 
 ec50_1_3_pesto = [ec50_1_pesto(:,2) ec50_3_pesto(:,2)];
@@ -365,16 +365,16 @@ group = ["rep1" "rep3"];
 [p_50_1_3_pesto, tbl_50_1_3_pesto, stats_50_1_3_pesto] = anova1(ec50_1_3_pesto, group);
 figure(2)
 hold on
-title('ANOVA repression coefficients 1 and 3 - parameter sets from PESTO', 'FontSize',24);
+title('ANOVA EC50 repression coefficients 1 and 3 - parameter sets from PESTO CI', 'FontSize',24);
 ax = gca;
-ax.FontSize = 20;
+ax.FontSize = 30;
 lines = findobj(gcf,'Type','Line');
 for i = 1:numel(lines)
-  lines(i).LineWidth = 1.5;
+  lines(i).LineWidth = 3;
 end
 set(figure(2), 'Position', get(0, 'Screensize'))
-saveas(figure(1), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from PESTO/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC50_rep1_rep3_table_PESTO', '.jpg']);
-saveas(figure(2), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from PESTO/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC50_rep1_rep3_PESTO', '.jpg']);
+saveas(figure(1), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from PESTO CI/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC50_rep1_rep3_table_PESTO_CI', '.jpg']);
+saveas(figure(2), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from PESTO CI/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC50_rep1_rep3_PESTO_CI', '.jpg']);
 close all
 
 ec50_2_3_pesto = [ec50_2_pesto(:,2) ec50_3_pesto(:,2)];
@@ -382,16 +382,16 @@ group = ["rep2" "rep3"];
 [p_50_2_3_pesto, tbl_50_2_3_pesto, stats_50_2_3_pesto] = anova1(ec50_2_3_pesto, group);
 figure(2)
 hold on
-title('ANOVA repression coefficients 2 and 3 - parameter sets from PESTO', 'FontSize',24);
+title('ANOVA EC50 repression coefficients 2 and 3 - parameter sets from PESTO CI', 'FontSize',24);
 ax = gca;
-ax.FontSize = 20;
+ax.FontSize = 30;
 lines = findobj(gcf,'Type','Line');
 for i = 1:numel(lines)
-  lines(i).LineWidth = 1.5;
+  lines(i).LineWidth = 3;
 end
 set(figure(2), 'Position', get(0, 'Screensize'))
-saveas(figure(1), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from PESTO/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC50_rep2_rep3_table_PESTO', '.jpg']);
-saveas(figure(2), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from PESTO/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC50_rep2_rep3_PESTO', '.jpg']);
+saveas(figure(1), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from PESTO CI/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC50_rep2_rep3_table_PESTO_CI', '.jpg']);
+saveas(figure(2), ['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI/Uncertainty_analysis/Data/Statistics/Parameters from PESTO CI/', datestr(now, 'dd-mmm-yyyy'),'ANOVA_EC50_rep2_rep3_PESTO_CI', '.jpg']);
 close all
 
 %Coefficient of Variation

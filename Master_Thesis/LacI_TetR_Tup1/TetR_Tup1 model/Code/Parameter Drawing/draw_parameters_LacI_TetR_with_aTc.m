@@ -5,7 +5,7 @@ num_draws = 30;
 [ParaNames] = (get(model.mw_sbmod1.parameters, {'Name'}));
 
 parameters.name(6) = {"kLacI"};
-parameters.name(3) = {"kTetRTup1"};
+parameters.name(11) = {"kLacTetRTup1"};
 parameters.name(13) = {"dTetRTup1"};
 parameters.name(14) = {"degtag"};
 parameters.name(23) = {"LacIrep"};
@@ -17,7 +17,7 @@ parameters.name(18) = {"CitL"};
 parameters.name(20) = {"TetRTup1L"};
 parameters.name(31) = {"nTetRTup1"};
 parameters.name(22) = {"TetRTup1rep"};
-parameters.name(2) = {"kTetR"};
+
 
 
 parameters.name = cell2table(parameters.name);
@@ -43,23 +43,22 @@ for draw=1:num_draws
     end
 end
 
-rand_parameter(:,1:12) = 10.^rand_parameter(:,1:12);
-rand_parameter(:,16) = 10.^rand_parameter(:,16);
-rand_parameter(:,18) = 10.^rand_parameter(:,18);
-rand_parameter(:,19:20) = 10.^rand_parameter(:,19:20);
-
 rand_parameter = array2table(rand_parameter);
-rand_parameter.Properties.VariableNames(1:16) = ParaNames(1:16);
-rand_parameter.Properties.VariableNames(17) = ParaNames(18);
-rand_parameter.Properties.VariableNames(18) = ParaNames(20);
-rand_parameter.Properties.VariableNames(19:20) = ParaNames(21:22);
-rand_parameter.nMperUnit(:) = 10^1.1;
+rand_parameter.Properties.VariableNames(:) = table2array(parameters.name(index,:));
+
+rand_parameter.nMperUnit(:) = 1.1;
 
 rand_parameter.mu(:) = 0.0077;
 rand_parameter.kmaturation(:) = 0.0173;
 rand_parameter.dCit(:) = 0;
-
 rand_parameter = rand_parameter(:,[string(ParaNames)]);
+
+log_index = find(paramSpecs.islog == 1);
+rand_parameter = table2array(rand_parameter);
+rand_parameter(:,log_index) = 10.^rand_parameter(:,log_index);
+rand_parameter = array2table(rand_parameter);
+rand_parameter.Properties.VariableNames(:) = ParaNames;
+
 
 save(['/Users/claudiobroger/Documents/ETH/Master/Master_Thesis/LacI_TetR_Tup1/TetR_Tup1 model/',datestr(now, 'dd-mmm-yyyy'),'_rand_parameter_LacI_TetR_new.mat'],'rand_parameter')
 
